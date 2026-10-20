@@ -48,6 +48,9 @@ add_action(
 	}
 );
 
+/* Note: paragraphs holding only a shortcode are wrapped in <span>, because WordPress's shortcode_unautop removes the
+   <p> around a lone shortcode (lines would run together). */
+
 /* A classic menu (by name) as navigation block markup. */
 function bz_core_blocks_menu_markup( $name ) {
 	$menu = wp_get_nav_menu_object( $name );
@@ -106,7 +109,7 @@ function bz_core_blocks_finish( WP_REST_Request $r ) {
 	$footer = '<!-- wp:group {"align":"full","backgroundColor":"accent-2","textColor":"base","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|40"}},"elements":{"link":{"color":{"text":"var:preset|color|base"}}}},"layout":{"type":"constrained"}} -->'
 		. '<div class="wp-block-group alignfull has-base-color has-accent-2-background-color has-text-color has-background has-link-color" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--40)">'
 		. '<!-- wp:columns {"align":"wide"} --><div class="wp-block-columns alignwide">'
-		. $col( '<!-- wp:paragraph --><p><strong>[bz field=firm_name]</strong></p><!-- /wp:paragraph --><!-- wp:paragraph --><p>[bz field=footer_blurb]</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>[bz field=address_full]</p><!-- /wp:paragraph -->' )
+		. $col( '<!-- wp:paragraph --><p><strong>[bz field=firm_name]</strong></p><!-- /wp:paragraph --><!-- wp:paragraph --><p><span>[bz field=footer_blurb]</span></p><!-- /wp:paragraph --><!-- wp:paragraph --><p><span>[bz field=address_full]</span></p><!-- /wp:paragraph -->' )
 		. $col( '<!-- wp:heading {"level":4} --><h4 class="wp-block-heading">Services</h4><!-- /wp:heading --><!-- wp:navigation {"ref":' . (int) $svc . ',"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"}} /-->' )
 		. $col( '<!-- wp:heading {"level":4} --><h4 class="wp-block-heading">Contact</h4><!-- /wp:heading --><!-- wp:paragraph --><p><a href="[bz field=phone_href]">[bz field=phone]</a><br><a href="[bz field=email_href]">[bz field=email]</a><br>[bz field=hours]</p><!-- /wp:paragraph -->' )
 		. '</div><!-- /wp:columns -->'
@@ -115,7 +118,7 @@ function bz_core_blocks_finish( WP_REST_Request $r ) {
 		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size">[bz field=copyright]<br>Built with Aukume by <a href="https://bizinkonline.com" target="_blank" rel="noopener">Bizink</a> [bz_cookie_settings]</p><!-- /wp:paragraph -->'
 		. '<!-- wp:navigation {"ref":' . (int) $leg . ',"overlayMenu":"never","fontSize":"small"} /-->'
 		. '</div><!-- /wp:group -->'
-		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size">[bz field=compliance_note]</p><!-- /wp:paragraph -->'
+		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size"><span>[bz field=compliance_note]</span></p><!-- /wp:paragraph -->'
 		. '</div><!-- /wp:group -->';
 	if ( function_exists( 'bz_core_handover_template_part' ) ) {
 		bz_core_handover_template_part( 'header', 'Header', 'header', $header );
