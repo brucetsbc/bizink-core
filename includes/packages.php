@@ -547,20 +547,41 @@ function bz_core_package_plugins_apply() {
 	$names     = isset( $defs[ bz_core_package() ]['plugin_names'] ) ? (array) $defs[ bz_core_package() ]['plugin_names'] : array();
 	$log       = array();
 	$missing   = array();
-	foreach ( $want as $file => $on ) {
-		if ( ! isset( $installed[ $file ] ) ) {
-			if ( $on ) {
-				$missing[ $file ] = isset( $names[ $file ] ) ? $names[ $file ] : $file;
-			}
-			continue;
+	// Switch-on order: core/licence plugins before add-ons (e.g. BizPress, then BizPress Luca, then BizPress Blogs);
+	// anything that still fails is retried once after the rest are on. Switch-offs go add-ons first.
+	$rank = function ( $file ) {
+		if ( preg_match( '#(client|core|base)/#', $file ) ) {
+			return 0;
 		}
-		$active = is_plugin_active( $file );
-		if ( $on && ! $active ) {
-			$r     = activate_plugin( $file, '', false, true );
-			$log[] = is_wp_error( $r ) ? 'Could not switch on ' . $installed[ $file ]['Name'] . ': ' . $r->get_error_message() : 'Switched on ' . $installed[ $file ]['Name'];
-		} elseif ( ! $on && $active ) {
+		return preg_match( '#(luca|licen[cs]e)#', $file ) ? 1 : 2;
+	};
+	$files = array_keys( $want );
+	usort( $files, function ( $a, $b ) use ( $rank ) { return $rank( $a ) - $rank( $b ) ?: strcmp( $a, $b ); } );
+	$retry = array();
+	foreach ( array_reverse( $files ) as $file ) {
+		if ( empty( $want[ $file ] ) && isset( $installed[ $file ] ) && is_plugin_active( $file ) ) {
 			deactivate_plugins( $file, true );
 			$log[] = 'Switched off ' . $installed[ $file ]['Name'];
+		}
+	}
+	foreach ( array( 1, 2 ) as $pass ) {
+		foreach ( 1 === $pass ? $files : $retry as $file ) {
+			if ( empty( $want[ $file ] ) ) {
+				continue;
+			}
+			if ( ! isset( $installed[ $file ] ) ) {
+				$missing[ $file ] = isset( $names[ $file ] ) ? $names[ $file ] : $file;
+				continue;
+			}
+			if ( is_plugin_active( $file ) ) {
+				continue;
+			}
+			$r = activate_plugin( $file, '', false, true );
+			if ( is_wp_error( $r ) && 1 === $pass ) {
+				$retry[] = $file;
+				continue;
+			}
+			$log[] = is_wp_error( $r ) ? 'Could not switch on ' . $installed[ $file ]['Name'] . ': ' . $r->get_error_message() : 'Switched on ' . $installed[ $file ]['Name'];
 		}
 	}
 	update_option( 'bz_package_plugins_missing', $missing, false );
