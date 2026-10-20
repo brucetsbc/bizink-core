@@ -1571,6 +1571,7 @@ function bz_core_render_marketing() {
 		if ( ! $pkg && function_exists( 'bz_core_package' ) && current_user_can( 'manage_options' ) ) {
 			echo '<div class="bzm-plan-box"><span class="bzm-eyebrow" style="color:var(--mut)">Package (admins only)</span><strong>Not set: this site shows every feature</strong>'
 				. '<p>Choose Essentials, Pro or Plus in <a href="' . esc_url( admin_url( 'options-general.php?page=bz-client-details' ) ) . '">Settings → Client Details</a>.</p>'
+				. ( function_exists( 'bz_core_package_plugins_missing' ) && bz_core_package_plugins_missing() ? '<p style="color:#b45309">Not installed on this site yet: ' . esc_html( implode( ', ', bz_core_package_plugins_missing() ) ) . '. Ask Bizink to add ' . ( count( bz_core_package_plugins_missing() ) > 1 ? 'them' : 'it' ) . '.</p>' : '' )
 				. ( ! bz_core_packages_is_source() ? '<a class="bzm-btn link" style="font-size:12px;justify-self:start" href="' . esc_url( bz_core_packages_refresh_link() ) . '">Check for package changes</a>' : '<p>This is the master: packages are edited under Tools → Packages.</p>' ) . '</div>';
 		}
 		if ( $pkg ) {

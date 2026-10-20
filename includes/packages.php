@@ -72,6 +72,7 @@ function bz_core_package_defaults() {
 			'limits'   => array_map( function ( $l ) { return $l[1]; }, bz_core_package_limits() ),
 			'service'  => '',
 			'build'    => bz_core_package_default_build( $key ),
+			'plugins'  => array(), // plugin file => on (bz_core_package_plugins_apply switches them on each site)
 		);
 	}
 	return $out;
@@ -104,6 +105,8 @@ function bz_core_packages() {
 			$base[ $key ]['limits']   = array_merge( $pkg['limits'], array_map( 'intval', isset( $s['limits'] ) ? (array) $s['limits'] : array() ) );
 			$base[ $key ]['service']  = isset( $s['service'] ) ? (string) $s['service'] : '';
 			$base[ $key ]['build']    = isset( $s['build'] ) && isset( bz_core_build_methods()[ $s['build'] ] ) ? $s['build'] : $pkg['build'];
+			$base[ $key ]['plugins']  = isset( $s['plugins'] ) && is_array( $s['plugins'] ) ? array_map( 'boolval', $s['plugins'] ) : array();
+			$base[ $key ]['plugin_names'] = isset( $s['plugin_names'] ) && is_array( $s['plugin_names'] ) ? $s['plugin_names'] : array();
 		}
 	}
 	$defs = $base;
@@ -159,6 +162,8 @@ add_action(
 			bz_core_packages_fetch( (array) get_option( 'bz_packages_remote', array() ) );
 			$copy = (array) get_option( 'bz_packages_remote', array() );
 			$ok   = ! empty( $copy['ok'] );
+			delete_transient( 'bz_package_plugins_checked' );
+			bz_core_package_plugins_apply();
 		}
 		$back = wp_get_referer() ? wp_get_referer() : admin_url( 'admin.php?page=bz-marketing' );
 		wp_safe_redirect( add_query_arg( 'bz_msg', rawurlencode( $ok ? 'Package details updated from Bizink.' : 'Could not reach Bizink just now; the last copy is still in use.' ), $back ) );
@@ -217,7 +222,13 @@ add_action(
 				'limits'   => array(),
 				'service'  => isset( $_POST[ 'bz_service_' . $key ] ) ? wp_kses_post( wp_unslash( $_POST[ 'bz_service_' . $key ] ) ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 				'build'    => isset( $row['build'] ) && isset( bz_core_build_methods()[ $row['build'] ] ) ? $row['build'] : bz_core_package_default_build( $key ),
+				'plugins'  => array(),
+				'plugin_names' => array(),
 			);
+			foreach ( bz_core_managed_plugins() as $file => $name ) {
+				$out[ $key ]['plugins'][ $file ]      = ! empty( $row['plugins'][ md5( $file ) ] );
+				$out[ $key ]['plugin_names'][ $file ] = $name;
+			}
 			foreach ( array_keys( bz_core_package_features() ) as $f ) {
 				$out[ $key ]['features'][ $f ] = ! empty( $row['features'][ $f ] );
 			}
@@ -267,6 +278,18 @@ function bz_core_render_packages() {
 			echo '<td style="text-align:center"><input type="number" min="0" style="width:70px" name="pkg[' . esc_attr( $key ) . '][limits][' . esc_attr( $l ) . ']" value="' . esc_attr( $defs[ $key ]['limits'][ $l ] ) . '"></td>';
 		}
 		echo '</tr>';
+	}
+	$managed = bz_core_managed_plugins();
+	if ( $managed ) {
+		echo '<tr><td colspan="' . ( 1 + count( bz_core_package_names() ) ) . '" style="background:#f6f7f7"><strong>Plugins</strong><br><span class="description">Plugins installed on this master site. Ticked = switched on for that package\'s sites, unticked = switched off (deactivated, never deleted). Sites without a package, and this master, are left as they are.</span></td></tr>';
+		foreach ( $managed as $file => $name ) {
+			echo '<tr><td><strong>' . esc_html( $name ) . '</strong><br><span class="description"><code>' . esc_html( $file ) . '</code></span></td>';
+			foreach ( array_keys( bz_core_package_names() ) as $key ) {
+				$on = ! empty( $defs[ $key ]['plugins'][ $file ] );
+				echo '<td style="text-align:center"><input type="checkbox" name="pkg[' . esc_attr( $key ) . '][plugins][' . esc_attr( md5( $file ) ) . ']" value="1"' . checked( $on, true, false ) . ' aria-label="' . esc_attr( $name . ' in ' . $defs[ $key ]['label'] ) . '"></td>';
+			}
+			echo '</tr>';
+		}
 	}
 	echo '</tbody></table>';
 	echo '<h2 style="margin-top:28px">Service level</h2><p class="description">Shown to the firm on their dashboard (under "Your service level") and in the Site builder. Headings, bold, lists and links are kept.</p>';
@@ -484,3 +507,104 @@ add_action(
 	},
 	1000
 );
+
+
+/* ---------- Plugins by package ---------- */
+
+/* Plugins the master can assign to packages: everything installed except the platform itself. */
+function bz_core_managed_plugins() {
+	if ( ! function_exists( 'get_plugins' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+	$out = array();
+	foreach ( get_plugins() as $file => $data ) {
+		if ( preg_match( '#^(bizink-core|elementor|elementor-pro|gravityforms|duplicator|akismet|hello\.php)(/|$)#', $file ) ) {
+			continue;
+		}
+		$out[ $file ] = $data['Name'];
+	}
+	return $out;
+}
+
+/**
+ * Switch this site's package plugins on or off to match the package (never on the master or a site without a
+ * package). Plugins the package lists but that aren't installed here are remembered for the dashboard.
+ * Returns a short log.
+ */
+function bz_core_package_plugins_apply() {
+	if ( bz_core_packages_is_source() || '' === bz_core_package() ) {
+		return array();
+	}
+	$defs = bz_core_packages();
+	$want = isset( $defs[ bz_core_package() ]['plugins'] ) ? (array) $defs[ bz_core_package() ]['plugins'] : array();
+	if ( ! $want ) {
+		return array();
+	}
+	if ( ! function_exists( 'get_plugins' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+	$installed = get_plugins();
+	$names     = isset( $defs[ bz_core_package() ]['plugin_names'] ) ? (array) $defs[ bz_core_package() ]['plugin_names'] : array();
+	$log       = array();
+	$missing   = array();
+	foreach ( $want as $file => $on ) {
+		if ( ! isset( $installed[ $file ] ) ) {
+			if ( $on ) {
+				$missing[ $file ] = isset( $names[ $file ] ) ? $names[ $file ] : $file;
+			}
+			continue;
+		}
+		$active = is_plugin_active( $file );
+		if ( $on && ! $active ) {
+			$r     = activate_plugin( $file, '', false, true );
+			$log[] = is_wp_error( $r ) ? 'Could not switch on ' . $installed[ $file ]['Name'] . ': ' . $r->get_error_message() : 'Switched on ' . $installed[ $file ]['Name'];
+		} elseif ( ! $on && $active ) {
+			deactivate_plugins( $file, true );
+			$log[] = 'Switched off ' . $installed[ $file ]['Name'];
+		}
+	}
+	update_option( 'bz_package_plugins_missing', $missing, false );
+	if ( $log ) {
+		update_option( 'bz_package_plugins_log', array( 'time' => time(), 'log' => $log ), false );
+	}
+	return $log;
+}
+
+// In wp-admin (at most every 10 minutes) and twice a day in the background.
+add_action(
+	'admin_init',
+	function () {
+		if ( ! current_user_can( 'activate_plugins' ) || get_transient( 'bz_package_plugins_checked' ) ) {
+			return;
+		}
+		set_transient( 'bz_package_plugins_checked', 1, 10 * MINUTE_IN_SECONDS );
+		bz_core_package_plugins_apply();
+	}
+);
+add_action( 'bz_core_package_plugins_cron', 'bz_core_package_plugins_apply' );
+add_action(
+	'init',
+	function () {
+		if ( ! wp_next_scheduled( 'bz_core_package_plugins_cron' ) ) {
+			wp_schedule_event( time() + HOUR_IN_SECONDS, 'twicedaily', 'bz_core_package_plugins_cron' );
+		}
+	}
+);
+// A package change in Client Details applies straight away.
+add_action(
+	'update_option_' . BZ_CORE_OPTION,
+	function ( $old, $new ) {
+		$o = is_array( $old ) && isset( $old['package'] ) ? $old['package'] : '';
+		$n = is_array( $new ) && isset( $new['package'] ) ? $new['package'] : '';
+		if ( $o !== $n ) {
+			delete_transient( 'bz_package_plugins_checked' );
+		}
+	},
+	10,
+	2
+);
+
+/* For the dashboard: package plugins this site should have but doesn't. */
+function bz_core_package_plugins_missing() {
+	return (array) get_option( 'bz_package_plugins_missing', array() );
+}
