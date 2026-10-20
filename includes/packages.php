@@ -584,6 +584,9 @@ function bz_core_package_plugins_apply() {
 			$log[] = is_wp_error( $r ) ? 'Could not switch on ' . $installed[ $file ]['Name'] . ': ' . $r->get_error_message() : 'Switched on ' . $installed[ $file ]['Name'];
 		}
 	}
+	if ( $missing !== (array) get_option( 'bz_package_plugins_missing', array() ) ) {
+		delete_transient( 'bz_core_update_info' );
+	}
 	update_option( 'bz_package_plugins_missing', $missing, false );
 	if ( $log ) {
 		update_option( 'bz_package_plugins_log', array( 'time' => time(), 'log' => $log ), false );

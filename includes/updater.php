@@ -75,7 +75,12 @@ add_action(
 					if ( $site && false !== strpos( $site, '.' ) && $version && '0' !== $version ) { // real domains only
 						$log          = (array) get_option( 'bz_core_site_versions', array() );
 						$log          = array_filter( $log, function ( $row, $host ) { return false !== strpos( $host, '.' ); }, ARRAY_FILTER_USE_BOTH );
-						$log[ $site ] = array( 'version' => $version, 'time' => time() );
+						$log[ $site ] = array(
+							'version' => $version,
+							'time'    => time(),
+							'package' => sanitize_key( (string) $r['package'] ),
+							'missing' => array_slice( array_filter( array_map( 'sanitize_text_field', explode( '|', (string) $r['missing'] ) ) ), 0, 20 ),
+						);
 						update_option( 'bz_core_site_versions', array_slice( $log, -500, null, true ), false );
 					}
 					return rest_ensure_response( bz_core_latest_release() );
@@ -105,14 +110,22 @@ function bz_core_render_plugin_versions() {
 	echo '<p>Latest release on GitHub (' . esc_html( BZ_CORE_REPO ) . '): <strong>' . esc_html( $latest ? $latest['version'] : 'unknown' ) . '</strong>'
 		. ( ! empty( $latest['url'] ) ? ' · <a href="' . esc_url( $latest['url'] ) . '" target="_blank" rel="noopener">Release notes</a>' : '' )
 		. ' · <a href="' . esc_url( wp_nonce_url( admin_url( 'tools.php?page=bz-plugin-versions&refresh=1' ), 'bz_versions_refresh' ) ) . '">Check GitHub now</a></p>';
-	echo '<p class="description">Sites check every 6 hours and show "Update now" on their Plugins page when a newer release exists. Each site\'s version is recorded when it checks.</p>';
-	echo '<table class="widefat striped" style="max-width:760px"><thead><tr><th>Site</th><th>bizink-core</th><th>Last checked</th></tr></thead><tbody>';
+	echo '<p class="description">Sites check every 6 hours and show "Update now" on their Plugins page when a newer release exists. Each site\'s version, package and any package plugins it is missing (Tools → Packages → Plugins, not installed on that site) are recorded when it checks.</p>';
+	echo '<table class="widefat striped" style="max-width:1100px"><thead><tr><th>Site</th><th>bizink-core</th><th>Package</th><th>Missing package plugins</th><th>Last checked</th></tr></thead><tbody>';
+	$names = function_exists( 'bz_core_package_names' ) ? bz_core_package_names() : array();
 	foreach ( $log as $site => $row ) {
-		$behind = $latest && version_compare( $row['version'], $latest['version'], '<' );
-		echo '<tr><td>' . esc_html( $site ) . '</td><td' . ( $behind ? ' style="color:#b45309;font-weight:600"' : '' ) . '>' . esc_html( $row['version'] ) . ( $behind ? ' (update waiting)' : '' ) . '</td><td>' . esc_html( human_time_diff( $row['time'] ) ) . ' ago</td></tr>';
+		$behind  = $latest && version_compare( $row['version'], $latest['version'], '<' );
+		$pkg     = ! empty( $row['package'] ) ? ( isset( $names[ $row['package'] ] ) ? $names[ $row['package'] ] : $row['package'] ) : '';
+		$missing = ! empty( $row['missing'] ) ? (array) $row['missing'] : array();
+		$known   = isset( $row['package'] ); // sites on 0.28.2+ report package and missing plugins
+		echo '<tr><td>' . esc_html( $site ) . '</td>'
+			. '<td' . ( $behind ? ' style="color:#b45309;font-weight:600"' : '' ) . '>' . esc_html( $row['version'] ) . ( $behind ? ' (update waiting)' : '' ) . '</td>'
+			. '<td>' . ( $known ? ( $pkg ? esc_html( $pkg ) : '<span style="color:#646970">Not set</span>' ) : '<span style="color:#646970">(reports from 0.28.2)</span>' ) . '</td>'
+			. '<td>' . ( $missing ? '<span style="color:#b45309;font-weight:600">' . esc_html( implode( ', ', $missing ) ) . '</span>' : ( $known ? '<span style="color:#646970">None</span>' : '' ) ) . '</td>'
+			. '<td>' . esc_html( human_time_diff( $row['time'] ) ) . ' ago</td></tr>';
 	}
 	if ( ! $log ) {
-		echo '<tr><td colspan="3">No site has checked yet.</td></tr>';
+		echo '<tr><td colspan="5">No site has checked yet.</td></tr>';
 	}
 	echo '</tbody></table></div>';
 }
@@ -126,7 +139,12 @@ function bz_core_update_info( $force = false ) {
 		return $cached;
 	}
 	$url = BZ_MASTER_URL . '/wp-json/bizink/v1/plugin/latest?' . http_build_query(
-		array( 'site' => wp_parse_url( home_url(), PHP_URL_HOST ), 'version' => BZ_CORE_VERSION )
+		array(
+			'site'    => wp_parse_url( home_url(), PHP_URL_HOST ),
+			'version' => BZ_CORE_VERSION,
+			'package' => function_exists( 'bz_core_package' ) ? bz_core_package() : '',
+			'missing' => function_exists( 'bz_core_package_plugins_missing' ) ? implode( '|', array_values( bz_core_package_plugins_missing() ) ) : '',
+		)
 	);
 	$r    = bz_core_master_request( $url, array( 'timeout' => 10 ) );
 	$info = is_wp_error( $r ) || 200 !== wp_remote_retrieve_response_code( $r ) ? array() : (array) json_decode( wp_remote_retrieve_body( $r ), true );
