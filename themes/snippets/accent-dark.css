@@ -1,0 +1,2 @@
+/* Firms whose accent colour is dark (e.g. navy): light text on accent buttons (copy mode adds this automatically). */
+.elementor .bz-btn-accent, .elementor .bz-btn-accent:hover, .elementor .bz-btn-accent:focus-visible { color: var(--color-inverse, #fff) !important; }

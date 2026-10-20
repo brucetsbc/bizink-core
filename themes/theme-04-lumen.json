@@ -1,0 +1,33 @@
+{
+ "name": "Theme 04 — Lumen",
+ "description": "Modern cloud and fintech: deep indigo to violet with a bright mint accent, Plus Jakarta Sans, soft 24px cards and pill buttons. Signature block: LUMEN-HERO (gradient hero with a sample cash-flow dashboard card).",
+ "tokens": {
+  "color-primary": "#3B32C4",
+  "color-primary-dark": "#221B7A",
+  "color-secondary": "#6D4AE8",
+  "color-accent": "#2FD3A0",
+  "color-heading": "#14123A",
+  "color-text": "#3A3858",
+  "color-text-muted": "#5D5B7A",
+  "color-surface": "#FFFFFF",
+  "color-surface-alt": "#F4F3FB",
+  "color-border": "#E6E4F2",
+  "color-inverse": "#FFFFFF",
+  "font-heading": "Plus Jakarta Sans",
+  "font-body": "Plus Jakarta Sans",
+  "text-h1": "clamp(2.4rem, 1.6rem + 3vw, 4rem)",
+  "text-h2": "clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem)",
+  "text-h3": "clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem)",
+  "text-h4": "1.25rem",
+  "text-body": "1.0625rem",
+  "text-small": "0.875rem",
+  "space-xs": "8px",
+  "space-sm": "16px",
+  "space-md": "24px",
+  "space-lg": "48px",
+  "space-section": "clamp(56px, 2.5rem + 3.5vw, 96px)",
+  "container-max": "1200px",
+  "radius-card": "24px",
+  "radius-button": "999px"
+ }
+}

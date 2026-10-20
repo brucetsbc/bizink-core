@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Your new website</title>
+<style>
+:root {
+  --bg: #f6f5f1; --card: #ffffff; --ink: #1d2433; --muted: #5d6676; --line: #dcdfe5; --soft: #eef0f4;
+  --brand: #1e3a5f; --brand-ink: #ffffff; --accent: #c9a227; --ok: #15803d; --warn: #b45309; --bad: #b91c1c;
+  --radius: 10px; --font: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--font); }
+header.top { background: var(--brand); color: var(--brand-ink); padding: 18px 16px; }
+header.top .in { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+header.top b { font-size: 18px; letter-spacing: .2px; }
+header.top span { opacity: .8; font-size: 14px; }
+main { max-width: 860px; margin: 0 auto; padding: 20px 16px 80px; }
+h1 { font-size: 28px; line-height: 1.2; margin: 8px 0 6px; }
+h2 { font-size: 21px; margin: 0 0 4px; }
+p.lead { color: var(--muted); margin: 0 0 18px; }
+.steps { display: flex; gap: 6px; flex-wrap: wrap; margin: 18px 0; padding: 0; list-style: none; }
+.steps button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14px; cursor: pointer; }
+.steps button[aria-current="step"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.steps button.done::before { content: "✓ "; color: var(--ok); }
+.steps button[aria-current="step"].done::before { color: var(--brand-ink); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-top: 14px; }
+.grid .wide { grid-column: 1 / -1; }
+@media (max-width: 620px) { .grid { grid-template-columns: minmax(0, 1fr); } .card { padding: 16px; } h1 { font-size: 24px; } }
+label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.hint { color: var(--muted); font-size: 13px; font-weight: 400; margin-top: 3px; }
+input[type=text], input[type=email], input[type=url], input[type=tel], select, textarea {
+  width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 8px; font: inherit; color: var(--ink); background: #fff;
+}
+textarea { min-height: 90px; resize: vertical; }
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--brand); background: var(--brand); color: var(--brand-ink); border-radius: 8px; padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--brand); }
+.btn.small { padding: 6px 12px; font-size: 14px; }
+.btn.danger { border-color: var(--bad); color: var(--bad); background: transparent; }
+.btn[disabled] { opacity: .55; cursor: default; }
+.nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.status { position: fixed; right: 14px; bottom: 14px; background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.status.show { opacity: .92; }
+.ticks { columns: 3 200px; column-gap: 18px; margin-top: 8px; }
+.ticks label { font-weight: 400; display: flex; gap: 8px; align-items: flex-start; break-inside: avoid; margin: 0 0 6px; }
+.ticks input { margin-top: 5px; }
+.group-h { font-weight: 700; margin: 16px 0 2px; font-size: 15px; }
+.row { border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin-top: 12px; background: #fcfcfd; }
+.row .grid { margin-top: 0; }
+.row .rm { margin-top: 10px; }
+.up { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.up img { max-height: 64px; max-width: 180px; border: 1px solid var(--line); border-radius: 6px; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 14px 14px; }
+.up .photo { max-height: 80px; border-radius: 50%; }
+.themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+.theme { border: 2px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; }
+.theme img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; display: block; background: var(--soft); }
+.theme div { padding: 10px 12px; }
+.theme b { display: block; }
+.theme small { color: var(--muted); }
+.theme[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 162, 39, .25); }
+.none-theme { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: 16px; }
+.msg { padding: 14px 16px; border-radius: 8px; background: var(--soft); margin: 12px 0; }
+.msg.bad { background: #fde8e8; color: var(--bad); }
+.msg.ok { background: #e6f4ea; color: var(--ok); }
+.review dl { display: grid; grid-template-columns: 200px 1fr; gap: 6px 14px; margin: 10px 0 0; }
+.review dt { color: var(--muted); }
+.review dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.review .gap { color: var(--warn); }
+@media (max-width: 620px) { .review dl { grid-template-columns: minmax(0, 1fr); } .review dd { margin-bottom: 8px; } }
+details.more summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.req::after { content: " *"; color: var(--bad); }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body data-api="">
+<header class="top"><div class="in"><b>Bizink</b><span>Your new website: details form</span></div></header>
+<main id="app"><div class="card"><p>Loading your form…</p></div></main>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  "use strict";
+  var API = (document.body.getAttribute("data-api") || "/wp-json/bizink/v1/intake/").replace(/\/?$/, "/");
+  var TOKEN = (new URLSearchParams(location.search).get("k") || "").replace(/[^A-Za-z0-9]/g, "");
+  var app = document.getElementById("app");
+  var data = {}, opts = { partners: [], themes: [], regions: {} }, firmName = "", status = "", step = 0, saveTimer = null, saving = false, dirty = false;
+
+  var STEPS = [
+    { id: "firm", t: "Your firm" },
+    { id: "contact", t: "Contact and location" },
+    { id: "website", t: "Website" },
+    { id: "partners", t: "Software and memberships" },
+    { id: "team", t: "Team" },
+    { id: "look", t: "Logo and look" },
+    { id: "extras", t: "Testimonials" },
+    { id: "review", t: "Check and send" }
+  ];
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function $(sel) { return app.querySelector(sel); }
+  function flash(msg, ms) { var el = document.getElementById("status"); el.textContent = msg; el.classList.add("show"); clearTimeout(flash.t); flash.t = setTimeout(function () { el.classList.remove("show"); }, ms || 1800); }
+  function list(v) { return Array.isArray(v) ? v : []; }
+
+  /* ---------- Fields ---------- */
+  function field(k, label, o) {
+    o = o || {};
+    var id = "f-" + k, v = data[k] == null ? "" : data[k], input;
+    if (o.type === "textarea") input = '<textarea id="' + id + '" data-k="' + k + '" placeholder="' + esc(o.ph || "") + '">' + esc(v) + "</textarea>";
+    else if (o.type === "select") input = '<select id="' + id + '" data-k="' + k + '">' + o.options.map(function (x) { return '<option value="' + esc(x[0]) + '"' + (String(v) === x[0] ? " selected" : "") + ">" + esc(x[1]) + "</option>"; }).join("") + "</select>";
+    else input = '<input id="' + id + '" data-k="' + k + '" type="' + (o.type || "text") + '" value="' + esc(v) + '" placeholder="' + esc(o.ph || "") + '"' + (o.type === "email" ? ' autocomplete="email"' : "") + ">";
+    return '<div class="' + (o.wide ? "wide" : "") + '"><label for="' + id + '"' + (o.req ? ' class="req"' : "") + ">" + esc(label) + "</label>" + input + (o.hint ? '<div class="hint">' + esc(o.hint) + "</div>" : "") + "</div>";
+  }
+  function upload(k, label, hint, current, cls) {
+    return '<div class="wide"><label>' + esc(label) + '</label><div class="up">'
+      + (current ? '<img class="' + (cls || "") + '" src="' + esc(current) + '" alt="">' : "")
+      + '<input type="file" accept="image/png,image/jpeg,image/webp,image/gif" data-up="' + esc(k) + '" aria-label="' + esc(label) + '">'
+      + (current ? '<button type="button" class="btn small ghost" data-clear="' + esc(k) + '">Remove</button>' : "")
+      + "</div>" + (hint ? '<div class="hint">' + esc(hint) + "</div>" : "") + "</div>";
+  }
+  function countries() {
+    return [["", "Choose…"]].concat(Object.keys(opts.regions || {}).map(function (c) { return [c.toLowerCase(), opts.regions[c]]; }));
+  }
+
+  /* ---------- Steps ---------- */
+  var VIEWS = {
+    firm: function () {
+      return "<h2>About your firm</h2><p class=\"lead\">The basics we use across the site. Leave anything you're unsure of; we'll check it with you.</p><div class=\"grid\">"
+        + field("firm", "Firm name (as it should appear on the site)", { req: true, ph: "Smith & Co Accountants" })
+        + field("descriptor", "What you are, in a few words", { ph: "chartered accountants, bookkeepers, tax agents" })
+        + field("country", "Country", { type: "select", options: countries(), req: true })
+        + field("founded", "Year founded", { ph: "2011" })
+        + field("specialities", "Who you mainly help, or what you specialise in", { wide: true, type: "textarea", ph: "Small businesses, tradies, property investors, SMSFs, not-for-profits", hint: "A list is fine. We use it in the home page and service copy." })
+        + field("areas", "Areas you serve", { wide: true, ph: "Parramatta, Western Sydney, Australia-wide online", hint: "Towns, regions, or \"online\". Separate with commas." })
+        + field("contact_name", "Your name", { ph: "Who should we talk to about the website?" })
+        + field("contact_email", "Your email", { type: "email" })
+        + "</div>";
+    },
+    contact: function () {
+      return "<h2>Contact and location</h2><p class=\"lead\">Shown in the header, footer, contact page and Google's business details.</p><div class=\"grid\">"
+        + field("street", "Street address", { wide: true, req: true, ph: "Level 2, 10 Smith Street" })
+        + field("suburb", "Suburb or town", { req: true })
+        + field("city", "City")
+        + field("region", "State, region or county")
+        + field("postcode", "Postcode")
+        + field("phone", "Phone number (as you'd like it shown)", { type: "tel", req: true, ph: "02 9000 0000" })
+        + field("email", "Enquiry email", { type: "email", req: true, ph: "hello@yourfirm.com.au", hint: "Website enquiries and forms are sent here." })
+        + field("hours", "Opening hours", { ph: "Mon to Fri 9am to 5pm", hint: "Leave blank to hide." })
+        + field("map_query", "Address for the map, if different", { ph: "", hint: "Leave blank to use the address above, or write \"none\" if you'd rather not show a map (e.g. a home office)." })
+        + "</div>";
+    },
+    website: function () {
+      var social = data.social || {};
+      return "<h2>Your website</h2><p class=\"lead\">Links and wording for the main call to action.</p><div class=\"grid\">"
+        + field("old", "Your current website", { type: "url", req: true, ph: "https://", hint: "We'll carry over anything useful. Write \"none\" if you don't have one." })
+        + field("live", "Domain the new site will use", { ph: "yourfirm.com.au" })
+        + field("offer", "Main offer for new clients", { ph: "Free 30 minute consultation", hint: "The button on most pages, e.g. Book a discovery call, Get a quote." })
+        + field("booking_url", "Online booking link (if you use one)", { type: "url", ph: "https://calendly.com/…" })
+        + field("offer_sentence", "One sentence inviting people to get in touch", { wide: true, type: "textarea", ph: "Book a free 30 minute chat to talk through your business and how we can help." })
+        + field("portal_url", "Client portal or login link", { type: "url", ph: "https://", hint: "If clients log in somewhere (Xero, Ignition, a document portal)." })
+        + field("footer_blurb", "A short description of the firm for the footer", { wide: true, type: "textarea", ph: "Two or three sentences." })
+        + "</div><details class=\"more\"" + (social.linkedin || social.facebook || social.instagram || social.youtube ? " open" : "") + "><summary>Social media links</summary><div class=\"grid\">"
+        + ["linkedin", "facebook", "instagram", "youtube", "x"].map(function (n) {
+          return '<div><label for="s-' + n + '">' + { linkedin: "LinkedIn", facebook: "Facebook", instagram: "Instagram", youtube: "YouTube", x: "X (Twitter)" }[n] + '</label><input id="s-' + n + '" type="url" data-social="' + n + '" value="' + esc(social[n] || "") + '" placeholder="https://"></div>';
+        }).join("")
+        + "</div></details><details class=\"more\"" + (data.ga4_measurement_id || data.ga4_property_id || data.search_console ? " open" : "") + "><summary>Google Analytics and Search Console (optional)</summary>"
+        + "<p class=\"hint\">Only if you already have them. Skip this if you're not sure; we can set them up with you.</p><div class=\"grid\">"
+        + field("ga4_measurement_id", "GA4 measurement ID", { ph: "G-XXXXXXXXXX" })
+        + field("ga4_property_id", "GA4 property ID", { ph: "Numbers only" })
+        + field("search_console", "Search Console property", { wide: true, ph: "https://yourfirm.com.au/" })
+        + "</div></details>";
+    },
+    partners: function () {
+      var picked = list(data.partners), groups = {}, order = ["Software", "Accreditation", "Professional body"];
+      opts.partners.forEach(function (p) { (groups[p.type] = groups[p.type] || []).push(p.name); });
+      Object.keys(groups).forEach(function (g) { if (order.indexOf(g) < 0) order.push(g); });
+      var titles = { "Software": "Software you use or recommend", "Accreditation": "Software certifications", "Professional body": "Professional memberships" };
+      var html = "<h2>Software and memberships</h2><p class=\"lead\">Tick everything that applies. Their logos appear on your site, and software you tick gets its own page.</p>";
+      order.forEach(function (g) {
+        if (!groups[g]) return;
+        html += '<div class="group-h">' + esc(titles[g] || g) + '</div><div class="ticks">' + groups[g].map(function (n) {
+          return '<label><input type="checkbox" data-partner="' + esc(n) + '"' + (picked.indexOf(n) >= 0 ? " checked" : "") + "> " + esc(n) + "</label>";
+        }).join("") + "</div>";
+      });
+      html += '<div class="group-h">Anything else?</div><p class="hint">Other software, memberships or awards you\'d like a logo for. Upload the logo if you have it; otherwise we\'ll look for one.</p><div id="xp">'
+        + list(data.extra_partners).map(extraRow).join("") + '</div><p><button type="button" class="btn small ghost" id="add-xp">Add another logo</button></p>';
+      return html;
+    },
+    team: function () {
+      return "<h2>Your team</h2><p class=\"lead\">The people to show on the About or Team page. Photos look best as head-and-shoulders shots on a plain background, all similar in style.</p><div id=\"team\">"
+        + list(data.team).map(teamRow).join("") + '</div><p><button type="button" class="btn small ghost" id="add-team">Add a team member</button></p>';
+    },
+    look: function () {
+      var html = "<h2>Logo and look</h2><p class=\"lead\">Your logo and brand colours stay yours. Pick the layout style you like best; we'll show you a preview before anything goes live.</p><div class=\"grid\">"
+        + upload("logo", "Logo", "A wide PNG with a transparent background works best. If you have an SVG or a brand pack, email it to us.", data.logo)
+        + upload("favicon", "Browser tab icon (optional)", "A square version of your logo or symbol, at least 512 × 512 pixels.", data.favicon)
+        + field("brand_colours", "Brand colours (if you know them)", { wide: true, ph: "#1E3A5F navy, #C9A227 gold", hint: "Hex codes are ideal. Leave blank and we'll take them from your logo." })
+        + "</div><div class=\"group-h\" style=\"margin-top:22px\">Preferred style</div><div class=\"themes\">";
+      opts.themes.forEach(function (t) {
+        html += '<button type="button" class="theme" data-theme="' + esc(t.slug) + '" aria-pressed="' + (data.theme === t.slug) + '">'
+          + (t.thumb ? '<img src="' + esc(t.thumb) + '" alt="" loading="lazy">' : "") + "<div><b>" + esc(t.name) + "</b><small>" + esc(t.about) + "</small></div></button>";
+      });
+      html += '<button type="button" class="theme none-theme" data-theme="" aria-pressed="' + !data.theme + '"><div><b>No preference</b><small>We\'ll suggest one for you.</small></div></button></div>';
+      return html;
+    },
+    extras: function () {
+      return "<h2>Testimonials</h2><p class=\"lead\">Two or three real comments from clients, with their permission. Leave this out if you don't have any yet; none is better than made-up ones.</p><div id=\"tm\">"
+        + list(data.testimonials).map(testimonialRow).join("") + '</div><p><button type="button" class="btn small ghost" id="add-tm">Add a testimonial</button></p>'
+        + '<div class="grid">' + field("notes", "Anything else we should know?", { wide: true, type: "textarea", ph: "Pages you want to keep from your current site, wording you like, deadlines, things you don't want…" }) + "</div>";
+    },
+    review: function () {
+      var rows = [
+        ["Firm", data.firm], ["Country", (opts.regions[(data.country || "").toUpperCase()] || "")], ["Your contact", [data.contact_name, data.contact_email].filter(Boolean).join(", ")],
+        ["Address", [data.street, data.suburb, data.city, data.region, data.postcode].filter(Boolean).join(", ")],
+        ["Phone", data.phone], ["Enquiry email", data.email], ["Current website", data.old], ["Main offer", data.offer],
+        ["Software and memberships", list(data.partners).concat(list(data.extra_partners).map(function (x) { return x.name; }).filter(Boolean)).join(", ")],
+        ["Team", list(data.team).map(function (m) { return m.name; }).filter(Boolean).join(", ")],
+        ["Logo", data.logo ? "Uploaded" : ""],
+        ["Preferred style", data.theme ? ((opts.themes.filter(function (t) { return t.slug === data.theme; })[0] || {}).name || data.theme) : "No preference"],
+        ["Testimonials", String(list(data.testimonials).filter(function (x) { return x.quote; }).length || "")]
+      ];
+      var need = ["firm", "country", "street", "suburb", "phone", "email", "old"].filter(function (k) { return !String(data[k] || "").trim(); });
+      return '<div class="review"><h2>Check and send</h2><p class="lead">Here\'s a summary. You can go back to any section. When you send it, we\'ll be in touch about next steps.</p><dl>'
+        + rows.map(function (r) { return "<dt>" + esc(r[0]) + "</dt><dd" + (r[1] ? "" : ' class="gap"') + ">" + (r[1] ? esc(r[1]) : "Not filled in") + "</dd>"; }).join("")
+        + "</dl></div>"
+        + (need.length ? '<div class="msg">A few of the starred fields are still empty. You can still send it and we\'ll ask you for them.</div>' : "")
+        + '<p style="margin-top:18px"><button type="button" class="btn" id="submit">Send to Bizink</button></p>';
+    }
+  };
+
+  function extraRow(x, i) {
+    return '<div class="row" data-xrow="' + i + '"><div class="grid">'
+      + '<div><label>Name</label><input type="text" data-xp="name" value="' + esc(x.name) + '" placeholder="e.g. Dext, Tax Institute"></div>'
+      + '<div><label>Type</label><select data-xp="type">' + ["Software", "Professional body", "Accreditation", "Award", "Other"].map(function (t) { return "<option" + ((x.type || "Software") === t ? " selected" : "") + ">" + t + "</option>"; }).join("") + "</select></div>"
+      + '<div class="wide"><label>Their website (optional)</label><input type="url" data-xp="url" value="' + esc(x.url) + '" placeholder="https://"></div>'
+      + upload("xp:" + i, "Logo (optional)", "", x.logo)
+      + '</div><button type="button" class="btn small danger rm" data-rm-xp="' + i + '">Remove</button></div>';
+  }
+  function teamRow(m, i) {
+    return '<div class="row" data-trow="' + i + '"><div class="grid">'
+      + '<div><label>Name</label><input type="text" data-tm="name" value="' + esc(m.name) + '"></div>'
+      + '<div><label>Role</label><input type="text" data-tm="role" value="' + esc(m.role) + '" placeholder="Director, Senior Accountant…"></div>'
+      + '<div><label>Qualifications</label><input type="text" data-tm="qualifications" value="' + esc(m.qualifications) + '" placeholder="CA, B.Com"></div>'
+      + '<div><label>Direct phone or email (optional)</label><input type="text" data-tm="phone" value="' + esc(m.phone) + '"></div>'
+      + '<div class="wide"><label>Short bio</label><textarea data-tm="bio" placeholder="A few sentences: background, what they help clients with, something personal.">' + esc(m.bio) + "</textarea></div>"
+      + upload("team:" + i, "Photo", "", m.photo, "photo")
+      + '</div><button type="button" class="btn small danger rm" data-rm-team="' + i + '">Remove</button></div>';
+  }
+  function testimonialRow(x, i) {
+    return '<div class="row" data-qrow="' + i + '"><div class="grid">'
+      + '<div class="wide"><label>What they said</label><textarea data-q="quote">' + esc(x.quote) + "</textarea></div>"
+      + '<div><label>Name</label><input type="text" data-q="name" value="' + esc(x.name) + '"></div>'
+      + '<div><label>Business or role (optional)</label><input type="text" data-q="business" value="' + esc(x.business) + '"></div>'
+      + '</div><button type="button" class="btn small danger rm" data-rm-tm="' + i + '">Remove</button></div>';
+  }
+
+  /* ---------- Render ---------- */
+  function render() {
+    if (status === "submitted") {
+      app.innerHTML = '<div class="card"><h1>Thank you' + (data.contact_name ? ", " + esc(String(data.contact_name).split(" ")[0]) : "") + '</h1><p>Your details for <strong>' + esc(data.firm || firmName) + "</strong> have been sent to Bizink. We'll be in touch about next steps.</p><p class=\"hint\">Need to change something? Reply to our email or contact your Bizink account manager.</p></div>";
+      return;
+    }
+    var s = STEPS[step];
+    app.innerHTML = (step === 0 ? "<h1>Let's build your new website</h1><p class=\"lead\">Tell us about " + esc(firmName || "your firm") + ". Your answers save as you go, so you can come back to this link any time before you send it.</p>" : "")
+      + '<nav aria-label="Sections"><ol class="steps">' + STEPS.map(function (x, i) { return '<li><button type="button" data-step="' + i + '"' + (i === step ? ' aria-current="step"' : "") + (stepDone(x.id) ? ' class="done"' : "") + ">" + (i + 1) + ". " + esc(x.t) + "</button></li>"; }).join("") + "</ol></nav>"
+      + '<section class="card" aria-labelledby="h-' + s.id + '">' + VIEWS[s.id]().replace("<h2>", '<h2 id="h-' + s.id + '">') + "</section>"
+      + '<div class="nav">' + (step > 0 ? '<button type="button" class="btn ghost" data-step="' + (step - 1) + '">← Back</button>' : "<span></span>")
+      + (step < STEPS.length - 1 ? '<button type="button" class="btn" data-step="' + (step + 1) + '">Next: ' + esc(STEPS[step + 1].t) + " →</button>" : "") + "</div>";
+  }
+  function stepDone(id) {
+    var has = function (k) { return String(data[k] || "").trim() !== ""; };
+    return {
+      firm: has("firm") && has("country"), contact: has("street") && has("phone") && has("email"), website: has("old"),
+      partners: list(data.partners).length > 0, team: list(data.team).some(function (m) { return m.name; }),
+      look: has("logo"), extras: list(data.testimonials).some(function (x) { return x.quote; }), review: false
+    }[id];
+  }
+
+  /* ---------- Save ---------- */
+  function queueSave() { dirty = true; clearTimeout(saveTimer); saveTimer = setTimeout(save, 1200); }
+  function save(submit) {
+    clearTimeout(saveTimer);
+    if (saving && !submit) { saveTimer = setTimeout(save, 800); return Promise.resolve(); }
+    saving = true; dirty = false;
+    return fetch(API + TOKEN, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: data, submit: submit ? 1 : 0 }) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw j; return j; }); })
+      .then(function (j) { saving = false; status = j.status; if (!submit) flash("Saved"); return j; })
+      .catch(function (e) { saving = false; dirty = true; flash((e && e.message) || "Couldn't save. Check your connection; we'll try again.", 4000); if (!submit) saveTimer = setTimeout(save, 8000); throw e; });
+  }
+  window.addEventListener("beforeunload", function (e) { if (dirty || saving) { save(); e.preventDefault(); e.returnValue = ""; } });
+
+  function sendFile(file, label) {
+    var fd = new FormData(); fd.append("file", file); fd.append("label", label);
+    flash("Uploading " + file.name + "…", 60000);
+    return fetch(API + TOKEN + "/upload", { method: "POST", body: fd })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw j; return j; }); })
+      .then(function (j) { flash("Uploaded"); return j.url; })
+      .catch(function (e) { flash((e && e.message) || "Upload failed. Please try again.", 5000); return null; });
+  }
+
+  /* ---------- Events ---------- */
+  app.addEventListener("input", function (e) {
+    var el = e.target, row;
+    if (el.dataset.k) { data[el.dataset.k] = el.value; queueSave(); }
+    else if (el.dataset.social) { data.social = Object.assign({}, data.social || {}); data.social[el.dataset.social] = el.value; queueSave(); }
+    else if (el.dataset.xp && (row = el.closest("[data-xrow]"))) { setIn("extra_partners", +row.dataset.xrow, el.dataset.xp, el.value); }
+    else if (el.dataset.tm && (row = el.closest("[data-trow]"))) { setIn("team", +row.dataset.trow, el.dataset.tm, el.value); }
+    else if (el.dataset.q && (row = el.closest("[data-qrow]"))) { setIn("testimonials", +row.dataset.qrow, el.dataset.q, el.value); }
+  });
+  function setIn(key, i, prop, val) { var arr = list(data[key]).slice(); arr[i] = Object.assign({}, arr[i] || {}); arr[i][prop] = val; data[key] = arr; queueSave(); }
+
+  app.addEventListener("change", function (e) {
+    var el = e.target;
+    if (el.dataset.k && el.tagName === "SELECT") { data[el.dataset.k] = el.value; queueSave(); }
+    else if (el.dataset.partner) {
+      var set = list(data.partners).filter(function (n) { return n !== el.dataset.partner; });
+      if (el.checked) set.push(el.dataset.partner);
+      data.partners = set; queueSave();
+    } else if (el.dataset.up && el.files && el.files[0]) {
+      var key = el.dataset.up, f = el.files[0];
+      if (f.size > 8 * 1024 * 1024) { flash("That file is over 8 MB. Please choose a smaller one.", 4000); el.value = ""; return; }
+      el.disabled = true;
+      sendFile(f, key.split(":")[0] + " " + (data.firm || firmName)).then(function (url) {
+        el.disabled = false;
+        if (!url) return;
+        var parts = key.split(":");
+        if (parts[0] === "team") setIn("team", +parts[1], "photo", url);
+        else if (parts[0] === "xp") setIn("extra_partners", +parts[1], "logo", url);
+        else { data[key] = url; queueSave(); }
+        render();
+      });
+    }
+  });
+
+  app.addEventListener("click", function (e) {
+    var t = e.target.closest("button");
+    if (!t) return;
+    if (t.dataset.step != null) { if (dirty) save(); step = +t.dataset.step; render(); window.scrollTo(0, 0); }
+    else if (t.dataset.theme != null) { data.theme = t.dataset.theme; queueSave(); render(); }
+    else if (t.dataset.clear) {
+      var p = t.dataset.clear.split(":");
+      if (p[0] === "team") setIn("team", +p[1], "photo", "");
+      else if (p[0] === "xp") setIn("extra_partners", +p[1], "logo", "");
+      else { data[p[0]] = ""; queueSave(); }
+      render();
+    }
+    else if (t.id === "add-xp") { data.extra_partners = list(data.extra_partners).concat([{ name: "", type: "Software", url: "", logo: "" }]); queueSave(); render(); }
+    else if (t.id === "add-team") { data.team = list(data.team).concat([{ name: "", role: "" }]); queueSave(); render(); }
+    else if (t.id === "add-tm") { data.testimonials = list(data.testimonials).concat([{ quote: "", name: "" }]); queueSave(); render(); }
+    else if (t.dataset.rmXp != null) { data.extra_partners = list(data.extra_partners).filter(function (_, i) { return i !== +t.dataset.rmXp; }); queueSave(); render(); }
+    else if (t.dataset.rmTeam != null) { data.team = list(data.team).filter(function (_, i) { return i !== +t.dataset.rmTeam; }); queueSave(); render(); }
+    else if (t.dataset.rmTm != null) { data.testimonials = list(data.testimonials).filter(function (_, i) { return i !== +t.dataset.rmTm; }); queueSave(); render(); }
+    else if (t.id === "submit") {
+      t.disabled = true; t.textContent = "Sending…";
+      save(true).then(function () { status = "submitted"; render(); window.scrollTo(0, 0); })
+        .catch(function () { t.disabled = false; t.textContent = "Send to Bizink"; });
+    }
+  });
+
+  /* ---------- Load ---------- */
+  if (!TOKEN) { app.innerHTML = '<div class="card"><h1>Link incomplete</h1><p>Please open the full link from your Bizink email.</p></div>'; return; }
+  fetch(API + TOKEN)
+    .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw j; return j; }); })
+    .then(function (j) {
+      data = j.data && !Array.isArray(j.data) ? j.data : {}; opts = j.options || opts; firmName = j.firm || ""; status = j.status || "";
+      if (!data.firm && firmName) data.firm = firmName;
+      document.title = (firmName ? firmName + ": " : "") + "your new website";
+      render();
+    })
+    .catch(function (e) { app.innerHTML = '<div class="card"><h1>We couldn\'t open your form</h1><div class="msg bad">' + esc((e && e.message) || "Please check your connection and try again.") + "</div></div>"; });
+})();
+</script>
+</body>
+</html>

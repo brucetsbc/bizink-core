@@ -1,0 +1,4 @@
+/* Theme 03 Ledger: Fraunces reads best at regular weight (beats the kit's default heading weight); oxblood only as a flourish. */
+body .elementor :is(h1, h2, h3, h4) { font-weight: 400 !important; letter-spacing: -0.01em; }
+body .elementor :is(h1, h2, h3) em { font-style: italic; color: var(--color-primary); }
+blockquote::before { color: #8C2F2B; }

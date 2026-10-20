@@ -1,0 +1,33 @@
+{
+ "name": "Theme 05 — Signal",
+ "description": "Bold and confident: black and white with one vivid orange accent, Space Grotesk headings with Inter, oversized tight headlines, a hard grid with thick borders and no rounding. Signature blocks: SIGNAL-HERO (oversized headline + black stats band), SIGNAL-SERV (bordered services tile grid with a highlight tile).",
+ "tokens": {
+  "color-primary": "#0E0E0E",
+  "color-primary-dark": "#000000",
+  "color-secondary": "#3A3A36",
+  "color-accent": "#FF5B26",
+  "color-heading": "#0E0E0E",
+  "color-text": "#2B2B28",
+  "color-text-muted": "#5F5F5A",
+  "color-surface": "#FFFFFF",
+  "color-surface-alt": "#F2F2EF",
+  "color-border": "#DADAD5",
+  "color-inverse": "#FFFFFF",
+  "font-heading": "Space Grotesk",
+  "font-body": "Inter",
+  "text-h1": "clamp(3rem, 1.8rem + 4.8vw, 7rem)",
+  "text-h2": "clamp(2.2rem, 1.6rem + 2.6vw, 4rem)",
+  "text-h3": "clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem)",
+  "text-h4": "1.25rem",
+  "text-body": "1.0625rem",
+  "text-small": "0.875rem",
+  "space-xs": "8px",
+  "space-sm": "16px",
+  "space-md": "24px",
+  "space-lg": "48px",
+  "space-section": "clamp(56px, 2.5rem + 3.5vw, 96px)",
+  "container-max": "1200px",
+  "radius-card": "0px",
+  "radius-button": "0px"
+ }
+}

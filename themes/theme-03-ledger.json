@@ -1,0 +1,33 @@
+{
+ "name": "Theme 03 — Ledger",
+ "description": "Editorial and established: white pages, deep green with a pale sage accent (oxblood only as a flourish, e.g. quote marks), Fraunces serif headings with IBM Plex Sans, square corners and thin ruled lines. Signature blocks: LEDGER-HERO (headline + key figures column), LEDGER-SERV (ruled numbered services list).",
+ "tokens": {
+  "color-primary": "#1F4D3A",
+  "color-primary-dark": "#163829",
+  "color-secondary": "#2E6B52",
+  "color-accent": "#BFD8C9",
+  "color-heading": "#141716",
+  "color-text": "#2A2E2C",
+  "color-text-muted": "#575C59",
+  "color-surface": "#FFFFFF",
+  "color-surface-alt": "#EFF2F0",
+  "color-border": "#D9DEDB",
+  "color-inverse": "#FFFFFF",
+  "font-heading": "Fraunces",
+  "font-body": "IBM Plex Sans",
+  "text-h1": "clamp(2.5rem, 1.6rem + 3.4vw, 4.5rem)",
+  "text-h2": "clamp(2rem, 1.5rem + 2vw, 3.25rem)",
+  "text-h3": "clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem)",
+  "text-h4": "1.25rem",
+  "text-body": "1.0625rem",
+  "text-small": "0.875rem",
+  "space-xs": "8px",
+  "space-sm": "16px",
+  "space-md": "24px",
+  "space-lg": "48px",
+  "space-section": "clamp(56px, 2.5rem + 3.5vw, 96px)",
+  "container-max": "1200px",
+  "radius-card": "0px",
+  "radius-button": "0px"
+ }
+}

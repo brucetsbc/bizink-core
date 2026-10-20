@@ -1,0 +1,5 @@
+/* Square buttons everywhere (theme buttons, Elementor buttons, form buttons, header button). */
+.elementor .e-button-base, .elementor .bz-btn, .elementor .elementor-button { border-radius: 0 !important; }
+body .gform_wrapper.gform-theme--orbital :is(.gform_footer,.gform_page_footer) .gform_button { border-radius: 0 !important; }
+/* Square video library controls too. */
+.bz-vl-topics button, .bz-vl-dialog .bz-vl-close, .bz-vl-open, .bz-vl-thumb .bz-vl-play { border-radius: 0 !important; }

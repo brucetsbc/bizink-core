@@ -1,0 +1,3 @@
+/* Theme 06 Horizon: confident rounded headings, soft lifted cards. */
+body .elementor :is(h1, h2) { font-weight: 800 !important; letter-spacing: -0.02em; }
+body .elementor :is(h3, h4) { font-weight: 700 !important; letter-spacing: -0.01em; }

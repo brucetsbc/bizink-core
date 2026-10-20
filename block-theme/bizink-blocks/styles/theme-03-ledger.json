@@ -1,0 +1,279 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Ledger",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"slug": "base",
+					"name": "Base",
+					"color": "#FFFFFF"
+				},
+				{
+					"slug": "contrast",
+					"name": "Heading",
+					"color": "#141716"
+				},
+				{
+					"slug": "accent-1",
+					"name": "Brand",
+					"color": "#1F4D3A"
+				},
+				{
+					"slug": "accent-2",
+					"name": "Brand dark",
+					"color": "#163829"
+				},
+				{
+					"slug": "accent-3",
+					"name": "Accent",
+					"color": "#BFD8C9"
+				},
+				{
+					"slug": "accent-4",
+					"name": "Muted text",
+					"color": "#575C59"
+				},
+				{
+					"slug": "accent-5",
+					"name": "Light background",
+					"color": "#EFF2F0"
+				},
+				{
+					"slug": "accent-6",
+					"name": "Border",
+					"color": "#D9DEDB"
+				},
+				{
+					"slug": "body-text",
+					"name": "Body text",
+					"color": "#2A2E2C"
+				}
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"slug": "fraunces",
+					"name": "Fraunces",
+					"fontFamily": "\"Fraunces\", serif",
+					"fontFace": [
+						{
+							"fontFamily": "Fraunces",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/fraunces/v38/6NVf8FyLNQOQZAnv9ZwNjucMHVn85Ni7emAe9lKqZTnbB-gzTK0K1ChJdt9vIVYX9G37lvd9sPEKsxx664UJf1hLTc7RrU8.woff2"
+							]
+						},
+						{
+							"fontFamily": "Fraunces",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c7qv8.woff2"
+							]
+						},
+						{
+							"fontFamily": "Fraunces",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c7qv8.woff2"
+							]
+						},
+						{
+							"fontFamily": "Fraunces",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c7qv8.woff2"
+							]
+						}
+					]
+				},
+				{
+					"slug": "ibm-plex-sans",
+					"name": "IBM Plex Sans",
+					"fontFamily": "\"IBM Plex Sans\", sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "IBM Plex Sans",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/ibmplexsans/v23/zYXEKVElMYYaJe8bpLHnCwDKhdTEG46kmUZQCX598fQbM4jw8V78x9OWIhqbQ5g6voI.woff2"
+							]
+						},
+						{
+							"fontFamily": "IBM Plex Sans",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2"
+							]
+						},
+						{
+							"fontFamily": "IBM Plex Sans",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2"
+							]
+						},
+						{
+							"fontFamily": "IBM Plex Sans",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2"
+							]
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{
+					"slug": "small",
+					"name": "Small",
+					"size": "0.875rem"
+				},
+				{
+					"slug": "medium",
+					"name": "Body",
+					"size": "1.0625rem"
+				},
+				{
+					"slug": "large",
+					"name": "Large",
+					"size": "1.25rem"
+				},
+				{
+					"slug": "x-large",
+					"name": "Extra large",
+					"size": "clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem)"
+				},
+				{
+					"slug": "xx-large",
+					"name": "Huge",
+					"size": "clamp(2rem, 1.5rem + 2vw, 3.25rem)"
+				}
+			]
+		},
+		"custom": {
+			"radius": {
+				"card": "0px",
+				"button": "0px"
+			},
+			"space": {
+				"section": "clamp(56px, 2.5rem + 3.5vw, 96px)"
+			}
+		},
+		"layout": {
+			"contentSize": "760px",
+			"wideSize": "1200px"
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--base)",
+			"text": "var(--wp--preset--color--body-text)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--ibm-plex-sans)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"lineHeight": "1.65"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--fraunces)",
+					"fontWeight": "700",
+					"lineHeight": "1.15"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "clamp(2.5rem, 1.6rem + 3.4vw, 4.5rem)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "clamp(2rem, 1.5rem + 2vw, 3.25rem)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem)"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "1.25rem"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--accent-1)"
+				}
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--accent-1)",
+					"text": "var(--wp--preset--color--base)"
+				},
+				"border": {
+					"radius": "var(--wp--custom--radius--button)"
+				},
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--ibm-plex-sans)",
+					"fontWeight": "600"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--accent-2)"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/details": {
+				"border": {
+					"radius": "var(--wp--custom--radius--card)",
+					"width": "1px",
+					"color": "var(--wp--preset--color--accent-6)"
+				},
+				"spacing": {
+					"padding": {
+						"top": "14px",
+						"bottom": "14px",
+						"left": "18px",
+						"right": "18px"
+					}
+				}
+			},
+			"core/image": {
+				"border": {
+					"radius": "var(--wp--custom--radius--card)"
+				}
+			},
+			"core/quote": {
+				"border": {
+					"left": {
+						"color": "var(--wp--preset--color--accent-3)",
+						"width": "4px"
+					}
+				}
+			}
+		}
+	}
+}

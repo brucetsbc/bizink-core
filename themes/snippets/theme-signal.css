@@ -1,0 +1,2 @@
+/* Theme 05 Signal: tight grotesk headings, black on white. */
+body .elementor :is(h1, h2, h3, h4) { font-weight: 600 !important; letter-spacing: -0.035em; }

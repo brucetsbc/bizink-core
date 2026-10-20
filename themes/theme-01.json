@@ -1,0 +1,33 @@
+{
+ "name": "Theme 01 — Navy & Gold",
+ "description": "Confident navy with teal and gold accents; Manrope headings, Inter body; soft 12px cards, 8px buttons.",
+ "tokens": {
+  "color-primary": "#1F3A5F",
+  "color-primary-dark": "#142840",
+  "color-secondary": "#2E7D6B",
+  "color-accent": "#E0A526",
+  "color-heading": "#14202E",
+  "color-text": "#33404F",
+  "color-text-muted": "#667385",
+  "color-surface": "#FFFFFF",
+  "color-surface-alt": "#F3F5F8",
+  "color-border": "#DDE2E8",
+  "color-inverse": "#FFFFFF",
+  "font-heading": "Manrope",
+  "font-body": "Inter",
+  "text-h1": "clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem)",
+  "text-h2": "clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem)",
+  "text-h3": "clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem)",
+  "text-h4": "1.25rem",
+  "text-body": "1.0625rem",
+  "text-small": "0.875rem",
+  "space-xs": "8px",
+  "space-sm": "16px",
+  "space-md": "24px",
+  "space-lg": "48px",
+  "space-section": "clamp(56px, 2.5rem + 3.5vw, 96px)",
+  "container-max": "1200px",
+  "radius-card": "12px",
+  "radius-button": "8px"
+ }
+}

@@ -1,0 +1,2316 @@
+{
+ "version": 2,
+ "terms": [
+  {
+   "term": "Accelerated depreciation",
+   "def": "A method that claims more of an asset's cost as depreciation in its early years, reducing taxable profit sooner."
+  },
+  {
+   "term": "Accounting method",
+   "def": "The rules a business uses to decide when income and expenses are recorded, usually cash or accrual accounting."
+  },
+  {
+   "term": "Accounting period",
+   "def": "The span of time a set of financial statements covers, such as a month, quarter or year."
+  },
+  {
+   "term": "Accounting software",
+   "def": "Software that records transactions, reconciles bank accounts and produces reports, such as Xero, MYOB or QuickBooks."
+  },
+  {
+   "term": "Accounts payable",
+   "def": "Money your business owes to suppliers for goods and services it has received but not yet paid for."
+  },
+  {
+   "term": "Accounts receivable",
+   "def": "Money owed to your business by customers for goods or services already delivered."
+  },
+  {
+   "term": "Accounts receivable turnover",
+   "def": "How many times a year a business collects its average accounts receivable. A higher number means customers pay faster."
+  },
+  {
+   "term": "Accrual accounting",
+   "def": "Recording income when it is earned and expenses when they are incurred, regardless of when cash changes hands."
+  },
+  {
+   "term": "Cost base",
+   "def": "What an asset cost you for tax purposes, including purchase price and certain costs of buying, holding and selling it. Used to work out a capital gain or loss.",
+   "variants": {
+    "US": {
+     "term": "Adjusted basis",
+     "def": "An asset's cost for tax purposes, adjusted for improvements and depreciation. Used to work out a gain or loss when you sell."
+    },
+    "UK": {
+     "term": "Base cost"
+    },
+    "IE": {
+     "term": "Base cost"
+    },
+    "CA": {
+     "term": "Adjusted cost base (ACB)",
+     "def": "An asset's cost for tax purposes, including purchase costs and adjustments. Used to work out a capital gain or loss when you sell."
+    }
+   }
+  },
+  {
+   "term": "Adjusted gross income",
+   "def": "Your total income minus specific adjustments, used by the IRS to work out your tax and eligibility for many credits.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Adjustments to income",
+   "def": "Specific deductions, such as some retirement contributions, that reduce gross income before adjusted gross income is calculated.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Allowable cost",
+   "def": "A cost that a contract allows you to bill to the customer."
+  },
+  {
+   "term": "Amended return",
+   "def": "A tax return {lodged} again with corrections after the original was submitted to {tax_authority}."
+  },
+  {
+   "term": "Amortisation",
+   "def": "Spreading the cost of an intangible asset, or the repayment of a loan, over a set period.",
+   "variants": {
+    "US": {
+     "term": "Amortization"
+    },
+    "CA": {
+     "term": "Amortization"
+    }
+   }
+  },
+  {
+   "term": "Amortising loan",
+   "def": "A loan repaid in regular scheduled instalments that cover both interest and principal.",
+   "variants": {
+    "US": {
+     "term": "Amortizing loan"
+    },
+    "CA": {
+     "term": "Amortizing loan"
+    }
+   }
+  },
+  {
+   "term": "Effective annual rate",
+   "def": "The interest rate earned or charged over a year once compounding is taken into account.",
+   "variants": {
+    "US": {
+     "term": "Annual percentage yield (APY)"
+    },
+    "CA": {
+     "term": "Annual percentage yield (APY)"
+    },
+    "UK": {
+     "term": "Annual equivalent rate (AER)"
+    },
+    "IE": {
+     "term": "Annual equivalent rate (AER)"
+    }
+   }
+  },
+  {
+   "term": "Appreciation",
+   "def": "An increase in the value of an asset over time."
+  },
+  {
+   "term": "Assessment",
+   "def": "{tax_authority_short}'s calculation of the tax you owe after you {lodge} a return. The term is also used for the value given to a property for rates or property tax."
+  },
+  {
+   "term": "Asset allocation",
+   "def": "How an investment portfolio is divided between asset classes such as shares, property, bonds and cash."
+  },
+  {
+   "term": "Asset case",
+   "def": "A bankruptcy in which the debtor has assets that can be sold to repay creditors.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Assets",
+   "def": "Anything a person or business owns that has a monetary value."
+  },
+  {
+   "term": "Audit",
+   "def": "An independent examination of financial records, or a review by {tax_authority} to check that tax has been reported correctly."
+  },
+  {
+   "term": "Average tax rate",
+   "def": "Total tax paid divided by taxable income, shown as a percentage."
+  },
+  {
+   "term": "Balance sheet",
+   "def": "A financial statement showing what a business owns (assets), owes (liabilities) and the owners' equity at a point in time."
+  },
+  {
+   "term": "Bank reconciliation",
+   "def": "Matching the transactions in your accounting records with your bank statement and explaining any differences."
+  },
+  {
+   "term": "Bankruptcy",
+   "def": "A legal process for people or businesses that cannot pay their debts, under which some debts may be released."
+  },
+  {
+   "term": "Break-even point",
+   "def": "The level of sales at which total revenue equals total fixed and variable costs, so the business makes neither a profit nor a loss."
+  },
+  {
+   "term": "Capital",
+   "def": "The money and other financial resources used to start, run and grow a business."
+  },
+  {
+   "term": "Capital gain",
+   "def": "The profit made when an asset, such as property or shares, is sold for more than its cost."
+  },
+  {
+   "term": "Capital Gains Tax (CGT)",
+   "def": "Tax on the capital gain made when you sell certain assets, such as investment property or shares.",
+   "variants": {
+    "NZ": {
+     "term": "Bright-line test",
+     "def": "A rule that taxes the gain on residential property sold within a set period after purchase. New Zealand has no general capital gains tax."
+    },
+    "US": {
+     "term": "Capital gains tax",
+     "def": "Federal (and often state) tax on gains from selling assets. Rates depend on whether the asset was held short or long term."
+    }
+   }
+  },
+  {
+   "term": "Capital loss",
+   "def": "The loss made when an asset is sold for less than its cost. It can often be used to reduce capital gains."
+  },
+  {
+   "term": "Cash accounting",
+   "def": "Recording income when money is received and expenses when they are paid."
+  },
+  {
+   "term": "Cash flow statement",
+   "def": "A financial report showing where cash came from and where it went over a period."
+  },
+  {
+   "term": "Chart of accounts",
+   "def": "The list of all the accounts in a business's general ledger, used to categorise every transaction."
+  },
+  {
+   "term": "Cost of goods sold (COGS)",
+   "def": "The direct costs of producing or buying the goods a business sold, such as materials and direct labour."
+  },
+  {
+   "term": "Current year tax",
+   "def": "The tax payable on income earned in the current tax year."
+  },
+  {
+   "term": "Debt consolidation",
+   "def": "Combining several debts into one loan, ideally at a lower interest rate or with simpler repayments."
+  },
+  {
+   "term": "Debt-to-income ratio",
+   "def": "How much of a person's income goes towards repaying debt. Lenders use it to assess borrowing capacity."
+  },
+  {
+   "term": "Deduction",
+   "def": "An expense you can subtract from your assessable income to reduce the tax you pay.",
+   "variants": {
+    "US": {
+     "term": "Deduction",
+     "def": "An expense you can subtract from your income to reduce the tax you pay."
+    },
+    "CA": {
+     "term": "Deduction",
+     "def": "An expense you can subtract from your income to reduce the tax you pay."
+    }
+   }
+  },
+  {
+   "term": "Dependant",
+   "def": "A person, such as a child, who relies on someone else for financial support.",
+   "variants": {
+    "US": {
+     "term": "Dependent"
+    },
+    "CA": {
+     "term": "Dependent"
+    }
+   }
+  },
+  {
+   "term": "Depreciation",
+   "def": "Spreading the cost of a business asset over its useful life, recognising the fall in its value."
+  },
+  {
+   "term": "Direct tax",
+   "def": "A tax paid directly to the government by the person or business it is charged on, such as income tax."
+  },
+  {
+   "term": "Dividend",
+   "def": "A distribution of a company's profits to its shareholders."
+  },
+  {
+   "term": "Due diligence",
+   "def": "A thorough review of a business or investment before buying it, to understand its value and risks."
+  },
+  {
+   "term": "E-commerce",
+   "def": "Buying and selling goods or services online."
+  },
+  {
+   "term": "EBITDA",
+   "def": "Earnings before interest, tax, depreciation and amortisation: a measure of operating performance.",
+   "variants": {
+    "US": {
+     "term": "EBITDA",
+     "def": "Earnings before interest, taxes, depreciation and amortization: a measure of operating performance."
+    },
+    "CA": {
+     "term": "EBITDA",
+     "def": "Earnings before interest, taxes, depreciation and amortization: a measure of operating performance."
+    }
+   }
+  },
+  {
+   "term": "Emergency fund",
+   "def": "Money set aside to cover unexpected expenses, such as repairs or a drop in income."
+  },
+  {
+   "term": "Equity",
+   "def": "The value of an asset after the debts secured against it are subtracted. In a business, the owners' share of its assets."
+  },
+  {
+   "term": "Estate",
+   "def": "Everything a person owns, minus what they owe, particularly when they die."
+  },
+  {
+   "term": "PAYG instalments",
+   "def": "Regular payments made during the year towards your expected income tax, so you don't face one large bill after you {lodge} your return.",
+   "variants": {
+    "NZ": {
+     "term": "Provisional tax"
+    },
+    "UK": {
+     "term": "Payments on account"
+    },
+    "IE": {
+     "term": "Preliminary tax"
+    },
+    "US": {
+     "term": "Estimated tax payments"
+    },
+    "CA": {
+     "term": "Tax instalments"
+    }
+   }
+  },
+  {
+   "term": "Excise",
+   "def": "A tax on specific goods such as fuel, alcohol and tobacco, usually charged per unit rather than on price.",
+   "variants": {
+    "US": {
+     "term": "Excise tax"
+    },
+    "CA": {
+     "term": "Excise tax"
+    }
+   }
+  },
+  {
+   "term": "Market value",
+   "def": "The price an asset would sell for between a willing buyer and a willing seller in an open market.",
+   "variants": {
+    "US": {
+     "term": "Fair market value"
+    },
+    "CA": {
+     "term": "Fair market value"
+    }
+   }
+  },
+  {
+   "term": "Financial statement",
+   "def": "A formal report of a business's financial activities and position, such as the profit and loss, balance sheet and cash flow statement."
+  },
+  {
+   "term": "Financial year",
+   "def": "The 12-month period a business uses for accounting and tax reporting.",
+   "variants": {
+    "US": {
+     "term": "Fiscal year"
+    },
+    "CA": {
+     "term": "Fiscal year"
+    }
+   }
+  },
+  {
+   "term": "Fixed assets",
+   "def": "Long-term physical assets a business owns and uses to earn income, such as equipment, vehicles and buildings."
+  },
+  {
+   "term": "Flat tax",
+   "def": "A tax system in which everyone pays the same rate regardless of income."
+  },
+  {
+   "term": "Fractional ownership",
+   "def": "Several people each owning a share of an asset, such as a property, and sharing its costs and benefits."
+  },
+  {
+   "term": "Franking credits",
+   "def": "Credits for the company tax already paid on a dividend. Shareholders can use them to reduce their own tax.",
+   "regions": [
+    "AU",
+    "NZ"
+   ],
+   "variants": {
+    "NZ": {
+     "term": "Imputation credits",
+     "def": "Credits for the company tax already paid on a dividend. Shareholders can use them to reduce their own tax."
+    }
+   }
+  },
+  {
+   "term": "Fringe Benefits Tax (FBT)",
+   "def": "Tax employers pay on certain non-cash benefits given to employees, such as a car or paid expenses.",
+   "variants": {
+    "UK": {
+     "term": "Benefits in kind",
+     "def": "Non-cash benefits given to employees, such as a company car, which are taxable and reported to HMRC."
+    },
+    "IE": {
+     "term": "Benefit-in-kind (BIK)",
+     "def": "Non-cash benefits given to employees, such as a company car, which are taxed through payroll."
+    },
+    "US": {
+     "term": "Fringe benefits",
+     "def": "Non-cash benefits given to employees. Many are taxable as wages unless a specific exclusion applies."
+    },
+    "CA": {
+     "term": "Taxable benefits",
+     "def": "Non-cash benefits given to employees, such as a company car, which are included in their employment income."
+    }
+   }
+  },
+  {
+   "term": "Government bond",
+   "def": "A loan to the government that pays a fixed rate of interest until it matures.",
+   "variants": {
+    "UK": {
+     "term": "Gilt"
+    }
+   }
+  },
+  {
+   "term": "Gross income",
+   "def": "Total income before any tax or deductions are taken out."
+  },
+  {
+   "term": "Gross profit",
+   "def": "Revenue minus the cost of goods sold. It shows how much a business makes on what it sells, before overheads."
+  },
+  {
+   "term": "Gross profit margin",
+   "def": "Gross profit as a percentage of revenue."
+  },
+  {
+   "term": "Gross profit vs net profit",
+   "def": "Gross profit is revenue minus the cost of goods sold. Net profit is what remains after all expenses, including overheads, interest and tax."
+  },
+  {
+   "term": "Household income",
+   "def": "The combined income of everyone in a household."
+  },
+  {
+   "term": "Income tax",
+   "def": "Tax charged on the income of individuals and businesses."
+  },
+  {
+   "term": "Indirect tax",
+   "def": "A tax collected by a business on a transaction and passed on to the government, such as {sales_tax}."
+  },
+  {
+   "term": "Inventory",
+   "def": "Goods a business holds to sell, and the materials used to make them. Also called stock.",
+   "variants": {
+    "US": {
+     "term": "Inventory",
+     "def": "Goods a business holds to sell, and the materials used to make them."
+    },
+    "CA": {
+     "term": "Inventory",
+     "def": "Goods a business holds to sell, and the materials used to make them."
+    }
+   }
+  },
+  {
+   "term": "Investment income",
+   "def": "Income earned from investments, such as interest, dividends, rent and capital gains."
+  },
+  {
+   "term": "Invoice",
+   "def": "A document a seller issues to a buyer listing the goods or services supplied, the amount due and the payment terms. If you're registered for {sales_tax}, it must meet {tax_authority_short} requirements."
+  },
+  {
+   "term": "Journal entry",
+   "def": "A record of a transaction in the accounting system, showing the accounts debited and credited."
+  },
+  {
+   "term": "Key Performance Indicator (KPI)",
+   "def": "A measure a business tracks to see how well it is meeting its goals, such as gross margin or debtor days."
+  },
+  {
+   "term": "Ledger balance",
+   "def": "The balance of an account in the ledger at a point in time, after all recorded transactions."
+  },
+  {
+   "term": "Leverage",
+   "def": "Using borrowed money to buy assets or invest, which can magnify both gains and losses."
+  },
+  {
+   "term": "Liability",
+   "def": "Anything a person or business owes, such as loans, supplier bills and tax."
+  },
+  {
+   "term": "Line of credit",
+   "def": "A flexible loan that lets you borrow up to a set limit as needed, paying interest only on what you use."
+  },
+  {
+   "term": "Liquid assets",
+   "def": "Cash, and assets that can be quickly turned into cash without losing much value."
+  },
+  {
+   "term": "Liquidity",
+   "def": "How easily assets can be turned into cash to meet short-term obligations."
+  },
+  {
+   "term": "Living trust",
+   "def": "A trust set up during a person's lifetime to hold and manage their assets, often used to avoid probate.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Load",
+   "def": "A sales charge or commission paid when buying or selling units in a mutual fund.",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Margin",
+   "def": "The difference between the selling price and the cost, usually shown as a percentage of the selling price."
+  },
+  {
+   "term": "Margin vs markup",
+   "def": "Margin is profit as a percentage of the selling price. Markup is profit as a percentage of the cost."
+  },
+  {
+   "term": "Maturity date",
+   "def": "The date a loan, bond or term deposit ends and the principal is repaid."
+  },
+  {
+   "term": "Mortgage",
+   "def": "A loan secured against property, which the lender can claim if repayments aren't made."
+  },
+  {
+   "term": "Managed fund",
+   "def": "An investment that pools money from many investors and is run by a professional fund manager.",
+   "variants": {
+    "UK": {
+     "term": "Unit trust"
+    },
+    "IE": {
+     "term": "Unit trust"
+    },
+    "US": {
+     "term": "Mutual fund"
+    },
+    "CA": {
+     "term": "Mutual fund"
+    }
+   }
+  },
+  {
+   "term": "Negative equity",
+   "def": "When the amount owed on a loan is more than the current value of the asset it is secured against."
+  },
+  {
+   "term": "Net income",
+   "def": "Income left after all expenses, allowances and taxes are deducted."
+  },
+  {
+   "term": "Net profit",
+   "def": "The profit left after all expenses, including overheads, interest and tax, are subtracted from revenue."
+  },
+  {
+   "term": "Net worth",
+   "def": "The total value of everything a person or business owns, minus everything it owes."
+  },
+  {
+   "term": "Non-liquid asset",
+   "def": "An asset that can't be quickly turned into cash without losing value, such as property or equipment."
+  },
+  {
+   "term": "Promissory note",
+   "def": "A written promise to pay a set amount of money, either on demand or by a certain date."
+  },
+  {
+   "term": "Operating margin",
+   "def": "Operating profit as a percentage of revenue. It shows how much of each sale is left after running costs."
+  },
+  {
+   "term": "Operating profit",
+   "def": "Profit from a business's core operations, before interest and tax."
+  },
+  {
+   "term": "Options",
+   "def": "Contracts that give the holder the right, but not the obligation, to buy or sell an asset at a set price by a set date."
+  },
+  {
+   "term": "Payroll records",
+   "def": "Records of employees' pay, tax, {retirement_savings} and leave, which employers must keep and use for {payroll_reporting}."
+  },
+  {
+   "term": "Periodic rate",
+   "def": "The interest rate charged for each period of a loan, such as a monthly rate."
+  },
+  {
+   "term": "Private equity",
+   "def": "Investment in private companies, usually by funds that pool money from investors."
+  },
+  {
+   "term": "Profit and loss statement",
+   "def": "A report showing a business's income and expenses over a period, and the resulting profit or loss.",
+   "variants": {
+    "US": {
+     "term": "Income statement",
+     "def": "A report showing a business's income and expenses over a period, and the resulting profit or loss. Also called a profit and loss statement."
+    },
+    "CA": {
+     "term": "Income statement",
+     "def": "A report showing a business's income and expenses over a period, and the resulting profit or loss. Also called a profit and loss statement."
+    }
+   }
+  },
+  {
+   "term": "Purchase agreement",
+   "def": "A contract setting out the price and conditions for buying an asset or business."
+  },
+  {
+   "term": "Quantitative easing",
+   "def": "When a central bank creates money to buy financial assets, to lower interest rates and support the economy."
+  },
+  {
+   "term": "Quick ratio",
+   "def": "Current assets, excluding inventory, divided by current liabilities. It shows whether a business can pay its short-term debts."
+  },
+  {
+   "term": "Rebate",
+   "def": "A partial refund of an amount already paid."
+  },
+  {
+   "term": "Recession",
+   "def": "A significant fall in economic activity lasting several months or more."
+  },
+  {
+   "term": "Refinance",
+   "def": "Replacing an existing loan with a new one, usually to get a better rate or different terms."
+  },
+  {
+   "term": "Return on assets (ROA)",
+   "def": "Net profit divided by total assets. It shows how efficiently a business uses its assets to make profit."
+  },
+  {
+   "term": "Return on equity (ROE)",
+   "def": "Net profit divided by owners' equity. It shows the return on the money the owners have invested."
+  },
+  {
+   "term": "Return on investment (ROI)",
+   "def": "The profit from an investment compared with what it cost, shown as a percentage."
+  },
+  {
+   "term": "Revenue",
+   "def": "The income a business earns from its normal activities, mainly selling goods or services."
+  },
+  {
+   "term": "Risk",
+   "def": "The chance that an investment's return will be lower than expected, or that you will lose money."
+  },
+  {
+   "term": "Safe harbour",
+   "def": "Rules that protect a person or business from a penalty or liability if they meet set conditions.",
+   "variants": {
+    "US": {
+     "term": "Safe harbor"
+    },
+    "CA": {
+     "term": "Safe harbor"
+    }
+   }
+  },
+  {
+   "term": "Sole trader",
+   "def": "A business owned and run by one person, with no legal separation between the owner and the business.",
+   "variants": {
+    "US": {
+     "term": "Sole proprietorship"
+    },
+    "CA": {
+     "term": "Sole proprietorship"
+    }
+   }
+  },
+  {
+   "term": "Stockbroker",
+   "def": "A licensed professional who buys and sells shares and other securities for investors."
+  },
+  {
+   "term": "Tax bracket",
+   "def": "A range of income taxed at a particular rate."
+  },
+  {
+   "term": "Tax offset",
+   "def": "An amount that directly reduces the tax you owe, rather than your taxable income.",
+   "variants": {
+    "NZ": {
+     "term": "Tax credit"
+    },
+    "UK": {
+     "term": "Tax credit"
+    },
+    "IE": {
+     "term": "Tax credit"
+    },
+    "US": {
+     "term": "Tax credit"
+    },
+    "CA": {
+     "term": "Tax credit"
+    }
+   }
+  },
+  {
+   "term": "Tax deferral",
+   "def": "Delaying when tax is paid, for example by contributing to {retirement_savings}."
+  },
+  {
+   "term": "Trial balance",
+   "def": "A report listing the balance of every general ledger account at a point in time, used to check debits equal credits."
+  },
+  {
+   "term": "Passive income",
+   "def": "Income that doesn't come from active work, such as rent, interest and dividends.",
+   "variants": {
+    "US": {
+     "term": "Unearned income"
+    }
+   }
+  },
+  {
+   "term": "Unsecured debt",
+   "def": "Debt that isn't backed by an asset the lender can take if you don't repay, such as most credit cards."
+  },
+  {
+   "term": "Venture capital",
+   "def": "Investment in early-stage businesses with high growth potential, in exchange for a share of ownership."
+  },
+  {
+   "term": "Working capital",
+   "def": "Current assets minus current liabilities: the funds available to run the business day to day."
+  },
+  {
+   "term": "Year to date (YTD)",
+   "def": "The period from the start of the current financial or calendar year up to today."
+  },
+  {
+   "term": "GST-free",
+   "def": "Supplies that don't attract {sales_tax}, such as most basic food. The business can still claim the {sales_tax} on its related costs.",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "CA"
+   ],
+   "variants": {
+    "NZ": {
+     "term": "Zero-rated"
+    },
+    "UK": {
+     "term": "Zero-rated"
+    },
+    "IE": {
+     "term": "Zero-rated"
+    },
+    "CA": {
+     "term": "Zero-rated supplies",
+     "def": "Supplies taxed at 0% GST/HST, such as basic groceries. The business can still claim input tax credits on related costs."
+    }
+   }
+  },
+  {
+   "term": "{sales_tax}",
+   "def": "A tax on most goods and services, collected by registered businesses and paid to {tax_authority} with each {sales_tax_return}."
+  },
+  {
+   "term": "{business_number}",
+   "def": "The identifying number for your business, used with {tax_authority} and on invoices.",
+   "regions": [
+    "AU",
+    "NZ",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Above-the-line deduction",
+   "def": "A deduction taken before adjusted gross income is worked out, such as some retirement contributions. It lowers AGI, which can affect other tax breaks.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Alternative minimum tax (AMT)",
+   "def": "A separate calculation that makes sure higher-income taxpayers with large deductions still pay at least a minimum amount of tax.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Dividend imputation",
+   "def": "A system that stops company profits being taxed twice. Tax the company has paid passes to shareholders as credits they can use against their own tax.",
+   "regions": [
+    "AU",
+    "NZ"
+   ],
+   "variants": {
+    "AU": {
+     "term": "Franking credits (dividend imputation)",
+     "def": "Credits for the tax a company has already paid, passed to shareholders with dividends. Shareholders use them to reduce their own tax, so profits aren't taxed twice."
+    },
+    "NZ": {
+     "term": "Imputation credits",
+     "def": "Credits for the tax a company has already paid, passed to shareholders with dividends. Shareholders use them to reduce their own tax, so profits aren't taxed twice."
+    }
+   }
+  },
+  {
+   "term": "E-file",
+   "def": "Lodging a tax return online with the IRS, directly or through tax software or a preparer.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Estate tax",
+   "def": "A federal tax on the value of a person's estate when they die, payable before it passes to beneficiaries. Only larger estates pay it.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Health savings account (HSA)",
+   "def": "A tax-advantaged account for medical costs, available to people on a high-deductible health plan. Unused money carries over each year.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Housing expense ratio",
+   "def": "Monthly housing costs (mortgage, property tax and insurance) as a share of gross monthly income. Lenders use it to judge whether you can afford a home loan.",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Inheritance tax",
+   "def": "A tax on a person's estate when they die, on the value above a tax-free threshold. Some gifts and transfers, such as to a spouse or civil partner, can be exempt.",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Capital acquisitions tax (CAT)",
+   "def": "Tax on gifts and inheritances above a tax-free threshold. The threshold depends on the relationship between the giver and the person receiving.",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Property tax",
+   "def": "A local tax on the value of land and buildings, used to fund community services such as schools, roads and emergency services.",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Council rates",
+   "def": "Charges a local council sets on property owners to fund local services such as roads, rubbish collection and parks.",
+   "regions": [
+    "AU",
+    "NZ"
+   ]
+  },
+  {
+   "term": "Council tax",
+   "def": "A tax on homes collected by the local council to pay for local services. The amount depends on the property's valuation band.",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Local property tax (LPT)",
+   "def": "An annual tax on residential property, based on the property's market value band, collected by Revenue.",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Roth IRA",
+   "def": "A retirement account you pay into with after-tax money. Growth is tax-free and qualifying withdrawals in retirement are tax-free too.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Traditional IRA",
+   "def": "A retirement account where contributions may be tax-deductible. Tax is paid when the money is withdrawn in retirement.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Self-directed IRA",
+   "def": "An IRA that lets you invest in a wider range of assets, such as property or private businesses, with stricter rules on how you deal with them.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "S corporation",
+   "def": "A company that elects to pass its income, losses and credits through to shareholders for federal tax, so the business itself generally isn't taxed on its profit.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Schedules (tax forms)",
+   "def": "Extra forms filed with a federal tax return to report particular income and deductions, such as Schedule C for a sole proprietor's business profit.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Self-employment tax",
+   "def": "Social Security and Medicare tax paid by people who work for themselves, on top of income tax.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Signature loan",
+   "def": "A personal loan given on your credit history and signature alone, with no asset as security.",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Use tax",
+   "def": "Tax owed on goods bought from outside your state without sales tax, when they are used in your state.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Exclusion (tax)",
+   "def": "Income that the law lets you leave out of gross income, so it isn't taxed, such as some employer-provided benefits.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Employee savings plan",
+   "def": "A workplace plan, such as a 401(k), where employees save part of their pay for retirement before tax, often with an employer match.",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Allowances",
+   "def": "Extra payments for work-related costs or conditions, such as tools, travel, meals or working in difficult conditions.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Annual leave",
+   "def": "Paid time off each year for employees to rest or take a holiday.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE"
+   ],
+   "variants": {
+    "UK": {
+     "term": "Annual leave (holiday entitlement)"
+    }
+   }
+  },
+  {
+   "term": "Back pay",
+   "def": "Pay an employee was owed for an earlier period but didn't receive, such as from an underpayment or a backdated pay rise.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "US": {
+     "term": "Retroactive pay (back pay)"
+    }
+   }
+  },
+  {
+   "term": "Base pay",
+   "def": "An employee's standard rate of pay, before overtime, bonuses, allowances or benefits.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Bonus",
+   "def": "Extra pay on top of normal wages, usually at the employer's discretion as a reward or incentive. It is usually taxed like ordinary pay.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Casual employee",
+   "def": "Someone employed on an as-needed basis with no firm commitment to ongoing hours. They are usually paid by the hour.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "CA"
+   ]
+  },
+  {
+   "term": "Cloud payroll",
+   "def": "Payroll software run online, so pay runs, records and payslips can be reached from anywhere with a login.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Commission",
+   "def": "Pay linked to results, usually a percentage of the sales an employee makes.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Contractor",
+   "def": "A person in business on their own account who is paid to do a job, rather than employed. They handle their own tax and aren't on the payroll.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "US": {
+     "term": "Independent contractor",
+     "def": "A self-employed person paid to do a job rather than employed. No tax is withheld from their pay; they are usually reported on Form 1099-NEC."
+    },
+    "CA": {
+     "term": "Independent contractor",
+     "def": "A self-employed person paid to do a job rather than employed. They aren't on the payroll and handle their own CPP and income tax."
+    }
+   }
+  },
+  {
+   "term": "Direct deposit",
+   "def": "Paying wages straight into an employee's bank account instead of by cheque or cash.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Employee",
+   "def": "A person employed under a contract of employment, who works under the employer's direction and is paid through payroll.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Employer",
+   "def": "A person or business that employs staff and is responsible for paying them and meeting the related tax and employment obligations.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Employment contract",
+   "def": "The agreement between employer and employee setting out duties, pay, hours and other terms.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "NZ": {
+     "term": "Employment agreement"
+    },
+    "UK": {
+     "term": "Contract of employment (written statement)"
+    }
+   }
+  },
+  {
+   "term": "Fringe benefits",
+   "def": "Non-cash benefits an employer gives staff on top of pay, such as a work car or health insurance. Some are taxed.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "CA"
+   ],
+   "variants": {
+    "UK": {
+     "term": "Benefits in kind (BIK)",
+     "def": "Non-cash benefits an employer gives staff on top of pay, such as a company car or private medical insurance. Most are taxable and reported to HMRC."
+    },
+    "IE": {
+     "term": "Benefit in kind (BIK)",
+     "def": "Non-cash benefits an employer gives staff on top of pay, such as a company car. Most are taxed through payroll."
+    }
+   }
+  },
+  {
+   "term": "Garnishment",
+   "def": "A legal order requiring an employer to deduct money from an employee's pay and send it to a creditor or agency.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "CA": {
+     "term": "Garnishment (wage garnishment)"
+    }
+   }
+  },
+  {
+   "term": "Gross pay",
+   "def": "Total pay for a period before tax and any other deductions.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Hours worked",
+   "def": "The time an employee is required to be at work or on duty, used to calculate pay and entitlements.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Minimum wage",
+   "def": "The lowest hourly rate an employer may legally pay. Rates are set by law and reviewed regularly.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "AU": {
+     "term": "National minimum wage",
+     "def": "The lowest pay rate for employees not covered by an award or agreement, reviewed each year by the Fair Work Commission. Most employees are paid under an award instead."
+    }
+   }
+  },
+  {
+   "term": "Net pay",
+   "def": "What an employee receives after tax and all other deductions. Also called take-home pay.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Onboarding",
+   "def": "Bringing a new employee into the business: paperwork, payroll set-up, training and introductions.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Overtime",
+   "def": "Hours worked beyond an employee's normal hours. Depending on the law or agreement, it may be paid at a higher rate.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Pay period",
+   "def": "The span of time each pay covers, such as a week, fortnight or month.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "US": {
+     "term": "Pay period"
+    },
+    "CA": {
+     "term": "Pay period"
+    }
+   }
+  },
+  {
+   "term": "Pay rate",
+   "def": "The amount an employee is paid per hour, per period or per year before deductions.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Payslip",
+   "def": "A record given to employees each payday showing gross pay, deductions, net pay and leave balances.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE"
+   ],
+   "variants": {
+    "UK": {
+     "term": "Payslip (itemised pay statement)"
+    }
+   }
+  },
+  {
+   "term": "Pay stub",
+   "def": "A statement given with each pay showing gross pay, deductions and net pay for the period and the year to date.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Payroll",
+   "def": "Paying a business's employees, including working out pay, deductions and tax, and reporting to the authorities. Also the list of employees and what they are paid.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Payroll outsourcing",
+   "def": "Using an outside provider to run the business's payroll, including pay runs and reporting.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Reimbursement",
+   "def": "Repaying an employee for work costs they paid themselves, such as travel. Genuine reimbursements usually aren't taxed as pay.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Remittance",
+   "def": "Paying amounts withheld from employees' pay, such as income tax, to the tax authority.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "CA"
+   ],
+   "variants": {
+    "CA": {
+     "term": "Remittance",
+     "def": "Sending the CPP contributions, EI premiums and income tax withheld from employees' pay, plus the employer's share, to the CRA by the due date."
+    }
+   }
+  },
+  {
+   "term": "Salary",
+   "def": "A fixed amount of pay for a year, paid in regular instalments, rather than by the hour.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Severance pay",
+   "def": "A payment to an employee whose job ends, often based on length of service.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Redundancy pay",
+   "def": "A payment to an employee whose job is no longer needed. Minimum amounts are set by law in some cases, based on age and length of service.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "UK",
+    "IE"
+   ],
+   "variants": {
+    "IE": {
+     "term": "Statutory redundancy payment"
+    }
+   }
+  },
+  {
+   "term": "Sick leave",
+   "def": "Time off work because of illness or injury. Whether it is paid, and how much, depends on the law and the employment agreement.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "AU": {
+     "term": "Personal/carer's leave",
+     "def": "Paid leave when an employee is sick or injured, or needs to care for a family or household member. Minimum amounts are set by the National Employment Standards."
+    }
+   }
+  },
+  {
+   "term": "Statutory holiday",
+   "def": "A public holiday set by law. Employees who work it, or have it off, may be entitled to particular pay.",
+   "section": "payroll",
+   "regions": [
+    "CA",
+    "US"
+   ],
+   "variants": {
+    "US": {
+     "term": "Federal holiday"
+    }
+   }
+  },
+  {
+   "term": "Tips",
+   "def": "Money customers give staff on top of the bill. Tips are generally taxable income for the employee.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "UK": {
+     "term": "Tips and gratuities"
+    }
+   }
+  },
+  {
+   "term": "Wages",
+   "def": "Pay for work, usually worked out on hours or days worked.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE",
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Taxable income",
+   "def": "Income that tax is worked out on, after allowable deductions.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ",
+    "UK",
+    "IE"
+   ]
+  },
+  {
+   "term": "Award (modern award)",
+   "def": "A legal document setting minimum pay rates and conditions for employees in an industry or occupation.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Business activity statement (BAS)",
+   "def": "The form businesses lodge with the ATO to report and pay GST, PAYG withholding and other tax obligations.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Casual loading",
+   "def": "An extra percentage on a casual employee's hourly rate, paid instead of paid leave and other entitlements permanent staff receive.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Employee share scheme (ESS)",
+   "def": "A way of giving employees shares or options in the company they work for, often with special tax rules.",
+   "section": "payroll",
+   "regions": [
+    "AU",
+    "NZ"
+   ]
+  },
+  {
+   "term": "Fair Work Act",
+   "def": "The main federal law setting workplace rights, including the National Employment Standards and the system of awards.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Fair Work Ombudsman (FWO)",
+   "def": "The government agency that gives free advice on pay and workplace rights and enforces the Fair Work Act.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Income statement",
+   "def": "The end-of-year summary of an employee's pay, tax withheld and super, available in myGov once the employer finalises it through Single Touch Payroll.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Instalment activity statement (IAS)",
+   "def": "A statement some businesses lodge with the ATO to report and pay PAYG withholding or instalments when they don't lodge a BAS for that period.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Leave loading",
+   "def": "An extra amount, often 17.5%, paid on annual leave under many awards and agreements.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Long service leave (LSL)",
+   "def": "Extra paid leave for employees who have worked for the same employer for a long time. The rules come from state and territory laws.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "National Employment Standards (NES)",
+   "def": "The minimum entitlements for employees in the national system, such as maximum weekly hours, leave and notice of termination.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Parental leave",
+   "def": "Leave for employees after the birth or adoption of a child. Government-funded Parental Leave Pay may be paid through the employer's payroll.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "PAYG withholding",
+   "def": "Tax an employer takes out of employees' pay and sends to the ATO.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Payroll tax",
+   "def": "A state and territory tax on employers whose total wages are above a threshold. It is paid by the employer, not taken from employees' pay.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Single Touch Payroll (STP)",
+   "def": "Reporting each pay run's wages, tax withheld and super to the ATO from payroll software.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Superannuation",
+   "def": "Retirement savings. Employers must pay a set percentage of most employees' ordinary earnings into their super fund.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Superannuation guarantee (SG)",
+   "def": "The minimum super contribution employers must pay for eligible employees. Late or missed payments attract the super guarantee charge.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Tax file number (TFN)",
+   "def": "A personal reference number issued by the ATO. Employees give it to employers on a TFN declaration so the right tax is withheld.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Termination payment",
+   "def": "Amounts paid when employment ends, such as unused leave, pay in lieu of notice and redundancy pay. Some parts are taxed differently.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "Workers compensation",
+   "def": "Insurance employers must hold to cover employees' wages and medical costs if they are injured or become ill because of work. Run by each state and territory.",
+   "section": "payroll",
+   "regions": [
+    "AU"
+   ]
+  },
+  {
+   "term": "ACC levies",
+   "def": "Payments to the Accident Compensation Corporation (ACC) that fund cover for injuries. Employees' earners' levy is deducted through PAYE; employers pay a work levy.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Alternative holiday (day in lieu)",
+   "def": "A paid day off an employee earns for working on a public holiday that would otherwise be a working day for them.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Employer superannuation contribution tax (ESCT)",
+   "def": "Tax on an employer's contributions to an employee's KiwiSaver or other super fund, deducted before the contribution is paid.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Employment information",
+   "def": "The pay and deduction details employers file with Inland Revenue after each payday.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Fringe benefit tax (FBT)",
+   "def": "A tax employers pay on non-cash benefits given to staff, such as private use of a work vehicle.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Holiday pay",
+   "def": "Pay for annual holidays and public holidays under the Holidays Act.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Income year",
+   "def": "The year income tax is worked out on, usually 1 April to 31 March.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "IRD number",
+   "def": "The number Inland Revenue gives to people and organisations for tax. Employees give it to their employer on a tax code declaration.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "KiwiSaver",
+   "def": "A voluntary retirement savings scheme. Members contribute a chosen percentage of their pay, and employers must also contribute for eligible employees.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "NZ Super (New Zealand Superannuation)",
+   "def": "The government pension paid to eligible New Zealanders from age 65, funded from general taxes. Nothing is deducted through payroll for it, and it is separate from KiwiSaver.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "NZ Superannuation Fund",
+   "def": "The government's investment fund that helps pay for NZ Super in the future. Individuals and employers don't contribute to it.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Superannuation scheme (employer)",
+   "def": "A workplace or other registered retirement scheme besides KiwiSaver. Employer contributions to it are taxed with ESCT, as KiwiSaver contributions are.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "KiwiSaver savings suspension",
+   "def": "A break from KiwiSaver contributions for a set time, approved by Inland Revenue. Formerly called a contributions holiday.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Mondayisation",
+   "def": "When some public holidays fall on a weekend that isn't a working day for the employee, the holiday moves to the following Monday (or Tuesday).",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "New Zealand Business Number (NZBN)",
+   "def": "A unique number that identifies a business in New Zealand, used to share its key details with government and other businesses.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Otherwise working day",
+   "def": "A day the employee would normally have worked. It decides whether they get paid for a public holiday and earn a day in lieu.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "PAYE",
+   "def": "Pay as you earn: income tax and the ACC earners' levy that employers deduct from employees' pay and send to Inland Revenue.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Payday filing",
+   "def": "Filing employment information with Inland Revenue within two working days of each payday.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Protected net earnings",
+   "def": "The minimum share of an employee's pay that must be left after certain deductions, such as child support, are taken.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Deduction notice",
+   "def": "A notice from Inland Revenue telling an employer or bank to take money owed by a taxpayer, such as unpaid tax or child support, and pay it to Inland Revenue.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Shadow payroll",
+   "def": "A payroll run for an employee paid from overseas while working in New Zealand, so the right PAYE is reported and paid here.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Tax code",
+   "def": "A code an employee chooses on a tax code declaration so the right amount of PAYE is deducted, for example for a main or secondary job.",
+   "section": "payroll",
+   "regions": [
+    "NZ"
+   ]
+  },
+  {
+   "term": "Auto-enrolment",
+   "def": "The legal duty for employers to put eligible workers into a workplace pension and pay in at least a minimum contribution.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Employer Payment Summary (EPS)",
+   "def": "A report to HMRC to claim reductions, such as statutory pay recovery or Employment Allowance, or to say no employees were paid.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Employment Allowance",
+   "def": "A reduction in the employer's National Insurance bill each year for eligible businesses.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Full Payment Submission (FPS)",
+   "def": "The report sent to HMRC on or before each payday with employees' pay and deductions, under Real Time Information.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "HMRC",
+   "def": "HM Revenue & Customs, the UK tax authority.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Making Tax Digital (MTD)",
+   "def": "HMRC's programme requiring businesses to keep digital records and file returns, such as VAT, using compatible software.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "National Insurance contributions (NICs)",
+   "def": "Contributions paid by employees and employers on earnings, which count towards the State Pension and some benefits.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "National Living Wage",
+   "def": "The legal minimum hourly pay for workers above a set age. Rates change each April.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "P45",
+   "def": "The form given to an employee when they leave, showing their pay and tax to date for the new employer.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "P60",
+   "def": "The year-end summary of an employee's pay and tax for the tax year, given by 31 May.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "P11D",
+   "def": "The form employers use to report employees' benefits in kind and expenses to HMRC after the tax year, unless they are payrolled.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "PAYE",
+   "def": "Pay As You Earn: the system employers use to deduct Income Tax and National Insurance from pay and send it to HMRC.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Real Time Information (RTI)",
+   "def": "Reporting employees' pay and deductions to HMRC every time they are paid, rather than once a year.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Statutory Maternity Pay (SMP)",
+   "def": "Pay for eligible employees on maternity leave, paid through payroll. Employers can reclaim most or all of it from HMRC.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Statutory Sick Pay (SSP)",
+   "def": "The minimum sick pay employers must pay eligible employees who are too ill to work.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Tax code",
+   "def": "The code HMRC issues for each job or pension, telling the employer how much tax-free pay to allow before deducting Income Tax.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Worker",
+   "def": "A legal employment status between employee and self-employed. Workers have some rights, such as the minimum wage and holiday pay, but not all of an employee's.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "Workplace pension",
+   "def": "A pension the employer sets up for staff, with contributions from the employee's pay and from the employer.",
+   "section": "payroll",
+   "regions": [
+    "UK"
+   ]
+  },
+  {
+   "term": "PAYE",
+   "def": "Pay As You Earn: the system employers use to deduct income tax, PRSI and USC from pay and send it to Revenue.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "PAYE Modernisation",
+   "def": "The real-time system under which employers report each employee's pay and deductions to Revenue on or before every payday.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "PRSI",
+   "def": "Pay Related Social Insurance: contributions paid by employees and employers on earnings, which fund social welfare benefits and pensions.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Universal Social Charge (USC)",
+   "def": "A tax on gross income, charged at rising rates on income above a threshold, deducted through payroll.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Revenue Payroll Notification (RPN)",
+   "def": "The tax credits and rate band details Revenue gives the employer for each employee, used to work out their tax.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Tax credits",
+   "def": "Amounts that reduce the tax a person pays, such as the personal and employee tax credits.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Employment Detail Summary",
+   "def": "Revenue's end-of-year summary of an employee's pay and deductions, available in myAccount.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "Auto-enrolment (My Future Fund)",
+   "def": "The national retirement savings scheme that eligible employees are put into automatically, with contributions from employee, employer and the State.",
+   "section": "payroll",
+   "regions": [
+    "IE"
+   ]
+  },
+  {
+   "term": "401(k)",
+   "def": "An employer-sponsored retirement plan where employees save part of their pay before tax (or after tax in a Roth 401(k)), often with an employer match.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Biweekly pay",
+   "def": "Paying employees every two weeks, which gives 26 paydays a year.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "Cafeteria plan (Section 125)",
+   "def": "A plan that lets employees choose benefits, such as health insurance, and pay for them before tax.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Compensatory time off",
+   "def": "Paid time off given instead of overtime pay. Private employers generally can't use it in place of overtime for non-exempt staff.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Employer identification number (EIN)",
+   "def": "The federal tax ID the IRS gives a business, used on payroll tax filings.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "ERISA",
+   "def": "The Employee Retirement Income Security Act: federal law setting standards for most private-sector retirement and health plans.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Exempt employee",
+   "def": "An employee not entitled to overtime under the Fair Labor Standards Act, usually salaried and in a qualifying role.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Non-exempt employee",
+   "def": "An employee entitled to overtime pay for hours over 40 in a workweek under the Fair Labor Standards Act.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "FICA",
+   "def": "Social Security and Medicare taxes. Employers withhold the employee's share from pay and pay a matching share.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "FUTA",
+   "def": "Federal unemployment tax, paid by employers only, which funds unemployment benefits along with state programs.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Flexible spending account (FSA)",
+   "def": "An account employees pay into before tax to cover medical or dependent care costs. Most unused money is lost at the end of the plan year.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Form W-2",
+   "def": "The year-end form showing an employee's wages and taxes withheld, given to the employee and filed with the Social Security Administration.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Form W-4",
+   "def": "The form employees fill in so their employer withholds the right amount of federal income tax.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Form 1099-NEC",
+   "def": "The form used to report payments of $600 or more to independent contractors.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "High-deductible health plan (HDHP)",
+   "def": "Health insurance with a higher deductible and lower premiums. It is needed to open a health savings account.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Piece rate",
+   "def": "Pay based on the number of items produced or tasks completed rather than hours worked.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ]
+  },
+  {
+   "term": "SEP IRA",
+   "def": "A simplified employee pension: a retirement plan where the employer, including a self-employed person, contributes to IRAs for each eligible employee.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Social Security number (SSN)",
+   "def": "The number the Social Security Administration gives each person, used for employment and tax records.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "SUTA",
+   "def": "State unemployment tax, paid by employers (and in a few states employees) to fund state unemployment benefits.",
+   "section": "payroll",
+   "regions": [
+    "US"
+   ]
+  },
+  {
+   "term": "Withholding",
+   "def": "Tax an employer deducts from an employee's pay and sends to the government on their behalf.",
+   "section": "payroll",
+   "regions": [
+    "US",
+    "CA"
+   ],
+   "variants": {
+    "CA": {
+     "term": "Source deductions"
+    }
+   }
+  },
+  {
+   "term": "Canada Pension Plan (CPP)",
+   "def": "A public pension plan. Employees and employers each contribute on earnings up to a yearly maximum. Quebec has its own plan (QPP).",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Canada Revenue Agency (CRA)",
+   "def": "The federal agency that administers tax, including payroll deductions, across Canada. Quebec collects its own provincial income tax.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Employment Insurance (EI)",
+   "def": "A federal program that gives temporary income to eligible workers who lose their job or are on leave, such as parental leave. Employees and employers pay premiums.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Employment standards",
+   "def": "The minimum rules for wages, hours, leave and termination set by federal, provincial or territorial law.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Insurable earnings",
+   "def": "Earnings that EI premiums are worked out on, up to a yearly maximum.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Quebec Pension Plan (QPP)",
+   "def": "Quebec's public pension plan, which replaces the CPP for people working in Quebec.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Record of Employment (ROE)",
+   "def": "The form an employer issues to Service Canada when an employee has an interruption of earnings, used to decide EI benefits.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Registered Retirement Savings Plan (RRSP)",
+   "def": "A retirement savings account. Contributions can be deducted from income, and tax is paid when money is withdrawn.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Group RRSP",
+   "def": "An RRSP an employer sets up for staff, with contributions taken from pay and sometimes matched by the employer.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Social Insurance Number (SIN)",
+   "def": "The nine-digit number Service Canada gives each person to work and receive government benefits.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "T4 slip",
+   "def": "The year-end slip showing an employee's pay and deductions, filed with the CRA and given to the employee.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "TD1 form",
+   "def": "The form employees fill in so their employer deducts the right amount of income tax.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  },
+  {
+   "term": "Vacation pay",
+   "def": "Pay for vacation time, or a percentage of earnings paid instead, as set by employment standards.",
+   "section": "payroll",
+   "regions": [
+    "CA",
+    "US"
+   ],
+   "variants": {
+    "US": {
+     "term": "Vacation pay",
+     "def": "Pay for vacation time an employer offers. Federal law doesn't require paid vacation; it depends on the employer's policy and some state laws."
+    }
+   }
+  },
+  {
+   "term": "Work permit",
+   "def": "Permission for someone who isn't a citizen or permanent resident to work in Canada.",
+   "section": "payroll",
+   "regions": [
+    "CA"
+   ]
+  }
+ ]
+}
