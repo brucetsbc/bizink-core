@@ -121,7 +121,8 @@ function bz_core_render_plugin_versions() {
 
 function bz_core_update_info( $force = false ) {
 	$cached = get_transient( 'bz_core_update_info' );
-	if ( ! $force && is_array( $cached ) ) {
+	// Report a new version to the master as soon as it's installed (the cached answer predates the update).
+	if ( ! $force && is_array( $cached ) && get_option( 'bz_core_reported_version' ) === BZ_CORE_VERSION ) {
 		return $cached;
 	}
 	$url = BZ_MASTER_URL . '/wp-json/bizink/v1/plugin/latest?' . http_build_query(
@@ -130,6 +131,9 @@ function bz_core_update_info( $force = false ) {
 	$r    = bz_core_master_request( $url, array( 'timeout' => 10 ) );
 	$info = is_wp_error( $r ) || 200 !== wp_remote_retrieve_response_code( $r ) ? array() : (array) json_decode( wp_remote_retrieve_body( $r ), true );
 	set_transient( 'bz_core_update_info', $info, ( $info ? 6 : 1 ) * HOUR_IN_SECONDS );
+	if ( $info ) {
+		update_option( 'bz_core_reported_version', BZ_CORE_VERSION, false );
+	}
 	return $info;
 }
 
@@ -200,10 +204,7 @@ add_filter(
 		if ( ! is_object( $transient ) ) {
 			return $transient;
 		}
-		$info = get_transient( 'bz_core_update_info' );
-		if ( ! is_array( $info ) ) {
-			$info = bz_core_update_info();
-		}
+		$info = bz_core_update_info();  // cached; asks the master when the cache is old or the version changed
 		$file = bz_core_plugin_file();
 		if ( ! empty( $info['version'] ) && ! empty( $info['download'] ) && version_compare( $info['version'], BZ_CORE_VERSION, '>' ) ) {
 			$transient->response[ $file ] = (object) array(
