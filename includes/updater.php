@@ -121,13 +121,23 @@ function bz_core_render_plugin_versions() {
 		echo '<tr><td>' . esc_html( $site ) . '</td>'
 			. '<td' . ( $behind ? ' style="color:#b45309;font-weight:600"' : '' ) . '>' . esc_html( $row['version'] ) . ( $behind ? ' (update waiting)' : '' ) . '</td>'
 			. '<td>' . ( $known ? ( $pkg ? esc_html( $pkg ) : '<span style="color:#646970">Not set</span>' ) : '<span style="color:#646970">(reports from 0.28.2)</span>' ) . '</td>'
-			. '<td>' . ( $missing ? '<span style="color:#b45309;font-weight:600">' . esc_html( implode( ', ', $missing ) ) . '</span>' : ( $known ? '<span style="color:#646970">None</span>' : '' ) ) . '</td>'
+			. '<td>' . ( $missing ? '<span style="color:#b45309;font-weight:600">' . esc_html( implode( ', ', $missing ) ) . '</span>' : ( $known ? '<span style="color:#646970">' . esc_html( bz_core_versions_none_label( isset( $row['package'] ) ? $row['package'] : '' ) ) . '</span>' : '' ) ) . '</td>'
 			. '<td>' . esc_html( human_time_diff( $row['time'] ) ) . ' ago</td></tr>';
 	}
 	if ( ! $log ) {
 		echo '<tr><td colspan="5">No site has checked yet.</td></tr>';
 	}
 	echo '</tbody></table></div>';
+}
+
+/* "None" for a site with nothing missing, or why there is nothing to check (no package / no plugins in it). */
+function bz_core_versions_none_label( $package ) {
+	if ( '' === $package ) {
+		return 'No package set';
+	}
+	$defs = function_exists( 'bz_core_packages' ) ? bz_core_packages() : array();
+	$on   = isset( $defs[ $package ]['plugins'] ) ? array_filter( (array) $defs[ $package ]['plugins'] ) : array();
+	return $on ? 'None (all ' . count( $on ) . ' installed)' : 'No plugins assigned to this package';
 }
 
 /* ---------- Every site (the master too): WordPress's update check ---------- */
