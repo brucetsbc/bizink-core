@@ -72,8 +72,9 @@ add_action(
 				'callback'            => function ( WP_REST_Request $r ) {
 					$site    = strtolower( preg_replace( '/[^a-z0-9.\-]/i', '', (string) $r['site'] ) );
 					$version = preg_replace( '/[^0-9.]/', '', (string) $r['version'] );
-					if ( $site && $version ) {
+					if ( $site && false !== strpos( $site, '.' ) && $version && '0' !== $version ) { // real domains only
 						$log          = (array) get_option( 'bz_core_site_versions', array() );
+						$log          = array_filter( $log, function ( $row, $host ) { return false !== strpos( $host, '.' ); }, ARRAY_FILTER_USE_BOTH );
 						$log[ $site ] = array( 'version' => $version, 'time' => time() );
 						update_option( 'bz_core_site_versions', array_slice( $log, -500, null, true ), false );
 					}
