@@ -193,6 +193,77 @@ add_filter(
 	3
 );
 
+/* WordPress only rebuilds its update list every 12 hours; apply the (6-hour) answer whenever the list is read too. */
+add_filter(
+	'site_transient_update_plugins',
+	function ( $transient ) {
+		if ( ! is_object( $transient ) ) {
+			return $transient;
+		}
+		$info = get_transient( 'bz_core_update_info' );
+		if ( ! is_array( $info ) ) {
+			$info = bz_core_update_info();
+		}
+		$file = bz_core_plugin_file();
+		if ( ! empty( $info['version'] ) && ! empty( $info['download'] ) && version_compare( $info['version'], BZ_CORE_VERSION, '>' ) ) {
+			$transient->response[ $file ] = (object) array(
+				'id'          => 'github.com/' . BZ_CORE_REPO,
+				'slug'        => 'bizink-core',
+				'plugin'      => $file,
+				'new_version' => $info['version'],
+				'url'         => 'https://github.com/' . BZ_CORE_REPO,
+				'package'     => $info['download'],
+				'icons'       => array(),
+				'banners'     => array(),
+				'tested'      => get_bloginfo( 'version' ),
+			);
+		}
+		return $transient;
+	}
+);
+
+/* "Check for updates" in Bizink Core's row on the Plugins page: ask the master now. */
+add_filter(
+	'plugin_row_meta',
+	function ( $links, $file ) {
+		if ( bz_core_plugin_file() === $file && current_user_can( 'update_plugins' ) ) {
+			$links[] = '<a href="' . esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=bz_core_check_updates' ), 'bz_core_check_updates' ) ) . '">Check for updates</a>';
+		}
+		return $links;
+	},
+	10,
+	2
+);
+
+add_action(
+	'admin_post_bz_core_check_updates',
+	function () {
+		check_admin_referer( 'bz_core_check_updates' );
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_die( 'Not allowed.' );
+		}
+		delete_transient( 'bz_core_update_info' );
+		$info = bz_core_update_info( true );
+		delete_site_transient( 'update_plugins' );
+		wp_update_plugins();
+		$newer = ! empty( $info['version'] ) && version_compare( $info['version'], BZ_CORE_VERSION, '>' );
+		set_transient( 'bz_core_check_msg_' . get_current_user_id(), $newer ? 'Bizink Core ' . $info['version'] . ' is available: select Update now below.' : ( empty( $info['version'] ) ? 'Could not reach Bizink just now; try again in a minute.' : 'Bizink Core is up to date (' . BZ_CORE_VERSION . ').' ), 60 );
+		wp_safe_redirect( admin_url( 'plugins.php' ) );
+		exit;
+	}
+);
+
+add_action(
+	'admin_notices',
+	function () {
+		$msg = get_transient( 'bz_core_check_msg_' . get_current_user_id() );
+		if ( $msg ) {
+			delete_transient( 'bz_core_check_msg_' . get_current_user_id() );
+			echo '<div class="notice notice-info is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
+		}
+	}
+);
+
 /* After an update, forget the cached answer so the Plugins page is right straight away. */
 add_action(
 	'upgrader_process_complete',
