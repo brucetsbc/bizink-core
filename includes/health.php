@@ -1,6 +1,6 @@
 <?php
 /**
- * Site health: update status, automatic-update policy, "Update now" from the master, and uptime checks.
+ * Client site health: update status, automatic-update policy, "Update now" from the master, and uptime checks.
  *
  * Every site:
  *   - reports to the master (POST {master}/wp-json/bizink/v1/health/report) twice a day, after any update and when
@@ -11,7 +11,7 @@
  *   - follows the master's automatic-update policy (returned with each report);
  *   - accepts "update" and "report" commands from the master (POST /wp-json/bizink/v1/health/command) only when
  *     signed with its key and less than 5 minutes old.
- * The master: Tools → Site health (status, uptime, SSL, updates, Update now / Update all, policy), uptime checks of
+ * The master: Tools → Client site health (status, uptime, SSL, updates, Update now / Update all, policy), uptime checks of
  * every site every 5 minutes (all in parallel; SSL once a day), alerts (support ticket, else email) after two
  * failed checks in a row and on recovery. For dependable 5-minute checks, add a Cloudways cron job that opens
  * {master}/wp-cron.php every 5 minutes (WordPress cron otherwise only runs when someone visits the master).
@@ -360,7 +360,7 @@ add_action(
 					}
 					$known = bz_core_health_get( $host );
 					if ( ! empty( $known['key'] ) && ! hash_equals( $known['key'], $key ) ) {
-						return new WP_Error( 'bz_health_key', 'This site is registered with a different key. Reset it on the master (Tools → Site health).', array( 'status' => 409 ) );
+						return new WP_Error( 'bz_health_key', 'This site is registered with a different key. Reset it on the master (Tools → Client site health).', array( 'status' => 409 ) );
 					}
 					bz_core_health_store( $data, $key );
 					return array( 'ok' => true, 'policy' => bz_core_health_master_policy() );
@@ -510,7 +510,7 @@ function bz_core_ssl_days( $host ) {
 /* Down / back up: a support ticket (as BZ_ALERT_EMAIL), else an email. */
 function bz_core_uptime_alert( $host, $recovered, $detail ) {
 	$subject = ( $recovered ? 'Site back up: ' : 'Site down: ' ) . $host;
-	$body    = $subject . "\n\n" . $detail . "\n\nTools → Site health on the master: " . admin_url( 'tools.php?page=bz-site-health' );
+	$body    = $subject . "\n\n" . $detail . "\n\nTools → Client site health on the master: " . admin_url( 'tools.php?page=bz-site-health' );
 	$ok      = false;
 	if ( defined( 'BZ_SUPPORT_ENDPOINT' ) && BZ_SUPPORT_ENDPOINT ) {
 		$r  = wp_remote_post(
@@ -527,13 +527,13 @@ function bz_core_uptime_alert( $host, $recovered, $detail ) {
 	}
 }
 
-/* ---------- Master: Tools → Site health ---------- */
+/* ---------- Master: Tools → Client site health ---------- */
 
 add_action(
 	'admin_menu',
 	function () {
 		if ( bz_core_is_master() ) {
-			add_management_page( 'Site health', 'Site health', 'manage_options', 'bz-site-health', 'bz_core_render_site_health' );
+			add_management_page( 'Client site health', 'Client site health', 'manage_options', 'bz-site-health', 'bz_core_render_site_health' );
 		}
 	}
 );
@@ -622,7 +622,7 @@ function bz_core_render_site_health() {
 	}
 	?>
 	<div class="wrap">
-		<h1>Site health</h1>
+		<h1>Client site health</h1>
 		<?php if ( $msg ) : ?><div class="notice notice-success is-dismissible"><p><?php echo esc_html( $msg ); ?></p></div><?php endif; ?>
 		<p><strong><?php echo count( $rows ); ?></strong> sites · <strong style="color:<?php echo $down ? '#b32d2e' : '#00a32a'; ?>"><?php echo (int) $down; ?> down</strong> · <strong><?php echo (int) $pending_sites; ?></strong> with updates waiting.
 			<button type="button" class="button" id="bzh-uptime">Check uptime now</button>
@@ -670,7 +670,7 @@ function bz_core_render_site_health() {
 						<button type="button" class="button button-small bzh-do" data-do="report">Refresh</button>
 						<span class="bzh-res"></span>
 						<br><a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=bz_health_reset&host=' . rawurlencode( $h ) ), 'bz_health_reset_' . $h ) ); ?>" class="description">Reset key</a> ·
-						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=bz_health_remove&host=' . rawurlencode( $h ) ), 'bz_health_remove_' . $h ) ); ?>" class="description" onclick="return confirm('Remove <?php echo esc_js( $h ); ?> from Site health?');">Remove</a>
+						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=bz_health_remove&host=' . rawurlencode( $h ) ), 'bz_health_remove_' . $h ) ); ?>" class="description" onclick="return confirm('Remove <?php echo esc_js( $h ); ?> from Client site health?');">Remove</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
