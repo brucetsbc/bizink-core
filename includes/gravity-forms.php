@@ -142,3 +142,23 @@ add_action(
 		}
 	}
 );
+
+/*
+ * Honeypot on for every form, once per site (new forms from the editor and the shared forms already have it; this
+ * catches older and script-made ones). After that a form's own setting is left alone.
+ */
+add_action(
+	'admin_init',
+	function () {
+		if ( get_option( 'bz_gf_honeypot_done' ) || ! class_exists( 'GFAPI' ) ) {
+			return;
+		}
+		foreach ( GFAPI::get_forms( null ) as $form ) {
+			if ( empty( $form['enableHoneypot'] ) ) {
+				$form['enableHoneypot'] = true;
+				GFAPI::update_form( $form );
+			}
+		}
+		update_option( 'bz_gf_honeypot_done', 1, false );
+	}
+);

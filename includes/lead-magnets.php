@@ -56,6 +56,7 @@ function bz_core_lm_form( $resource ) {
 		'labelPlacement'       => 'top_label',
 		'descriptionPlacement' => 'below',
 		'cssClass'             => 'bz-lead-form',
+		'enableHoneypot'       => true, // Same as the shared forms; WP Armour adds its own trap on top.
 		'button'               => array( 'type' => 'text', 'text' => 'Send me the ' . ( stripos( $title, 'checklist' ) !== false ? 'checklist' : 'download' ) ),
 		'fields'               => array(
 			$field( array( 'type' => 'text', 'id' => 1, 'label' => 'Your name', 'isRequired' => true, 'autocompleteAttribute' => 'name', 'enableAutocomplete' => true ) ),
