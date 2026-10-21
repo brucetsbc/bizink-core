@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.31.2
+ * Version:     0.31.3
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.31.2' );
+define( 'BZ_CORE_VERSION', '0.31.3' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -99,6 +99,7 @@ function bz_core_fields() {
 		'ga4_property_id'    => array( 'GA4 property ID', 'text', 'Numbers only, from Google Analytics → Admin → Property details. Used by the Marketing page for visitors and downloads.' ),
 		'search_console'     => array( 'Search Console property', 'text', 'e.g. sc-domain:firm.com.au or https://www.firm.com.au/. Used by the Marketing page for Google search clicks.' ),
 		'cookie_banner'      => array( 'Cookie banner', 'cookie', 'UK and Ireland: "Ask for consent" (analytics waits for Accept). Elsewhere a notice is enough if the firm wants one. Visitors can reopen it from any link to #cookie-settings, e.g. the [bz_cookie_settings] shortcode in the footer.' ),
+		'live_domain'        => array( 'Live domain', 'text', 'The firm\'s real domain, e.g. firm.com.au. Shown on the branded downloads while the site is still on its staging address; blank uses this site\'s address.' ),
 		'cookie_text'        => array( 'Cookie banner text', 'textarea', 'Optional. Leave empty for the standard wording. A link to the privacy policy is added after it.' ),
 		'social_facebook'    => array( 'Facebook', 'url', 'Full address of the firm\'s page. Social links are used in newsletters (and footers); leave empty to hide.' ),
 		'social_linkedin'    => array( 'LinkedIn', 'url', '' ),
