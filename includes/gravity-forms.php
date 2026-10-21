@@ -117,3 +117,28 @@ add_action(
 	},
 	20
 );
+
+/*
+ * Entry lists show Entry Date by default: when the entries screen opens, any form without a saved column choice gets
+ * Gravity Forms' default columns (first fields) plus Entry Date. Once columns are chosen in the list, they're kept.
+ */
+add_action(
+	'admin_init',
+	function () {
+		if ( ! isset( $_GET['page'] ) || 'gf_entries' !== $_GET['page'] || ! class_exists( 'GFAPI' ) || ! class_exists( 'GFFormsModel' ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			|| ! method_exists( 'GFFormsModel', 'get_grid_column_meta' ) || ! method_exists( 'GFFormsModel', 'update_grid_column_meta' ) ) {
+			return;
+		}
+		foreach ( GFAPI::get_forms( null ) as $form ) {
+			$id = (int) $form['id'];
+			if ( GFFormsModel::get_grid_column_meta( $id ) ) {
+				continue;
+			}
+			$columns = array_map( 'strval', array_keys( GFFormsModel::get_grid_columns( $id ) ) );
+			if ( ! in_array( 'date_created', $columns, true ) ) {
+				$columns[] = 'date_created';
+			}
+			GFFormsModel::update_grid_column_meta( $id, $columns );
+		}
+	}
+);
