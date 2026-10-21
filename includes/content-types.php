@@ -30,6 +30,7 @@ function bz_core_meta_fields() {
 		'bz_calculator' => array(
 			'bz_calc_url'    => array( 'Calculator URL', 'url', 'e.g. https://smartbizcalcs.com/{client}/break-even-calculator/index.html' ),
 			'bz_region'      => array( 'Region', 'region', '' ),
+			'bz_calc_regions' => array( 'Only for regions', 'text', 'Region codes this calculator is for, e.g. AU or UK IE (tax calculators). Empty = every site. Other sites hide it.' ),
 			'bz_calc_height' => array( 'Starting height (px)', 'number', 'Used until iframe-resizer adjusts the height. Default 900.' ),
 		),
 		'bz_team'       => array(
@@ -365,5 +366,66 @@ add_action(
 			'bz-core',
 			'.bz-calc{margin:0 0 var(--space-lg,48px)}' // Calculators draw their own border inside the iframe.
 		);
+	}
+);
+
+/*
+ * Region-only calculators (tax: GST, VAT, sales tax). "Only for regions" lists the region codes a calculator belongs
+ * to (e.g. "AU" or "UK IE"); empty = every site. Elsewhere it's left out of lists, menus, search and the sitemap,
+ * and its page is "not found" (editors can still open it).
+ */
+function bz_core_calc_other_region_ids() {
+	static $ids = null;
+	if ( null !== $ids ) {
+		return $ids;
+	}
+	global $wpdb;
+	$region = strtoupper( bz_core_get( 'region' ) );
+	$ids    = array();
+	$rows   = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value <> ''", 'bz_calc_regions' ) );
+	foreach ( $rows as $r ) {
+		$list = preg_split( '/[\s,]+/', strtoupper( $r->meta_value ), -1, PREG_SPLIT_NO_EMPTY );
+		if ( $list && ! in_array( $region, $list, true ) ) {
+			$ids[] = (int) $r->post_id;
+		}
+	}
+	return $ids;
+}
+
+add_action(
+	'pre_get_posts',
+	function ( $q ) {
+		if ( is_admin() && ! wp_doing_ajax() ) {
+			return;
+		}
+		$types = (array) $q->get( 'post_type' );
+		if ( ! in_array( 'bz_calculator', $types, true ) && ! in_array( 'any', $types, true ) && ! $q->is_search() ) {
+			return;
+		}
+		$ids = bz_core_calc_other_region_ids();
+		if ( $ids ) {
+			$q->set( 'post__not_in', array_merge( (array) $q->get( 'post__not_in' ), $ids ) );
+		}
+	}
+);
+add_action(
+	'template_redirect',
+	function () {
+		if ( is_singular( 'bz_calculator' ) && ! current_user_can( 'edit_pages' ) && in_array( (int) get_queried_object_id(), bz_core_calc_other_region_ids(), true ) ) {
+			global $wp_query;
+			$wp_query->set_404();
+			status_header( 404 );
+			nocache_headers();
+		}
+	},
+	5
+);
+add_filter(
+	'wp_nav_menu_objects',
+	function ( $items ) {
+		$ids = bz_core_calc_other_region_ids();
+		return $ids ? array_values( array_filter( $items, function ( $item ) use ( $ids ) {
+			return ! ( 'bz_calculator' === $item->object && in_array( (int) $item->object_id, $ids, true ) );
+		} ) ) : $items;
 	}
 );
