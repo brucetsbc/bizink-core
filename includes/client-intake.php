@@ -304,7 +304,7 @@ function bz_core_intake_export( $post ) {
 		return is_array( $v ) ? array_values( array_filter( array_map( 'trim', $v ) ) ) : array_values( array_filter( array_map( 'trim', explode( ',', (string) $v ) ) ) );
 	};
 	$details = array();
-	foreach ( array( 'firm', 'descriptor', 'country', 'founded', 'street', 'suburb', 'city', 'region', 'region_code', 'postcode', 'phone', 'phone_intl', 'email', 'hours', 'map_query', 'offer', 'offer_sentence', 'booking_url', 'portal_url', 'footer_blurb', 'old', 'live', 'theme', 'ga4_measurement_id', 'ga4_property_id', 'search_console', 'contact_name', 'contact_email' ) as $k ) {
+	foreach ( array( 'firm', 'descriptor', 'country', 'founded', 'street', 'suburb', 'city', 'region', 'region_code', 'postcode', 'phone', 'phone_intl', 'email', 'hours', 'map_query', 'offer', 'offer_sentence', 'booking_url', 'portal_url', 'footer_blurb', 'old', 'live', 'theme', 'ga4_measurement_id', 'ga4_property_id', 'search_console', 'contact_name', 'contact_email', 'contact_role', 'legal_name', 'company_number', 'billing_email' ) as $k ) {
 		if ( isset( $d[ $k ] ) && '' !== $d[ $k ] ) {
 			$details[ $k ] = $d[ $k ];
 		}

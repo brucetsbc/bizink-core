@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign your Bizink agreement</title>
+<style>
+:root {
+  --bg: #f6f5f1; --card: #ffffff; --ink: #1d2433; --muted: #5d6676; --line: #dcdfe5; --soft: #eef0f4;
+  --brand: #1e3a5f; --brand-ink: #ffffff; --accent: #c9a227; --ok: #15803d; --bad: #b91c1c;
+  --radius: 10px; --font: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--font); }
+header.top { background: var(--brand); color: var(--brand-ink); padding: 18px 16px; }
+header.top .in { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+header.top b { font-size: 18px; }
+header.top span { opacity: .8; font-size: 14px; }
+main { max-width: 860px; margin: 0 auto; padding: 20px 16px 80px; }
+h1 { font-size: 28px; line-height: 1.2; margin: 8px 0 6px; }
+h2 { font-size: 21px; margin: 0 0 4px; }
+p.lead { color: var(--muted); margin: 0 0 18px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-bottom: 16px; }
+.doc { width: 100%; height: 70vh; min-height: 420px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-top: 14px; }
+.grid .wide { grid-column: 1 / -1; }
+@media (max-width: 620px) { .grid { grid-template-columns: minmax(0, 1fr); } .card { padding: 16px; } h1 { font-size: 24px; } .doc { height: 55vh; } }
+label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.hint { color: var(--muted); font-size: 13px; font-weight: 400; margin-top: 3px; }
+input[type=text] { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 8px; font: inherit; color: var(--ink); background: #fff; }
+input:focus, button:focus-visible, canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--brand); background: var(--brand); color: var(--brand-ink); border-radius: 8px; padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--brand); }
+.btn.small { padding: 6px 12px; font-size: 14px; }
+.btn[disabled] { opacity: .55; cursor: default; }
+.tabs { display: flex; gap: 6px; margin: 4px 0 8px; }
+.tabs button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 5px 12px; font: inherit; font-size: 14px; cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.pad { position: relative; border: 1px dashed #9aa3b2; border-radius: 8px; background: #fff; }
+.pad canvas { display: block; width: 100%; height: 160px; touch-action: none; cursor: crosshair; border-radius: 8px; }
+.pad .line { position: absolute; left: 16px; right: 16px; bottom: 36px; border-bottom: 1px solid var(--line); pointer-events: none; }
+.agree { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; margin: 14px 0; }
+.agree input { margin-top: 5px; width: 18px; height: 18px; }
+.err { color: var(--bad); margin: 8px 0 0; }
+.done { border-color: var(--ok); }
+.done h1 { color: var(--ok); }
+</style>
+</head>
+<body data-api="">
+<header class="top"><div class="in"><b>bizink</b><span>Website Services Agreement</span></div></header>
+<main id="app"><div class="card"><p>Loading your agreement…</p></div></main>
+<script>
+(function () {
+  var API = document.body.getAttribute("data-api") || "/wp-json/bizink/v1/agreements/sign/";
+  var token = new URLSearchParams(location.search).get("k") || "";
+  var app = document.getElementById("app");
+  var state = { method: "drawn", drawn: false };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function fail(msg) { app.innerHTML = '<div class="card"><h1>Sorry</h1><p>' + esc(msg) + "</p></div>"; }
+  function when(iso) { try { return new Date(iso).toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" }); } catch (_) { return iso; } }
+
+  if (!/^[A-Za-z0-9]{20,}$/.test(token)) { fail("This link is not complete. Please use the full link from your email."); return; }
+
+  fetch(API + token).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (res) {
+    if (!res.ok) { fail(res.j && res.j.message ? res.j.message : "This link is not valid."); return; }
+    if (res.j.signed) { thanks(res.j, true); return; }
+    render(res.j);
+  }).catch(function () { fail("We couldn't load your agreement. Please check your connection and try again."); });
+
+  function render(a) {
+    app.innerHTML =
+      '<h1>Your agreement with Bizink</h1><p class="lead">For <strong>' + esc(a.firm) + '</strong>. Please read it, then sign below.</p>'
+      + '<div class="card"><h2>1. Read the agreement</h2><p class="hint">It includes a summary of our online Terms and Conditions, which form part of the agreement.</p>'
+      + '<iframe class="doc" src="' + esc(a.pdf) + '#view=FitH" title="Bizink Website Services Agreement"></iframe>'
+      + '<p><a class="btn ghost small" href="' + esc(a.pdf) + '" target="_blank" rel="noopener">Open the agreement in a new tab</a></p></div>'
+      + '<div class="card"><h2>2. Sign</h2><div class="grid">'
+      + '<div><label for="s-name">Your full name</label><input type="text" id="s-name" autocomplete="name" value="' + esc(a.contact_name) + '"></div>'
+      + '<div><label for="s-role">Your role</label><input type="text" id="s-role" autocomplete="organization-title" placeholder="Director"></div>'
+      + '<div class="wide"><label id="sig-l">Your signature</label>'
+      + '<div class="tabs" role="group" aria-labelledby="sig-l"><button type="button" data-m="drawn" aria-pressed="true">Draw</button><button type="button" data-m="typed" aria-pressed="false">Type</button></div>'
+      + '<div class="pad"><canvas id="pad" width="800" height="160" tabindex="0" aria-label="Signature pad: draw your signature with your mouse or finger"></canvas><div class="line"></div></div>'
+      + '<p class="hint" id="pad-hint">Draw your signature with your mouse or finger. <button type="button" class="btn ghost small" id="clear">Clear</button></p></div>'
+      + '</div><label class="agree"><input type="checkbox" id="s-agree"><span>I have read this agreement and the online Terms and Conditions, and I am authorised to sign it for <strong>' + esc(a.firm) + '</strong>.</span></label>'
+      + '<button type="button" class="btn" id="sign">Sign the agreement</button><p class="err" id="err" role="alert"></p>'
+      + '<p class="hint">We record your name, role, signature, the date and time, and your IP address with the agreement.</p></div>';
+
+    var c = document.getElementById("pad"), ctx = c.getContext("2d"), drawing = false, last = null;
+    function reset() { ctx.clearRect(0, 0, c.width, c.height); state.drawn = false; }
+    function pt(e) { var r = c.getBoundingClientRect(); return { x: (e.clientX - r.left) * c.width / r.width, y: (e.clientY - r.top) * c.height / r.height }; }
+    ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#1d2433";
+    c.addEventListener("pointerdown", function (e) { if (state.method !== "drawn") return; drawing = true; last = pt(e); c.setPointerCapture(e.pointerId); });
+    c.addEventListener("pointermove", function (e) { if (!drawing) return; var p = pt(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; state.drawn = true; });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(function (ev) { c.addEventListener(ev, function () { drawing = false; }); });
+    function typed() {
+      reset();
+      var n = document.getElementById("s-name").value.trim();
+      ctx.fillStyle = "#1d2433"; ctx.font = "italic 56px 'Segoe Script', 'Brush Script MT', 'Lucida Handwriting', cursive";
+      ctx.textBaseline = "alphabetic"; ctx.fillText(n, 24, 112, c.width - 48);
+      state.drawn = !!n;
+    }
+    document.getElementById("clear").addEventListener("click", function () { state.method === "typed" ? typed() : reset(); });
+    document.getElementById("s-name").addEventListener("input", function () { if (state.method === "typed") typed(); });
+    Array.prototype.forEach.call(app.querySelectorAll(".tabs button"), function (b) {
+      b.addEventListener("click", function () {
+        state.method = b.getAttribute("data-m");
+        Array.prototype.forEach.call(app.querySelectorAll(".tabs button"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        document.getElementById("pad-hint").firstChild.nodeValue = state.method === "typed" ? "Your typed name is used as your signature. " : "Draw your signature with your mouse or finger. ";
+        state.method === "typed" ? typed() : reset();
+      });
+    });
+
+    document.getElementById("sign").addEventListener("click", function () {
+      var err = document.getElementById("err"), btn = this;
+      var name = document.getElementById("s-name").value.trim(), role = document.getElementById("s-role").value.trim();
+      err.textContent = "";
+      if (!name || !role) { err.textContent = "Please enter your full name and your role."; return; }
+      if (!state.drawn) { err.textContent = state.method === "typed" ? "Please enter your name to make your signature." : "Please sign in the box, or choose Type."; return; }
+      if (!document.getElementById("s-agree").checked) { err.textContent = "Please tick the box to confirm."; return; }
+      btn.disabled = true; btn.textContent = "Signing…";
+      fetch(API + token, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: name, role: role, agree: true, method: state.method, signature: c.toDataURL("image/png") }) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok) { err.textContent = res.j && res.j.message ? res.j.message : "Something went wrong. Please try again."; btn.disabled = false; btn.textContent = "Sign the agreement"; return; }
+          thanks({ firm: a.firm, signed_at: res.j.signed_at, contact_name: name, pdf: a.pdf }, false);
+          window.scrollTo(0, 0);
+        })
+        .catch(function () { err.textContent = "We couldn't reach Bizink. Please check your connection and try again."; btn.disabled = false; btn.textContent = "Sign the agreement"; });
+    });
+  }
+
+  function thanks(a, already) {
+    var first = String(a.contact_name || "").split(" ")[0];
+    app.innerHTML = '<div class="card done"><h1>' + (already ? "Already signed" : "Thank you" + (first ? ", " + esc(first) : "")) + '</h1>'
+      + '<p>The agreement for <strong>' + esc(a.firm) + '</strong> was signed on ' + esc(when(a.signed_at)) + '.</p>'
+      + '<p>We\'ll email you a copy with both signatures for your records.</p>'
+      + (a.pdf ? '<p><a class="btn ghost small" href="' + esc(a.pdf) + '" target="_blank" rel="noopener">View the agreement</a></p>' : "") + "</div>";
+  }
+})();
+</script>
+</body>
+</html>
