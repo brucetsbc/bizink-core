@@ -854,16 +854,25 @@ add_action(
  * so a site can't point itself at another firm's analytics.
  */
 function bz_core_mkt_adopt_props( $site, $ga4, $gsc ) {
-	$changed = false;
-	$ga4     = preg_replace( '/\D/', '', $ga4 );
-	$gsc     = sanitize_text_field( $gsc );
-	if ( empty( $site['ga4'] ) && '' !== $ga4 ) {
+	$changed  = false;
+	$ga4      = preg_replace( '/\D/', '', $ga4 );
+	$gsc      = trim( sanitize_text_field( $gsc ) );
+	$gsc_ok   = '#^(sc-domain:[a-z0-9.-]+|https?://\S+)$#i';
+	$reported = array( 'site_ga4' => $ga4, 'site_gsc' => $gsc );
+	// Empty, or not a valid value (e.g. a typo such as "https;//"): nothing to protect, so take the site's.
+	if ( ( empty( $site['ga4'] ) || ! ctype_digit( (string) $site['ga4'] ) ) && '' !== $ga4 ) {
 		$site['ga4'] = $ga4;
 		$changed     = true;
 	}
-	if ( empty( $site['gsc'] ) && preg_match( '#^(sc-domain:[a-z0-9.-]+|https?://\S+)$#i', $gsc ) ) {
+	if ( ( empty( $site['gsc'] ) || ! preg_match( $gsc_ok, $site['gsc'] ) ) && preg_match( $gsc_ok, $gsc ) ) {
 		$site['gsc'] = $gsc;
 		$changed     = true;
+	}
+	// Remember what the site says, so Tools → Marketing sites can flag a difference to review.
+	$sites = bz_core_mkt_sites();
+	if ( isset( $sites[ $site['host'] ] ) && array_intersect_key( $sites[ $site['host'] ], $reported ) !== $reported ) {
+		$sites[ $site['host'] ] = $reported + $sites[ $site['host'] ];
+		update_option( 'bz_mkt_sites', $sites, false );
 	}
 	if ( $changed ) {
 		$sites = bz_core_mkt_sites();
@@ -1707,7 +1716,13 @@ function bz_core_render_marketing_sites() {
 			. '<input type="hidden" name="action" value="bz_mkt_site">' . ( $host ? '<input type="hidden" name="host" value="' . esc_attr( $host ) . '">' : '' ) . '</form>';
 		echo '<tr><td>' . ( $host ? '<strong>' . esc_html( $host ) . '</strong>' : '<input form="' . esc_attr( $f ) . '" name="host" placeholder="firm.myfirmspage.com" class="regular-text">' ) . '</td>';
 		foreach ( array( 'label' => 'Firm name', 'ga4' => '123456789', 'gsc' => 'sc-domain:firm.com.au' ) as $k => $ph ) {
-			echo '<td><input form="' . esc_attr( $f ) . '" name="' . esc_attr( $k ) . '" value="' . esc_attr( isset( $s[ $k ] ) ? $s[ $k ] : '' ) . '" placeholder="' . esc_attr( $ph ) . '"></td>';
+			$theirs = isset( $s[ 'site_' . $k ] ) ? (string) $s[ 'site_' . $k ] : '';
+			$mine   = isset( $s[ $k ] ) ? (string) $s[ $k ] : '';
+			echo '<td><input form="' . esc_attr( $f ) . '" name="' . esc_attr( $k ) . '" value="' . esc_attr( $mine ) . '" placeholder="' . esc_attr( $ph ) . '">';
+			if ( '' !== $theirs && $theirs !== $mine ) { // The site's Client Details say something else: copy it in and Save if it's right.
+				echo '<br><span class="description" style="color:#b45309">Site\'s Client Details: <code>' . esc_html( $theirs ) . '</code></span>';
+			}
+			echo '</td>';
 		}
 		echo '<td>' . esc_html( ! empty( $s['last_seen'] ) ? human_time_diff( $s['last_seen'] ) . ' ago' : '–' ) . '</td><td>';
 		echo '<button form="' . esc_attr( $f ) . '" class="button button-primary">' . ( $host ? 'Save' : 'Add site' ) . '</button> ';
