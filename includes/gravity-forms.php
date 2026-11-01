@@ -99,7 +99,8 @@ add_action(
 			. '.gform_wrapper.gform-theme--orbital .gfield input:is([type=text],[type=email],[type=tel],[type=url],[type=number]),'
 			. '.gform_wrapper.gform-theme--orbital .gfield textarea,.gform_wrapper.gform-theme--orbital .gfield select{border:1px solid var(--color-border)!important;'
 			. 'border-radius:var(--radius-button,8px)!important;min-height:48px;padding-inline:14px;font-size:1rem;font-family:var(--font-body),sans-serif;color:var(--color-text);background:var(--color-surface,#fff)}'
-			. '.gform_wrapper.gform-theme--orbital .gfield textarea{padding-block:12px}'
+			// Multi-line boxes: pill corners (e.g. Horizon's 999px buttons) look wrong, so cap them at 10px.
+			. '.gform_wrapper.gform-theme--orbital .gfield textarea{padding-block:12px;border-radius:min(var(--radius-button,8px),10px)!important}'
 			. '.gform_wrapper.gform-theme--orbital .gfield :is(input,textarea,select):focus{border-color:var(--color-primary)!important;'
 			. 'outline:2px solid color-mix(in srgb,var(--color-primary) 25%,transparent)!important;outline-offset:1px}'
 			. '.gform_wrapper.gform-theme--orbital .gfield_label{font-size:.95rem;font-weight:600;color:var(--color-heading)}'
