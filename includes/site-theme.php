@@ -132,9 +132,10 @@ function bz_core_theme_flush() {
 
 /**
  * Apply a theme. Returns a summary string or WP_Error. $keep_colours leaves color-* variables as they are.
- * $hero ('slider' or 'single') also puts the theme's photo banner on the home page (themes with "hero": "image").
+ * $hero ('slider', 'stories' or 'single') also puts the theme's photo banner on the home page (themes with "hero": "image");
+ * $slides is the sliders' photo count (2 to 6, 3 when not given).
  */
-function bz_core_apply_site_theme( $slug, $keep_colours, $hero = '' ) {
+function bz_core_apply_site_theme( $slug, $keep_colours, $hero = '', $slides = 0 ) {
 	$themes = bz_core_site_themes();
 	if ( ! isset( $themes[ $slug ] ) ) {
 		return new WP_Error( 'bz_theme_unknown', 'Unknown theme.' );
@@ -198,7 +199,7 @@ function bz_core_apply_site_theme( $slug, $keep_colours, $hero = '' ) {
 	$banner = '';
 	$variants = function_exists( 'bz_core_hero_variants' ) ? bz_core_hero_variants() : array();
 	if ( isset( $variants[ $hero ] ) && isset( $themes[ $slug ]['hero'] ) && 'image' === $themes[ $slug ]['hero'] ) {
-		$swap = bz_core_hero_swap( $hero );
+		$swap = bz_core_hero_swap( $hero, $slides );
 		if ( is_wp_error( $swap ) ) {
 			$banner = ' The home banner was not added: ' . $swap->get_error_message();
 		} else {
@@ -294,8 +295,9 @@ add_action(
 		$do   = isset( $_POST['do'] ) ? sanitize_key( wp_unslash( $_POST['do'] ) ) : '';
 		$slug = isset( $_POST['theme'] ) ? sanitize_file_name( wp_unslash( $_POST['theme'] ) ) : '';
 		$keep = ! empty( $_POST['keep_colours'] );
-		$hero = isset( $_POST['hero'] ) ? sanitize_key( wp_unslash( $_POST['hero'] ) ) : '';
-		$res  = 'undo' === $do ? bz_core_undo_site_theme() : bz_core_apply_site_theme( $slug, $keep, $hero );
+		$hero   = isset( $_POST['hero'] ) ? sanitize_key( wp_unslash( $_POST['hero'] ) ) : '';
+		$slides = isset( $_POST['hero_slides'] ) ? absint( $_POST['hero_slides'] ) : 0;
+		$res    = 'undo' === $do ? bz_core_undo_site_theme() : bz_core_apply_site_theme( $slug, $keep, $hero, $slides );
 		$msg  = is_wp_error( $res ) ? 'Not changed: ' . $res->get_error_message() : $res;
 		wp_safe_redirect( add_query_arg( array( 'page' => 'bz-site-theme', 'bz_msg' => rawurlencode( $msg ), 'bz_ok' => is_wp_error( $res ) ? '0' : '1' ), admin_url( 'themes.php' ) ) );
 		exit;
@@ -389,10 +391,17 @@ function bz_core_render_site_theme() {
 							<?php if ( isset( $t['hero'] ) && 'image' === $t['hero'] ) : ?>
 								<fieldset style="margin:0 0 12px;padding:8px 10px;border:1px solid #dcdcde;border-radius:8px">
 									<legend style="font-weight:600;padding:0 4px">Home banner</legend>
-									<label style="display:block"><input type="radio" name="hero" value="slider" checked> Photo slider (three photos)</label>
+									<label style="display:block"><input type="radio" name="hero" value="slider" checked> Photo slider</label>
 									<label style="display:block"><input type="radio" name="hero" value="stories"> Photo slider with a different message on each photo</label>
 									<label style="display:block"><input type="radio" name="hero" value="single"> Single photo</label>
 									<label style="display:block"><input type="radio" name="hero" value=""> Keep the current home hero</label>
+									<label style="display:block;margin-top:6px">Photos in a slider
+										<select name="hero_slides">
+											<?php foreach ( range( 2, 6 ) as $n ) : ?>
+												<option value="<?php echo (int) $n; ?>"<?php selected( 3, $n ); ?>><?php echo (int) $n; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</label>
 									<span style="display:block;color:#646970;font-size:12px;margin-top:4px">Replaces the top section of the home page. Starter photos are added; change them in Elementor.</span>
 								</fieldset>
 							<?php endif; ?>

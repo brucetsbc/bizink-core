@@ -261,11 +261,17 @@ function bz_core_videos_is_hidden( $health_row ) {
 	return $health_row && ( in_array( $health_row['video'], array( 'removed', 'private' ), true ) );
 }
 
-/* Schedules (master only). */
+/* Schedules (master only). A site cloned from the master inherits its scheduled events (they are in the database),
+   so other sites clear them; the handlers below also do nothing there. */
 add_action(
 	'init',
 	function () {
 		if ( ! bz_core_videos_is_source_site() ) {
+			foreach ( array( 'bz_videos_sync', 'bz_videos_check', 'bz_videos_digest' ) as $hook ) {
+				if ( wp_next_scheduled( $hook ) ) {
+					wp_clear_scheduled_hook( $hook );
+				}
+			}
 			return;
 		}
 		if ( ! wp_next_scheduled( 'bz_videos_sync' ) ) {
@@ -279,11 +285,20 @@ add_action(
 		}
 	}
 );
-add_action( 'bz_videos_sync', 'bz_core_videos_sync' );
+add_action(
+	'bz_videos_sync',
+	function () {
+		if ( bz_core_videos_is_source_site() ) {
+			bz_core_videos_sync();
+		}
+	}
+);
 add_action(
 	'bz_videos_check',
 	function () {
-		bz_core_videos_check_batch();
+		if ( bz_core_videos_is_source_site() ) {
+			bz_core_videos_check_batch();
+		}
 	}
 );
 
@@ -814,6 +829,9 @@ function bz_core_render_video_report() {
 add_action(
 	'bz_videos_digest',
 	function () {
+		if ( ! bz_core_videos_is_source_site() ) {
+			return;
+		}
 		list( $summary, $problems, $new, $stale ) = bz_core_videos_report_rows();
 		if ( ! $problems && ! $new ) {
 			return;

@@ -7,39 +7,51 @@
 [data-interaction-id="64154596"] { background-image: linear-gradient(150deg, var(--color-primary-dark) 0%, var(--color-primary) 55%, var(--color-secondary) 100%) !important; }
 [data-interaction-id="6a2a08b0"]::first-letter { text-transform: uppercase; }                  /* LUMEN-HERO-01 pill (descriptor is lower case) */
 
-/* HORIZON-HERO-01 (photo banner), HORIZON-HERO-02 (slider) and HORIZON-HERO-03 (slider with a message per photo). Matched by structure, not element IDs, so the blocks
+/* HORIZON-HERO-01 (photo banner), HORIZON-HERO-02 (slider) and HORIZON-HERO-03 (slider with a message per photo; 2 to 6 photos). Matched by structure, not element IDs, so the blocks
    work when rebuilt on any site: a <section> whose first child is an <aside> holding the photo(s), then the shade.
-   Headline accent, pill capital, and a shade in the theme's dark colour (strong on the text side, lighter over the
-   photo; even on phones so text stays readable). */
+   Headline accent and pill capital. The overlay is the shade div (after the <aside>) exactly as set in the editor: its
+   background colour and opacity (builders default to var(--color-primary-dark) at 0.72). Nothing here changes it, so
+   the editor and the live page always match. */
 section:has(> aside:first-child > img) :is(h1, h2) span { color: var(--color-accent); }
 section:has(> aside:first-child > img) p:has(+ :is(h1, h2))::first-letter { text-transform: uppercase; }
-section:has(> aside:first-child > img) > aside:first-child + div {
-  background-color: transparent !important;
-  background-image: linear-gradient(100deg, color-mix(in srgb, var(--color-primary-dark) 90%, transparent) 0%, color-mix(in srgb, var(--color-primary-dark) 72%, transparent) 50%, color-mix(in srgb, var(--color-primary-dark) 25%, transparent) 100%) !important;
-}
-@media (max-width: 767px) {
-  section:has(> aside:first-child > img) > aside:first-child + div { background-image: none !important; background-color: color-mix(in srgb, var(--color-primary-dark) 72%, transparent) !important; }
-}
-/* HORIZON-HERO-02: three photos crossfade, 6 seconds each. Slide 1 shows first; slides 2 and 3 start hidden. */
-section > aside:first-child:has(> img:nth-child(3)) > img { animation: bz-hz-fade 18s linear infinite; }
-section > aside:first-child:has(> img:nth-child(3)) > img:nth-child(1) { animation-delay: -1.2s; }
-section > aside:first-child:has(> img:nth-child(3)) > img:nth-child(2) { animation-delay: 4.8s; }
-section > aside:first-child:has(> img:nth-child(3)) > img:nth-child(3) { animation-delay: 10.8s; }
-@keyframes bz-hz-fade { 0% { opacity: 0; } 6.67% { opacity: 1; } 33.33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
-/* HORIZON-HERO-03: a message per photo. The three <article> text blocks share one grid cell and fade in step with
-   the photos; hidden ones are visibility:hidden, so their buttons can't be clicked or tabbed to. */
-section:has(> aside:first-child > img:nth-child(3)) div:has(> article + article) { display: grid; }
-section:has(> aside:first-child > img:nth-child(3)) div:has(> article + article) > article { grid-area: 1 / 1; animation: bz-hz-text 18s linear infinite; }
-section:has(> aside:first-child > img:nth-child(3)) div:has(> article + article) > article:nth-child(1) { animation-delay: -1.2s; }
-section:has(> aside:first-child > img:nth-child(3)) div:has(> article + article) > article:nth-child(2) { animation-delay: 4.8s; }
-section:has(> aside:first-child > img:nth-child(3)) div:has(> article + article) > article:nth-child(3) { animation-delay: 10.8s; }
-@keyframes bz-hz-text {
-  0% { opacity: 0; visibility: hidden; transform: translateY(14px); }
-  6.67% { opacity: 1; visibility: visible; transform: none; }
-  33.33% { opacity: 1; visibility: visible; }
-  40% { opacity: 0; visibility: hidden; }
-  100% { opacity: 0; visibility: hidden; }
-}
+/* HORIZON-HERO-02: 2 to 6 photos crossfade, 6 seconds each (a cycle of 6s per photo). Slide 1 shows first; the others
+   start hidden. Photo k starts at 6(k-1) - 1.2 seconds; the count picks the cycle length and its keyframes. */
+section > aside:first-child:has(> img + img) > img { animation: bz-hz-fade-3 18s linear infinite; }
+section > aside:first-child > img:nth-child(1) { animation-delay: -1.2s; }
+section > aside:first-child > img:nth-child(2) { animation-delay: 4.8s; }
+section > aside:first-child > img:nth-child(3) { animation-delay: 10.8s; }
+section > aside:first-child > img:nth-child(4) { animation-delay: 16.8s; }
+section > aside:first-child > img:nth-child(5) { animation-delay: 22.8s; }
+section > aside:first-child > img:nth-child(6) { animation-delay: 28.8s; }
+section > aside:first-child:has(> img:nth-child(2):last-child) > img { animation-name: bz-hz-fade-2; animation-duration: 12s; }
+section > aside:first-child:has(> img:nth-child(4):last-child) > img { animation-name: bz-hz-fade-4; animation-duration: 24s; }
+section > aside:first-child:has(> img:nth-child(5):last-child) > img { animation-name: bz-hz-fade-5; animation-duration: 30s; }
+section > aside:first-child:has(> img:nth-child(6):last-child) > img { animation-name: bz-hz-fade-6; animation-duration: 36s; }
+/* In each: fade in over 1.2s, show to 6s, fade out by 7.2s, hidden for the rest of the cycle. */
+@keyframes bz-hz-fade-2 { 0% { opacity: 0; } 10% { opacity: 1; } 50% { opacity: 1; } 60% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes bz-hz-fade-3 { 0% { opacity: 0; } 6.67% { opacity: 1; } 33.33% { opacity: 1; } 40% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes bz-hz-fade-4 { 0% { opacity: 0; } 5% { opacity: 1; } 25% { opacity: 1; } 30% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes bz-hz-fade-5 { 0% { opacity: 0; } 4% { opacity: 1; } 20% { opacity: 1; } 24% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes bz-hz-fade-6 { 0% { opacity: 0; } 3.33% { opacity: 1; } 16.67% { opacity: 1; } 20% { opacity: 0; } 100% { opacity: 0; } }
+/* HORIZON-HERO-03: a message per photo. The <article> text blocks share one grid cell and fade in step with the
+   photos; hidden ones are visibility:hidden, so their buttons can't be clicked or tabbed to. */
+section:has(> aside:first-child > img + img) div:has(> article + article) { display: grid; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article { grid-area: 1 / 1; animation: bz-hz-text-3 18s linear infinite; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(1) { animation-delay: -1.2s; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(2) { animation-delay: 4.8s; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(3) { animation-delay: 10.8s; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(4) { animation-delay: 16.8s; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(5) { animation-delay: 22.8s; }
+section:has(> aside:first-child > img + img) div:has(> article + article) > article:nth-child(6) { animation-delay: 28.8s; }
+section:has(> aside:first-child > img:nth-child(2):last-child) div:has(> article + article) > article { animation-name: bz-hz-text-2; animation-duration: 12s; }
+section:has(> aside:first-child > img:nth-child(4):last-child) div:has(> article + article) > article { animation-name: bz-hz-text-4; animation-duration: 24s; }
+section:has(> aside:first-child > img:nth-child(5):last-child) div:has(> article + article) > article { animation-name: bz-hz-text-5; animation-duration: 30s; }
+section:has(> aside:first-child > img:nth-child(6):last-child) div:has(> article + article) > article { animation-name: bz-hz-text-6; animation-duration: 36s; }
+@keyframes bz-hz-text-2 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 10% { opacity: 1; visibility: visible; transform: none; } 50% { opacity: 1; visibility: visible; } 60% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes bz-hz-text-3 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 6.67% { opacity: 1; visibility: visible; transform: none; } 33.33% { opacity: 1; visibility: visible; } 40% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes bz-hz-text-4 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 5% { opacity: 1; visibility: visible; transform: none; } 25% { opacity: 1; visibility: visible; } 30% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes bz-hz-text-5 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 4% { opacity: 1; visibility: visible; transform: none; } 20% { opacity: 1; visibility: visible; } 24% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes bz-hz-text-6 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 3.33% { opacity: 1; visibility: visible; transform: none; } 16.67% { opacity: 1; visibility: visible; } 20% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) {
   section > aside:first-child > img { animation: none !important; }
   section:has(> aside:first-child > img) div:has(> article + article) > article { animation: none !important; }

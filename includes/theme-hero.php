@@ -4,8 +4,9 @@
  *
  * Appearance → Site theme offers "Use the home banner" on those themes. Applying with it:
  *   1. copies the starter photos from the master into this site's media library (once);
- *   2. builds the chosen component if missing: HORIZON-HERO-01 (one photo), HORIZON-HERO-02 (three-photo slider) or
- *      HORIZON-HERO-03 (three photos, each with its own pill, headline, text and buttons);
+ *   2. builds the chosen component if missing: HORIZON-HERO-01 (one photo), HORIZON-HERO-02 (photo slider) or
+ *      HORIZON-HERO-03 (photos each with its own pill, headline, text and buttons); sliders take 2 to 6 photos
+ *      (3 by default; other counts get their own component, e.g. "HORIZON-HERO-02 (slider, 5 photos)");
  *   3. puts the chosen one at the top of the home page, replacing the home hero component that was there.
  * Undo puts the home page back exactly as it was (its Elementor data is kept in the theme history).
  * The look (shade, accent, slider timing) is in themes/snippets/signature-blocks.css and matches the block by
@@ -60,7 +61,7 @@ function bz_core_hero_photo_ids() {
 	return $ids;
 }
 
-/* Banner variants: component title, photos, and whether each photo has its own text. */
+/* Banner variants: component title, photos (the sliders take 2 to 6; 3 by default), and whether each photo has its own text. */
 function bz_core_hero_variants() {
 	return array(
 		'single'  => array( 'title' => 'HORIZON-HERO-01', 'slides' => 1, 'stories' => false, 'label' => 'photo banner' ),
@@ -75,24 +76,57 @@ function bz_core_hero_copy() {
 		array( 'pill' => array( 'name' => 'shortcode', 'settings' => array( 'shortcode' => '[bz field=descriptor]' ) ), 'title' => 'Numbers you can trust. <span>Advice that moves you forward.</span>', 'lead' => 'Tax, accounts and business advice from a local team that knows your industry and picks up the phone.', 'btn1' => 'Book a free call →', 'btn2' => 'Our services' ),
 		array( 'pill' => 'For growing businesses', 'title' => 'Plan ahead, <span>not just at tax time.</span>', 'lead' => 'Cash flow forecasts, budgets and regular check-ins, so you always know where you stand and what comes next.', 'btn1' => 'Talk to an adviser →', 'btn2' => 'How we help' ),
 		array( 'pill' => 'Cloud accounting', 'title' => 'Your books, <span>always up to date.</span>', 'lead' => 'We set up and look after your accounting software, so your numbers are ready whenever you need them.', 'btn1' => 'Book a free call →', 'btn2' => 'Our services' ),
+		array( 'pill' => 'Tax and compliance', 'title' => 'Lodged on time, <span>every time.</span>', 'lead' => 'Tax returns and year-end accounts handled by people who know the rules and explain them plainly.', 'btn1' => 'Book a free call →', 'btn2' => 'Our services' ),
+		array( 'pill' => 'Business advice', 'title' => 'Big decision coming up? <span>Talk it through first.</span>', 'lead' => 'Buying, selling, hiring or restructuring: get clear numbers and honest advice before you commit.', 'btn1' => 'Talk to an adviser →', 'btn2' => 'How we help' ),
+		array( 'pill' => 'Local and personal', 'title' => 'A team that knows <span>your name.</span>', 'lead' => 'The same people look after you year after year, and they always pick up the phone.', 'btn1' => 'Book a free call →', 'btn2' => 'Our services' ),
 	);
 }
 
+/* Photos in a slider: 2 to 6 (3 when not given). */
+function bz_core_hero_slide_count( $variant, $slides = 0 ) {
+	$v = bz_core_hero_variants()[ $variant ];
+	if ( 1 === $v['slides'] ) {
+		return 1;
+	}
+	$n = (int) $slides;
+	return $n >= 2 && $n <= 6 ? $n : $v['slides'];
+}
+
+/* Component title: the standard titles for 1 or 3 photos, the count added for other slider sizes. */
+function bz_core_hero_title( $variant, $slides ) {
+	$title = bz_core_hero_variants()[ $variant ]['title'];
+	return 3 === $slides || 1 === $slides ? $title : substr( $title, 0, -1 ) . ', ' . $slides . ' photos)';
+}
+
+/*
+ * Components built before 0.33.3 stored a fixed navy shade (rgba(20, 33, 94, 0.62)) that signature-blocks.css then
+ * overrode, so the editor and the live page showed different colours.
+ */
+function bz_core_hero_is_stale( $component_id ) {
+	return (bool) preg_match( '/20,\s*33,\s*94/', (string) get_post_meta( $component_id, '_elementor_data', true ) );
+}
+
 /* The component id for a variant (single, slider, stories), building it if this site doesn't have it yet. */
-function bz_core_hero_component( $variant ) {
+function bz_core_hero_component( $variant, $slides = 0 ) {
 	$variants = bz_core_hero_variants();
 	if ( ! isset( $variants[ $variant ] ) ) {
 		return new WP_Error( 'bz_hero_variant', 'Unknown banner type.' );
 	}
-	$v     = $variants[ $variant ];
-	$title = $v['title'];
-	$list  = bz_core_hero_ability( 'elementor/list-components', array() );
+	$v           = $variants[ $variant ];
+	$v['slides'] = bz_core_hero_slide_count( $variant, $slides );
+	$title       = bz_core_hero_title( $variant, $v['slides'] );
+	$list        = bz_core_hero_ability( 'elementor/list-components', array() );
 	if ( is_wp_error( $list ) ) {
 		return $list;
 	}
 	foreach ( isset( $list['components'] ) ? (array) $list['components'] : array() as $c ) {
 		if ( isset( $c['name'] ) && $title === $c['name'] ) {
-			return (int) $c['id'];
+			if ( ! bz_core_hero_is_stale( (int) $c['id'] ) ) {
+				return (int) $c['id'];
+			}
+			// Keep the old one for pages that still use it (renamed out of the way) and build a fresh one.
+			bz_core_hero_ability( 'elementor/manage-component', array( 'action' => 'rename', 'component_id' => (int) $c['id'], 'title' => $title . ' (old)' ) );
+			break;
 		}
 	}
 	$photos = bz_core_hero_photo_ids();
@@ -107,13 +141,13 @@ function bz_core_hero_component( $variant ) {
 	$style    = array(
 		$p            => 'position: relative; padding: 0px; min-height: 640px; display: flex; align-items: center; overflow: hidden; background-color: var(--color-primary-dark); @media(--mobile) { min-height: 600px; }',
 		$p . '-media' => 'position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 0px; z-index: 0;',
-		$p . '-shade' => 'position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 0px; z-index: 1; background-color: rgba(20, 33, 94, 0.62);',
+		$p . '-shade' => 'position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 0px; z-index: 1; background-color: var(--color-primary-dark); opacity: 0.72;',
 		$p . '-in'    => 'position: relative; z-index: 2; width: 100%; max-width: var(--container-max); margin: 0px auto; padding: var(--space-section) var(--space-md);',
 	);
 	$config   = array( $p => array( 'tag' => 'section' ), $p . '-media' => array( 'tag' => 'aside' ) );
 	$props    = array();
 	$text_xml = '';
-	$blocks   = $v['stories'] ? 3 : 1;
+	$blocks   = $v['stories'] ? $v['slides'] : 1;
 	for ( $b = 1; $b <= $blocks; $b++ ) {
 		$q     = $v['stories'] ? $p . '-s' . $b : $p;   // element prefix for this text block
 		$grp   = $v['stories'] ? 'Slide ' . $b : 'Text';
@@ -143,7 +177,7 @@ function bz_core_hero_component( $variant ) {
 		$props[ $key . 'btn2_text' ] = array( 'target' => $q . '-btn2', 'prop_key' => 'text', 'label' => 'Button 2 text', 'group' => $grp );
 		$props[ $key . 'btn2_link' ] = array( 'target' => $q . '-btn2', 'prop_key' => 'link', 'label' => 'Button 2 link', 'group' => $grp );
 	}
-	if ( $v['stories'] ) {  // the three text blocks share one spot (CSS stacks and fades them with the photos)
+	if ( $v['stories'] ) {  // the text blocks share one spot (CSS stacks and fades them with the photos)
 		$text_xml           = '<e-div-block configuration-id="' . $p . '-stack">' . $text_xml . '</e-div-block>';
 		$style[ $p . '-stack' ] = 'padding: 0px; display: grid;';
 	}
@@ -151,7 +185,7 @@ function bz_core_hero_component( $variant ) {
 	for ( $i = 1; $i <= $v['slides']; $i++ ) {
 		$k             = $p . '-slide' . $i;
 		$slide_xml    .= '<e-image configuration-id="' . $k . '"></e-image>';
-		$config[ $k ]  = array( 'image' => array( 'src' => array( 'id' => $photos[ $i - 1 ] ), 'size' => 'full' ) );
+		$config[ $k ]  = array( 'image' => array( 'src' => array( 'id' => $photos[ ( $i - 1 ) % count( $photos ) ] ), 'size' => 'full' ) ); // 3 starter photos, repeated
 		$style[ $k ]   = 'position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover;' . ( $i > 1 ? ' opacity: 0;' : '' );
 		$img_key       = 1 === $v['slides'] ? 'image' : ( $v['stories'] ? 's' . $i . '_image' : 'image' . $i );
 		$props[ $img_key ] = array(
@@ -173,17 +207,43 @@ function bz_core_hero_component( $variant ) {
 	return isset( $made['component_id'] ) ? (int) $made['component_id'] : new WP_Error( 'bz_hero_component', 'Elementor didn\'t create the banner component.' );
 }
 
+/*
+ * A photo banner built from plain elements (copy mode's page header): a block whose first child is a block holding
+ * only images (the <aside>), followed by the shade and the text.
+ */
+function bz_core_hero_is_photo_banner( $el ) {
+	$kids = isset( $el['elements'] ) ? (array) $el['elements'] : array();
+	if ( 'e-div-block' !== ( $el['elType'] ?? '' ) || count( $kids ) < 3 || empty( $kids[0]['elements'] ) ) {
+		return false;
+	}
+	foreach ( $kids[0]['elements'] as $media ) {
+		if ( 'e-image' !== ( $media['widgetType'] ?? '' ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/* A component on its own, or in the unpadded block a banner swap puts it in ("Home banner block"). */
+function bz_core_hero_is_component_block( $el ) {
+	if ( 'e-component' === ( $el['widgetType'] ?? '' ) ) {
+		return true;
+	}
+	$kids = isset( $el['elements'] ) ? (array) $el['elements'] : array();
+	return 'e-div-block' === ( $el['elType'] ?? '' ) && 1 === count( $kids ) && 'e-component' === ( $kids[0]['widgetType'] ?? '' );
+}
+
 /**
  * Put the banner at the top of the home page. Returns array( page id, Elementor data before ) for Undo, or WP_Error.
- * The first block is replaced when it is a component (the standard home hero, or an earlier banner); anything else
- * stays and the banner goes above it.
+ * The first block is replaced when it is a component (the standard home hero, or an earlier banner, also in its
+ * wrapper block) or a photo banner built from plain elements (copy mode); anything else stays and the banner goes above it.
  */
-function bz_core_hero_swap( $variant ) {
+function bz_core_hero_swap( $variant, $slides = 0 ) {
 	$home = (int) get_option( 'page_on_front' );
 	if ( ! $home ) {
 		return new WP_Error( 'bz_hero_home', 'This site has no static home page to put the banner on.' );
 	}
-	$component = bz_core_hero_component( $variant );
+	$component = bz_core_hero_component( $variant, $slides );
 	if ( is_wp_error( $component ) ) {
 		return $component;
 	}
@@ -205,8 +265,11 @@ function bz_core_hero_swap( $variant ) {
 		array(
 			'post_id'        => $home,
 			'parent_id'      => $parent,
-			'xml_structure'  => '<e-component configuration-id="Home banner"/>',
+			// In its own unpadded block: Elementor otherwise wraps a root component in a block with 10px padding,
+			// which leaves a white edge round the full-width banner.
+			'xml_structure'  => '<e-div-block configuration-id="Home banner block"><e-component configuration-id="Home banner"/></e-div-block>',
 			'element_config' => array( 'Home banner' => array( 'component_id' => $component ) ),
+			'style'          => array( 'Home banner block' => 'padding: 0px;' ),
 		)
 	);
 	if ( is_wp_error( $built ) ) {
@@ -217,7 +280,7 @@ function bz_core_hero_swap( $variant ) {
 		return new WP_Error( 'bz_hero_build', 'Elementor didn\'t add the banner to the home page.' );
 	}
 	$ops = array( array( 'action' => 'move', 'element_id' => $new_id, 'new_parent_id' => $parent, 'index' => 0 ) );
-	if ( $children && isset( $children[0]['widgetType'] ) && 'e-component' === $children[0]['widgetType'] ) {
+	if ( $children && ( bz_core_hero_is_component_block( $children[0] ) || bz_core_hero_is_photo_banner( $children[0] ) ) ) {
 		$ops[] = array( 'action' => 'delete', 'element_id' => $children[0]['id'] );
 	}
 	$moved = bz_core_hero_ability( 'elementor/manage-elements', array( 'post_id' => $home, 'operations' => $ops ) );
