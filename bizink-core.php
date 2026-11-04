@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.34.1
+ * Version:     0.35.0
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.34.1' );
+define( 'BZ_CORE_VERSION', '0.35.0' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -71,6 +71,7 @@ require_once __DIR__ . '/includes/health.php';
 require_once __DIR__ . '/includes/mailpoet.php';
 require_once __DIR__ . '/includes/redirects.php';
 require_once __DIR__ . '/includes/agreements.php';
+require_once __DIR__ . '/includes/comments.php';
 
 /**
  * Client detail fields: key => [label, input type, help text].
@@ -171,6 +172,7 @@ function bz_core_get( $field ) {
 			return '' !== $value ? $value : 'Contact ' . bz_core_get( 'firm_name' ) . ' to arrange a time to talk.';
 		case 'contact_url':
 			$page = get_page_by_path( 'contact' );
+			$page = $page ? $page : get_page_by_path( 'contact-us' ); // Migrated sites keep their old address.
 			return $page ? get_permalink( $page ) : home_url( '/' );
 		case 'site_url':
 			return untrailingslashit( home_url() );
