@@ -538,10 +538,6 @@ function bz_core_blocks_off() {
 	return $off;
 }
 
-function bz_core_url_path( $url ) {
-	return untrailingslashit( (string) wp_parse_url( $url, PHP_URL_PATH ) );
-}
-
 function bz_core_block_query_off( $block, $off ) {
 	return 'core/query' === $block['blockName'] && isset( $block['attrs']['query']['postType'] ) && in_array( $block['attrs']['query']['postType'], $off['types'], true );
 }
