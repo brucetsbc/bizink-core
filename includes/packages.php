@@ -132,14 +132,34 @@ function bz_core_package() {
 	return isset( bz_core_package_names()[ $p ] ) ? $p : '';
 }
 
-/* Is a feature included for this site? No package set = everything. */
-function bz_core_feature( $feature ) {
+/* Does this site's package include a feature? No package set = everything. */
+function bz_core_package_includes( $feature ) {
 	$p = bz_core_package();
 	if ( '' === $p ) {
 		return true;
 	}
 	$defs = bz_core_packages();
 	return ! isset( $defs[ $p ]['features'][ $feature ] ) || (bool) $defs[ $p ]['features'][ $feature ];
+}
+
+/* Is a feature on for this site? The package's, plus any added in Client Details → Extra features. */
+function bz_core_feature( $feature ) {
+	if ( bz_core_package_includes( $feature ) ) {
+		return true;
+	}
+	$extras = function_exists( 'bz_core_get' ) ? (string) bz_core_get( 'extra_features' ) : '';
+	return in_array( $feature, array_map( 'trim', explode( ',', $extras ) ), true );
+}
+
+/* Features this site's package leaves out (key => label): the ones Extra features can add. */
+function bz_core_package_features_left_out() {
+	$out = array();
+	foreach ( bz_core_package_features() as $f => $info ) {
+		if ( ! bz_core_package_includes( $f ) ) {
+			$out[ $f ] = $info[0];
+		}
+	}
+	return $out;
 }
 
 function bz_core_package_limit( $limit ) {
@@ -491,6 +511,72 @@ add_action(
 		}
 	},
 	20
+);
+
+/*
+ * Block pages have no element ids to hide, so switched-off features are left out as the page renders, and come back
+ * when the feature is switched on: buttons to hidden pages, lists of hidden items, and any full-width section built
+ * around such a list or a switched-off feature's shortcode.
+ */
+function bz_core_blocks_off() {
+	static $off = null;
+	if ( null !== $off ) {
+		return $off;
+	}
+	$h     = bz_core_hidden();
+	$codes = array();
+	foreach ( bz_core_feature_shortcodes() as $tag => $f ) {
+		if ( ! bz_core_feature( $f ) ) {
+			$codes[] = preg_quote( $tag, '/' );
+		}
+	}
+	$off = array(
+		'types' => $h['types'],
+		'paths' => array_map( 'bz_core_url_path', array_filter( array_map( 'get_permalink', $h['ids'] ) ) ),
+		'codes' => $codes ? '/\[(?:' . implode( '|', $codes ) . ')[\s\]\/]/' : '',
+	);
+	return $off;
+}
+
+function bz_core_url_path( $url ) {
+	return untrailingslashit( (string) wp_parse_url( $url, PHP_URL_PATH ) );
+}
+
+function bz_core_block_query_off( $block, $off ) {
+	return 'core/query' === $block['blockName'] && isset( $block['attrs']['query']['postType'] ) && in_array( $block['attrs']['query']['postType'], $off['types'], true );
+}
+
+function bz_core_block_needs_off_feature( $block, $off ) {
+	if ( bz_core_block_query_off( $block, $off ) || ( $off['codes'] && preg_match( $off['codes'], (string) $block['innerHTML'] ) ) ) {
+		return true;
+	}
+	foreach ( $block['innerBlocks'] as $inner ) {
+		if ( bz_core_block_needs_off_feature( $inner, $off ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+add_filter(
+	'pre_render_block',
+	function ( $pre, $block ) {
+		if ( null !== $pre || empty( $block['blockName'] ) || ! in_array( $block['blockName'], array( 'core/button', 'core/query', 'core/group' ), true ) ) {
+			return $pre;
+		}
+		$off = bz_core_blocks_off();
+		if ( 'core/button' === $block['blockName'] ) {
+			$linked = preg_match( '/href="([^"]+)"/', (string) $block['innerHTML'], $m ) && in_array( bz_core_url_path( $m[1] ), $off['paths'], true );
+			return $linked ? '' : $pre;
+		}
+		if ( 'core/query' === $block['blockName'] ) {
+			return bz_core_block_query_off( $block, $off ) ? '' : $pre;
+		}
+		$full = isset( $block['attrs']['align'] ) && 'full' === $block['attrs']['align'];
+		return $full && bz_core_block_needs_off_feature( $block, $off ) ? '' : $pre;
+	},
+	10,
+	2
 );
 
 // wp-admin: hide menus for switched-off features from the Company admin role.

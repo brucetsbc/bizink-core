@@ -1,0 +1,6 @@
+/* Header extra logo: an image link opening in a new tab in the header's main row (e.g. Bouzios' Retirewise logo after
+   "Book a call", 2026-11-02) steps aside between 1025px and 1299px, where the full menu needs the room to stay on one
+   line. Below 1025px the menu is a button, so the logo shows again (hide it on phones in the element's own style). */
+@media (min-width: 1025px) and (max-width: 1299px) {
+  .elementor-location-header a.e-image-link-base[target="_blank"] { display: none; }
+}

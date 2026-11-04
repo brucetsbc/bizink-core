@@ -1,0 +1,5 @@
+/* Header (and its menu dropdowns) stacks above page content: banners with a z-index otherwise cover the dropdowns. */
+.elementor-location-header {
+  position: relative;
+  z-index: 100;
+}

@@ -1,0 +1,19 @@
+/* Mobile/tablet menu: a full-width panel that drops down over the page instead of growing the header (the nav
+   menu's dropdown sits in flow inside the narrow menu widget). Element ids are the master header's (56f197aa bar,
+   3b930437 menu column, 516dbf7c nav menu), shared by every clone. First fixed on Want Group 2026-10-22. */
+@media (max-width: 1024px) {
+  .elementor-location-header .elementor-element.elementor-element-56f197aa { position: relative; }
+  .elementor-location-header .elementor-element.elementor-element-3b930437,
+  .elementor-location-header .elementor-element.elementor-element-516dbf7c { position: static; }
+  .elementor-location-header .elementor-element-516dbf7c nav.elementor-nav-menu--dropdown.elementor-nav-menu__container {
+    position: absolute; top: 100%; left: 0; right: 0; width: auto; margin-top: 0; z-index: 9997;
+    max-height: calc(100vh - 140px); overflow-y: auto; border-radius: 0;
+    background: var(--color-surface, #fff); border-top: 1px solid var(--color-border, #DDE2E8);
+    box-shadow: 0 16px 32px rgba(19, 35, 58, 0.15);
+  }
+  .elementor-location-header .elementor-element-516dbf7c nav.elementor-nav-menu--dropdown .elementor-item { font-size: 1rem; padding: 13px 20px; }
+  .elementor-location-header .elementor-element-516dbf7c nav.elementor-nav-menu--dropdown .sub-menu {
+    border: 0; box-shadow: none; border-radius: 0; background: var(--color-surface-alt, #F2F6FA);
+  }
+  .elementor-location-header .elementor-element-516dbf7c nav.elementor-nav-menu--dropdown .elementor-sub-item { font-size: 0.9375rem; padding: 11px 20px 11px 36px; }
+}

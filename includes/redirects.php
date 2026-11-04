@@ -52,7 +52,8 @@ function bz_core_redirects_import( array $rows, $dry_run ) {
 			$out['exists'][] = $source;
 			continue;
 		}
-		if ( '/' !== $key && url_to_postid( home_url( $source ) ) ) {
+		$live_id = '/' !== $key ? url_to_postid( home_url( $source ) ) : 0;
+		if ( $live_id && 'publish' === get_post_status( $live_id ) ) { // A draft answers 404, so its address can redirect.
 			$out['live_page'][] = $source;
 			continue;
 		}

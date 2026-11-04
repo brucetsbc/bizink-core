@@ -7,7 +7,7 @@
  *   {bz_pdf:business-plan}  URL of a resource's current PDF (works while the resource is unpublished, e.g. a gated download)
  *
  * The shared forms live in forms/bizink-forms.json (Forms → Import/Export). Import them in that order on a fresh site so the
- * IDs match the pages: 1 Contact, 2 Careers application, 3 Business plan download.
+ * IDs match the pages: 1 Contact, 2 Careers application, 3 Business plan download, 4 Newsletter sign-up.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -163,9 +163,10 @@ function bz_core_feedback_item( $post ) {
 		'url'        => $meta( 'bz_url' ),
 		'element'    => $meta( 'bz_element' ),
 		'element_type' => $meta( 'bz_element_type' ),
+		'selector'   => $meta( 'bz_selector' ), // Block pages: where the element sits (no element IDs there).
 		'document'   => (int) $meta( 'bz_document' ),
 		'document_title' => (int) $meta( 'bz_document' ) && (int) $meta( 'bz_document' ) !== (int) $meta( 'bz_page_id' ) ? get_the_title( (int) $meta( 'bz_document' ) ) : '',
-		'shared'     => (int) $meta( 'bz_document' ) && (int) $meta( 'bz_document' ) !== (int) $meta( 'bz_page_id' ),
+		'shared'     => ( (int) $meta( 'bz_document' ) && (int) $meta( 'bz_document' ) !== (int) $meta( 'bz_page_id' ) ) || 0 === strpos( (string) $meta( 'bz_label' ), 'Site ' ),
 		'instance'   => $meta( 'bz_instance' ),
 		'path'       => (array) $meta( 'bz_path' ),
 		'label'      => $meta( 'bz_label' ),
@@ -357,6 +358,7 @@ function bz_core_feedback_create( WP_REST_Request $r ) {
 		'bz_url'            => esc_url_raw( (string) $r['url'] ),
 		'bz_element'        => sanitize_key( (string) $r['element'] ),
 		'bz_element_type'   => sanitize_text_field( (string) $r['element_type'] ),
+		'bz_selector'       => preg_replace( '/[^0-9.]/', '', (string) $r['selector'] ),
 		'bz_document'       => $where['document'],
 		'bz_instance'       => $where['instance'],
 		'bz_path'           => $path,
@@ -700,13 +702,21 @@ function api(path,method,body){var h={'Content-Type':'application/json'};if(C.no
  return fetch(C.rest+path,{method:method||'GET',credentials:'same-origin',headers:h,body:body?JSON.stringify(body):undefined}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.message||'Something went wrong');return j;});});}
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 function toast(t){var x=el('div',null,t);x.id='bzfb-toast';document.body.appendChild(x);setTimeout(function(){x.remove();},3500);}
-function target(node){while(node&&node!==document.body){if(node.closest&&node.closest('#bzfb-bar,.bzfb-pop,.bzfb-pin'))return null;if(node.dataset&&node.dataset.id)return node;node=node.parentElement;}return null;}
+var blockRoot=document.querySelector('.wp-site-blocks');
+function blockType(t){var m=(t.getAttribute('class')||'').match(/wp-block-[a-z0-9-]+/);return m?m[0]:t.tagName.toLowerCase();}
+function blockTarget(node){if(!blockRoot||!blockRoot.contains(node))return null;
+ while(node&&node!==blockRoot){if(node.tagName==='MAIN'||node.classList.contains('wp-block-post-content'))return null;
+  if(/^(H[1-6]|P|LI|A|IMG|FIGURE|BLOCKQUOTE|TABLE|FORM)$/.test(node.tagName)||/\bwp-block-/.test(node.getAttribute('class')||''))return node;node=node.parentElement;}return null;}
+function blockRef(t){var out=[];while(t&&t!==blockRoot){out.unshift([].indexOf.call(t.parentElement.children,t));t=t.parentElement;}return out.join('.');}
+function blockAt(ref){var n=blockRoot;ref.split('.').forEach(function(i){n=n&&n.children[+i];});return n||null;}
+function target(node){var start=node;while(node&&node!==document.body){if(node.closest&&node.closest('#bzfb-bar,.bzfb-pop,.bzfb-pin,#bzfb-key'))return null;if(node.dataset&&node.dataset.id)return node;node=node.parentElement;}return blockTarget(start);}
 function describe(t){var path=[],n=t.parentElement,doc=t.closest('[data-elementor-id]');
  while(n&&n!==document.body){if(n.dataset&&n.dataset.id)path.push(n.dataset.id);n=n.parentElement;}
- var type=t.dataset.element_type||t.dataset.eType||t.tagName.toLowerCase(),txt=(t.innerText||t.getAttribute('alt')||'').replace(/\s+/g,' ').trim();
+ var type=t.dataset.element_type||t.dataset.eType||(t.dataset.id?t.tagName.toLowerCase():blockType(t)),txt=(t.innerText||t.getAttribute('alt')||'').replace(/\s+/g,' ').trim();
  var img=t.tagName==='IMG'?t:t.querySelector('img');
- return {element:t.dataset.id,element_type:type,document:doc?+doc.dataset.elementorId:0,path:path,
-  label:(t.tagName.toLowerCase()+' '+type).trim(),snippet:txt?txt.slice(0,300):(img?('image: '+(img.getAttribute('alt')||img.src.split('/').pop())):'')};}
+ var part=t.dataset.id?'':(t.closest('header')?'Site header: ':(t.closest('footer')?'Site footer: ':''));
+ return {element:t.dataset.id,element_type:type,selector:t.dataset.id?'':blockRef(t),document:doc?+doc.dataset.elementorId:0,path:path,
+  label:part+(t.tagName.toLowerCase()+' '+type).trim(),snippet:txt?txt.slice(0,300):(img?('image: '+(img.getAttribute('alt')||img.src.split('/').pop())):'')};}
 function closePop(){if(pop){pop.remove();pop=null;}}
 function place(box,t){var r=t.getBoundingClientRect();box.style.top=(window.scrollY+Math.max(r.top,0)+Math.min(r.height,40)+8)+'px';
  box.style.left=Math.max(16,Math.min(window.scrollX+r.left,window.scrollX+document.documentElement.clientWidth-356))+'px';}
@@ -724,7 +734,7 @@ function view(it,t){closePop();pop=el('div','bzfb-pop');var st=({open:'Waiting f
  var row=el('div','bzfb-row'),close=el('button','bzfb-cancel','Close');row.appendChild(close);pop.appendChild(row);close.onclick=closePop;
  document.body.appendChild(pop);if(t)place(pop,t);else{pop.style.position='fixed';pop.style.right='16px';pop.style.bottom='72px';}}
 function pins(){document.querySelectorAll('.bzfb-pin').forEach(function(p){p.remove();});var n=0;
- items.forEach(function(it){if(it.kind!=='comment')return;n++;var t=it.element&&document.querySelector('[data-id="'+it.element+'"]');var p=el('div','bzfb-pin '+it.status,String(n));p.title=it.comment;
+ items.forEach(function(it){if(it.kind!=='comment')return;n++;var t=it.element?document.querySelector('[data-id="'+it.element+'"]'):(it.selector&&blockRoot?blockAt(it.selector):null);var p=el('div','bzfb-pin '+it.status,String(n));p.title=it.comment;
   if(t&&t.getClientRects().length){var r=t.getBoundingClientRect();p.style.top=(window.scrollY+r.top-10)+'px';p.style.left=(window.scrollX+r.left-10)+'px';}else{p.style.position='fixed';p.style.left='16px';p.style.top=(80+n*32)+'px';}
   p.onclick=function(e){e.stopPropagation();view(it,t);};document.body.appendChild(p);});
  count.textContent='Summary · '+items.filter(function(i){return i.kind==='comment'&&i.status!=='done'&&i.status!=='declined';}).length+' open here';

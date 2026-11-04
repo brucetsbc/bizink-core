@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.33.3
+ * Version:     0.34.0
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.33.3' );
+define( 'BZ_CORE_VERSION', '0.34.0' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -78,7 +78,8 @@ require_once __DIR__ . '/includes/agreements.php';
 function bz_core_fields() {
 	return array(
 		'package'         => array( 'Package', 'package', 'Essentials, Pro or Plus. Decides which features this site shows (set on the master under Tools → Packages). Empty shows everything.' ),
-		'firm_name'       => array( 'Firm name', 'text', 'Defaults to the Site Title when empty.' ),
+		'extra_features'  => array( 'Extra features', 'extras', 'Optional features this site has on top of its package, e.g. calculators or templates on an Essentials site. Only the features its package leaves out are listed.' ),
+		'firm_name'     => array( 'Firm name', 'text', 'Defaults to the Site Title when empty.' ),
 		'descriptor'      => array( 'Descriptor', 'text', 'e.g. registered tax agents and accountants (used in “Prepared by {firm}, {descriptor}”).' ),
 		'region'          => array( 'Region', 'region', 'Drives regional wording, tax terms and default compliance text.' ),
 		'phone'           => array( 'Phone (display)', 'text', 'As it should appear, e.g. (02) 9000 0000' ),
@@ -354,6 +355,10 @@ function bz_core_sanitize( $input ) {
 			case 'cookie':
 				$clean[ $key ] = function_exists( 'bz_core_cookie_modes' ) && array_key_exists( $raw, bz_core_cookie_modes() ) ? $raw : '';
 				break;
+			case 'extras': // Ticks on this form, or "calculators, templates" from new_site.py.
+				$picked        = is_array( $raw ) ? $raw : explode( ',', (string) $raw );
+				$clean[ $key ] = function_exists( 'bz_core_package_features' ) ? implode( ',', array_intersect( array_keys( bz_core_package_features() ), array_map( 'trim', $picked ) ) ) : '';
+				break;
 			default:
 				$clean[ $key ] = sanitize_text_field( $raw );
 		}
@@ -403,6 +408,16 @@ function bz_core_render_page() {
 										<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $value, $code ); ?>><?php echo esc_html( $mode_label ); ?></option>
 									<?php endforeach; ?>
 								</select>
+							<?php elseif ( 'extras' === $type ) : ?>
+								<?php
+								$offered = bz_core_package_features_left_out();
+								if ( ! $offered ) {
+									echo '<span class="description">Nothing to add: this site\'s package includes every feature.</span>';
+								}
+								foreach ( $offered as $code => $feature_label ) :
+									?>
+									<label style="display:block;margin:0 0 4px"><input type="checkbox" name="<?php echo esc_attr( $name ); ?>[]" value="<?php echo esc_attr( $code ); ?>" <?php checked( in_array( $code, explode( ',', (string) $value ), true ) ); ?>> <?php echo esc_html( $feature_label ); ?></label>
+								<?php endforeach; ?>
 							<?php else : ?>
 								<input id="bz-<?php echo esc_attr( $key ); ?>" type="<?php echo esc_attr( $type ); ?>" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
 							<?php endif; ?>

@@ -65,7 +65,7 @@
 							"fontStyle": "normal",
 							"fontDisplay": "swap",
 							"src": [
-								"https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2"
+								"https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2"
 							]
 						},
 						{
@@ -74,7 +74,7 @@
 							"fontStyle": "normal",
 							"fontDisplay": "swap",
 							"src": [
-								"https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2"
+								"https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2"
 							]
 						},
 						{
@@ -83,7 +83,7 @@
 							"fontStyle": "normal",
 							"fontDisplay": "swap",
 							"src": [
-								"https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2"
+								"https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2"
 							]
 						}
 					]
@@ -175,6 +175,7 @@
 		}
 	},
 	"styles": {
+		"css": ":root{--color-primary:var(--wp--preset--color--accent-1);--color-primary-dark:var(--wp--preset--color--accent-2);--color-accent:var(--wp--preset--color--accent-3);--color-heading:var(--wp--preset--color--contrast);--color-text:var(--wp--preset--color--body-text);--color-text-muted:var(--wp--preset--color--accent-4);--color-surface:var(--wp--preset--color--base);--color-surface-alt:var(--wp--preset--color--accent-5);--color-border:var(--wp--preset--color--accent-6);--color-inverse:var(--wp--preset--color--base);--font-body:var(--wp--preset--font-family--inter);--font-heading:var(--wp--preset--font-family--manrope)}.wp-site-blocks>footer,.wp-block-post-content>.alignfull{margin-block-start:0}body .gform_wrapper.gform-theme--orbital :is(.gform_footer,.gform_page_footer) .gform_button{background:var(--wp--preset--color--accent-1)!important;color:var(--wp--preset--color--base)!important;border-color:var(--wp--preset--color--accent-1)!important;border-radius:var(--wp--custom--radius--button)!important}body .gform_wrapper.gform-theme--orbital :is(.gform_footer,.gform_page_footer) .gform_button:hover{background:var(--wp--preset--color--accent-2)!important;border-color:var(--wp--preset--color--accent-2)!important}",
 		"color": {
 			"background": "var(--wp--preset--color--base)",
 			"text": "var(--wp--preset--color--body-text)"

@@ -12,7 +12,8 @@
    Headline accent and pill capital. The overlay is the shade div (after the <aside>) exactly as set in the editor: its
    background colour and opacity (builders default to var(--color-primary-dark) at 0.72). Nothing here changes it, so
    the editor and the live page always match. */
-section:has(> aside:first-child > img) :is(h1, h2) span { color: var(--color-accent); }
+/* Accent words: a <span> in the stored text, or bold from the editor's toolbar (typed tags are shown as text). */
+section:has(> aside:first-child > img) :is(h1, h2) :is(span, strong, b) { color: var(--color-accent); font-weight: inherit; }
 section:has(> aside:first-child > img) p:has(+ :is(h1, h2))::first-letter { text-transform: uppercase; }
 /* HORIZON-HERO-02: 2 to 6 photos crossfade, 6 seconds each (a cycle of 6s per photo). Slide 1 shows first; the others
    start hidden. Photo k starts at 6(k-1) - 1.2 seconds; the count picks the cycle length and its keyframes. */

@@ -1,0 +1,11 @@
+/* FAQ (V4 accordion): the question's icon slot is empty, and Elementor 4.3.5 gives it a fixed 200px width that squeezes
+   the question on phones. Make it a 20px chevron in the site's primary colour (a mask, so it follows the theme) that
+   turns up when the item is open (the accordion uses native details/summary). From Want Group's fix of 2026-10-22. */
+.elementor .elementor-element.e-accordion-item-icon-base {
+  width: 20px; min-width: 20px; height: 20px; flex: 0 0 20px; margin-inline-start: 12px;
+  background-color: var(--color-primary, #1F3A5F);
+  -webkit-mask: no-repeat center / 16px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  mask: no-repeat center / 16px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  transition: transform 0.2s ease;
+}
+details[open] > summary .elementor-element.e-accordion-item-icon-base { transform: rotate(180deg); }

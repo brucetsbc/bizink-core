@@ -58,8 +58,9 @@ function bz_core_blocks_menu_markup( $name ) {
 		return '';
 	}
 	$items = wp_get_nav_menu_items( $menu->term_id, array( 'post_status' => 'publish' ) );
+	$items = apply_filters( 'wp_nav_menu_objects', (array) $items, new stdClass() ); // Leaves out switched-off features, as on classic menus.
 	$by    = array();
-	foreach ( (array) $items as $it ) {
+	foreach ( $items as $it ) {
 		$by[ (int) $it->menu_item_parent ][] = $it;
 	}
 	$markup = function ( $parent ) use ( &$markup, $by ) {
@@ -81,6 +82,74 @@ function bz_core_blocks_navigation( $title, $markup ) {
 	$prev = get_posts( array( 'post_type' => 'wp_navigation', 'title' => $title, 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids' ) );
 	return $prev ? wp_update_post( array_merge( $args, array( 'ID' => $prev[0] ) ) ) : wp_insert_post( $args );
 }
+
+/* Classic menu name => the navigation the header and footer show. */
+function bz_core_blocks_menu_names() {
+	return array(
+		'Main Menu'       => 'Main menu',
+		'Footer Services' => 'Footer services',
+		'Footer Legal'    => 'Footer legal',
+	);
+}
+
+/*
+ * Appearance → Menus is the one place to edit menus on a block site too. WordPress hides that screen on block themes
+ * unless the theme asks for it, and the header and footer show their own navigation copies, so saving a menu updates
+ * its copy. So does a change of features (the package, or Extra features), which adds or drops menu items.
+ */
+function bz_core_blocks_sync_menu( $name ) {
+	$names = bz_core_blocks_menu_names();
+	if ( ! isset( $names[ $name ] ) || ! wp_get_nav_menu_object( $name ) ) {
+		return;
+	}
+	$built = get_posts( array( 'post_type' => 'wp_navigation', 'title' => $names[ $name ], 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids' ) );
+	if ( $built ) { // None yet: blocks/finish hasn't run.
+		bz_core_blocks_navigation( $names[ $name ], bz_core_blocks_menu_markup( $name ) );
+	}
+}
+
+add_action(
+	'after_setup_theme',
+	function () {
+		if ( 'bizink-blocks' === get_stylesheet() ) {
+			add_theme_support( 'menus' );
+		}
+	}
+);
+
+add_action(
+	'wp_update_nav_menu',
+	function ( $menu_id ) {
+		$menu = 'bizink-blocks' === get_stylesheet() ? wp_get_nav_menu_object( $menu_id ) : false;
+		if ( $menu ) {
+			bz_core_blocks_sync_menu( $menu->name );
+		}
+	}
+);
+
+add_action(
+	'admin_init',
+	function () {
+		if ( 'bizink-blocks' !== get_stylesheet() || ! function_exists( 'bz_core_hidden' ) || ! current_user_can( 'manage_options' ) ) {
+			return; // An admin's visit: their saves keep the navigation markup whole.
+		}
+		$state = md5( wp_json_encode( bz_core_hidden() ) );
+		if ( get_option( 'bz_blocks_menu_state' ) !== $state ) {
+			update_option( 'bz_blocks_menu_state', $state );
+			array_map( 'bz_core_blocks_sync_menu', array_keys( bz_core_blocks_menu_names() ) );
+		}
+	}
+);
+
+add_action(
+	'admin_notices',
+	function () {
+		$screen = get_current_screen();
+		if ( $screen && 'nav-menus' === $screen->id && 'bizink-blocks' === get_stylesheet() ) {
+			echo '<div class="notice notice-info"><p>Main Menu, Footer Services and Footer Legal feed this site\'s header and footer: saving one here updates the site. Edit menus on this screen, not in the Site Editor, where changes are overwritten by the next save here.</p></div>';
+		}
+	}
+);
 
 /**
  * Finish a Standard build: header (logo, Main Menu, Book a call) and footer (live Client Details fields through
