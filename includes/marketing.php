@@ -1564,7 +1564,12 @@ function bz_core_render_marketing() {
 					echo '<input type="hidden" name="action" value="bz_mkt_draft"><input type="hidden" name="item" value="' . esc_attr( $item['id'] ) . '">';
 					echo '<button class="bzm-btn primary" style="width:100%">Draft post</button></form>';
 				}
-				echo '<button class="bzm-btn" disabled>Create email</button><button class="bzm-btn" disabled>Make ad</button><div class="bzm-soon">Email and ads: coming soon</div>';
+				if ( function_exists( 'bz_core_em_enabled' ) && bz_core_em_enabled() ) {
+					$email_item = array( 'type' => $type, 'topic' => bz_core_mkt_post_title( $item['title'] ), 'angle' => $item['angle'], 'link' => $item['link'] );
+					echo '<button type="button" class="bzm-btn ghost" data-bzem-plan="' . esc_attr( wp_json_encode( $email_item ) ) . '">Create email</button><button class="bzm-btn" disabled>Make ad</button><div class="bzm-soon">Ads: coming soon</div>';
+				} else {
+					echo '<button class="bzm-btn" disabled>Make ad</button><div class="bzm-soon">Ads: coming soon</div>';
+				}
 				echo '</div></div>';
 			}
 			echo $open ? '</div>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -1573,6 +1578,7 @@ function bz_core_render_marketing() {
 			}
 			?>
 		</div>
+		<?php echo function_exists( 'bz_core_em_panel' ) ? bz_core_em_panel() : ''; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped inside. ?>
 		<?php echo function_exists( 'bz_core_lm_panel' ) ? bz_core_lm_panel() : ''; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped inside. ?>
 		<?php endif; ?>
 		<?php

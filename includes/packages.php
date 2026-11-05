@@ -32,8 +32,9 @@ function bz_core_package_names() {
 /* Feature key => [label, help]. */
 function bz_core_package_features() {
 	return array(
-		'marketing'       => array( 'Marketing assistant', '90-day plan, Draft post and the lead magnet builder. Without it the dashboard shows stats, support and news only.' ),
+		'marketing'       => array( 'Marketing assistant', '90-day plan, Draft post, lead magnet builder and email templates. Without it the dashboard shows stats, support and news only.' ),
 		'lead_magnets'    => array( 'Lead magnet builder', 'Turn a template or checklist into a landing page and form (on the Marketing assistant page). Limit below.' ),
+		'email_templates' => array( 'Email templates', 'Ready-made marketing emails and "Promote a resource", to copy into any email platform (on the Marketing assistant page).' ),
 		'glossary'        => array( 'Glossary', 'The business, accounting and payroll glossary page.' ),
 		'calculators'     => array( 'Calculators', 'The Calculators page and every calculator.' ),
 		'templates'       => array( 'Templates and checklists', 'The Downloads page and every template and checklist.' ),
@@ -68,7 +69,7 @@ function bz_core_package_defaults() {
 	foreach ( bz_core_package_names() as $key => $label ) {
 		$out[ $key ] = array(
 			'label'    => $label,
-			'features' => array_fill_keys( array_keys( bz_core_package_features() ), true ),
+			'features' => array_merge( array_fill_keys( array_keys( bz_core_package_features() ), true ), array( 'email_templates' => 'essentials' !== $key ) ), // Email templates start in Pro and Plus.
 			'limits'   => array_map( function ( $l ) { return $l[1]; }, bz_core_package_limits() ),
 			'service'  => '',
 			'build'    => bz_core_package_default_build( $key ),

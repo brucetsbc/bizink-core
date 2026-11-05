@@ -1,0 +1,11 @@
+/* Multi-step Gravity Forms: the Previous button matches the form's Submit button shape, as an outline. */
+.gform_wrapper .gform_page_footer .gform_previous_button.button {
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 12px 24px;
+}

@@ -1,0 +1,274 @@
+{
+  "groups": {
+    "reviews": "Reviews and referrals",
+    "touch": "Staying in touch",
+    "services": "Your services",
+    "events": "Events",
+    "new": "New contacts"
+  },
+  "templates": [
+    {
+      "id": "google-review",
+      "group": "reviews",
+      "title": "Ask for a Google review",
+      "when": "Send to one happy client at a time, soon after a good result. Never offer anything in return, and don't suggest what they should say.",
+      "subjects": ["A quick favour, [First name]?", "Would you share your experience on Google?", "Two minutes that would really help us"],
+      "preview": "It takes about two minutes and makes a real difference.",
+      "body": "Hi [First name],\n\nThank you for trusting {firm} with [the work we did together]. It has been great working with you.\n\nMost people find us through Google, so a short review makes a real difference. If you are happy to leave one, this link takes you straight there:\n\n{google_review}\n\nIt could be as simple as what you needed help with and how it went. An honest review is all we are after.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "facebook-review",
+      "group": "reviews",
+      "title": "Ask for a Facebook recommendation",
+      "when": "Best for clients you know are active on Facebook. Never offer anything in return, and don't suggest what they should say.",
+      "subjects": ["Would you recommend us on Facebook, [First name]?", "A quick favour on Facebook?"],
+      "preview": "A sentence or two from you helps other business owners find us.",
+      "body": "Hi [First name],\n\nThank you for trusting {firm} with [the work we did together]. It has been great working with you.\n\nA recommendation from a real client means more than anything we could say about ourselves. If you are happy to leave one, you can do it on our Facebook page:\n\n{facebook}\n\nA sentence or two in your own words is plenty.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "testimonial",
+      "group": "reviews",
+      "title": "Ask for a testimonial",
+      "when": "For your website and marketing. Get the client's approval of the final wording, and of using their name and business, before you publish it.",
+      "subjects": ["Could we feature your experience, [First name]?", "Would you say a few words about working with us?"],
+      "preview": "A few sentences in your own words, or I can call and write them down for you.",
+      "body": "Hi [First name],\n\nI have really enjoyed working with you over [time period], and I wondered if you would be happy to say a few words about the experience for our website and marketing.\n\nIf it helps, these questions are a good starting point:\n\n- What was going on in your business before you came to us?\n- What has changed since?\n- What would you tell another business owner thinking of working with us?\n\nYou can reply to this email, or I can give you a call and write down what you say. Either way, I will send you the final wording to approve before we use it.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "case-study",
+      "group": "reviews",
+      "title": "Ask for a case study",
+      "when": "For a client with a clear result. Confirm with them what can be shared, especially any numbers, and get their approval before publishing.",
+      "subjects": ["Could we share your story, [First name]?", "10 minutes to talk about your results?"],
+      "preview": "A short chat about what has changed in your business.",
+      "body": "Hi [First name],\n\nThe progress you have made with [result or project] is the kind of story other business owners would find useful, and I would love to write it up as a short case study for our website.\n\nIt would only take about 10 minutes on a call. I would ask why you came to us, what it has been like working together and what has changed since.\n\nYou would see the finished piece before anything is published, and you decide what is shared. We can leave out figures or your business name if you prefer.\n\nDoes a quick call this week suit you? Let me know a time that works, or book one here: {booking_url}\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "referral",
+      "group": "reviews",
+      "title": "Ask for a referral",
+      "when": "Works well after a good result or a thank-you from the client. Describing your ideal client gets better introductions.",
+      "subjects": ["Do you know anyone we could help, [First name]?", "We'd love more clients like you"],
+      "preview": "Most of our best clients come through people like you.",
+      "body": "Hi [First name],\n\nWe really enjoy working with you, and we would love to work with more business owners like you. Many of our best clients come through introductions from people they trust.\n\nIs there anyone you know who might value some help? A good fit for us is [describe your ideal client, for example an owner-run trades business].\n\nIf someone comes to mind, feel free to pass on my details or let me know and I will get in touch. There is no pressure on them at all, and we would start with a friendly chat.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "referral-intro",
+      "group": "reviews",
+      "title": "Referral with ready-made introduction",
+      "when": "Use when a client has said they know someone. It gives them wording they can forward, which makes it much more likely to happen.",
+      "subjects": ["An easy way to introduce us", "Thank you, [First name], and a suggested introduction"],
+      "preview": "Some wording you can copy, so it only takes a minute.",
+      "body": "Hi [First name],\n\nThank you for offering to introduce us to [their contact's name]. To make it easy, here is something you could send them. Please change anything you like, and copy me in so I can take it from there.\n\n\"Hi [their contact's name], I would like to introduce you to [Your name] at {firm}, who I work with. I think it would be worth having a chat with them about [what they need help with]. They are easy to talk to and there is no obligation.\"\n\nThank you so much. We really appreciate it.\n\n{signoff}"
+    },
+    {
+      "id": "referral-thanks",
+      "group": "reviews",
+      "title": "Thank a client for a referral",
+      "when": "Send as soon as you receive the introduction, whether or not it turns into work. Don't mention anything confidential about the person referred.",
+      "subjects": ["Thank you for the introduction, [First name]", "That was very kind of you"],
+      "preview": "We really appreciate you thinking of us.",
+      "body": "Hi [First name],\n\nI just wanted to say thank you for introducing us to [their contact's name]. We really appreciate you thinking of us, and it means a lot that you would recommend {firm}.\n\nWe will look after them.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "feedback",
+      "group": "reviews",
+      "title": "Ask for feedback",
+      "when": "Send once or twice a year. Add a link to a survey if you have one; otherwise the two questions work as a simple reply.",
+      "subjects": ["How are we doing, [First name]?", "Two quick questions about working with us"],
+      "preview": "Your honest answer helps us look after you better.",
+      "body": "Hi [First name],\n\nThank you for your support this year. We want to keep getting better at looking after you, and your honest answers would really help.\n\nCould you reply with a line or two on these?\n\n- What do we do well?\n- What is one thing we could do better?\n\nThere are no wrong answers, and I read every reply.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "welcome",
+      "group": "touch",
+      "title": "Welcome a new client",
+      "when": "Send on the day they sign up. Add what you need from them first, so they know exactly what happens next.",
+      "subjects": ["Welcome to {firm}, [First name]", "Great to be working with you, [First name]"],
+      "preview": "What happens next, and how to reach us.",
+      "body": "Hi [First name],\n\nWelcome to {firm}. We are really pleased to be working with you.\n\nHere is what happens next:\n\n- [First step, for example we send your engagement letter]\n- [Second step, for example you share access to your accounting file]\n- [Third step, for example we meet to agree your priorities]\n\nIf you have a question at any point, just reply to this email or call us on {phone}. No question is too small.\n\nWe look forward to working with you.\n\n{signoff}"
+    },
+    {
+      "id": "deadline",
+      "group": "touch",
+      "title": "Deadline reminder",
+      "when": "Send about two weeks ahead so clients have time to act. Your next key date is filled in where we can; check it applies to the people you are sending to.",
+      "subjects": ["Coming up: {deadline}", "A quick reminder about an upcoming date", "Is this on your radar, [First name]?"],
+      "preview": "A quick reminder, and what we need from you.",
+      "body": "Hi [First name],\n\nA quick reminder about an upcoming date: {deadline}.\n\nTo keep things simple, here is what we need from you by [date you need it]:\n\n- [What to send or do]\n- [What to send or do]\n\nIf we already look after this for you, you don't need to do anything unless we have asked. If you are not sure whether it applies to you, just reply and we will check.\n\nThank you,\n\n{signoff}"
+    },
+    {
+      "id": "year-end",
+      "group": "touch",
+      "title": "Year-end is coming",
+      "when": "Send four to six weeks before the year ends, while there is still time to plan.",
+      "subjects": ["Getting ready for the {year_end}", "Time to plan ahead, [First name]?", "Let's get ahead of the {year_end}"],
+      "preview": "We are booking clients in now, and planning early pays off.",
+      "body": "Hi [First name],\n\nThe {year_end} is coming up, and we are starting to book clients in now.\n\nThe weeks before year end are also the best time to look at your position, while there is still time to do something about it. Leaving it until afterwards usually means fewer options.\n\nIf you would like to talk it through, or get your work booked in early, you can reply to this email or choose a time here:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+    },
+    {
+      "id": "holiday",
+      "group": "touch",
+      "title": "Holiday closing hours",
+      "when": "Send two weeks before you close, and consider a reminder a few days before.",
+      "subjects": ["Our holiday hours", "We'll be closed from [closing date] to [reopening date]"],
+      "preview": "When we are closed, and how to reach us if it's urgent.",
+      "body": "Hi [First name],\n\nThank you for your support this year. It has been a pleasure working with you.\n\nOur office will be closed from [closing date] and we will be back on [reopening date]. If there is anything you need from us before then, please let us know by [last day for requests].\n\nFor anything urgent while we are away, please email {email} and we will reply as soon as we can.\n\nWe hope you get some time to relax.\n\nWarm regards,\n\n{signoff}"
+    },
+    {
+      "id": "check-in",
+      "group": "touch",
+      "title": "Check in with a quiet client",
+      "when": "For a client or past enquiry you haven't spoken to in a while. Keep it personal; mention something specific if you can.",
+      "subjects": ["How is business going, [First name]?", "It's been a while, [First name]"],
+      "preview": "No agenda, just checking in.",
+      "body": "Hi [First name],\n\nIt has been a while since we last spoke, and I was wondering how things are going at [their business].\n\nIf anything has changed, or there is something on your mind, I am happy to have a quick chat. No agenda and no obligation. You can reply here or choose a time that suits you:\n\n{booking_url}\n\nAll the best,\n\n{signoff}"
+    },
+    {
+      "id": "topic",
+      "group": "touch",
+      "title": "Share a useful tip",
+      "when": "A simple format for one useful idea. Add your own experience: that is what makes it sound like you.",
+      "subjects": ["{topic}", "A quick thought for you, [First name]"],
+      "preview": "One practical idea you can use this week.",
+      "body": "Hi [First name],\n\n[Why this matters right now, in a sentence or two.]\n\n[The practical tip, or two or three short points.]\n\nIf you would like to talk about what this means for your business, reply to this email or choose a time here:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+    },
+    {
+      "id": "advisory",
+      "group": "services",
+      "title": "Promote business advisory",
+      "when": "Best for clients you already do compliance work for. Mention something you have noticed in their business if you can.",
+      "subjects": ["Ready to grow your business, [First name]?", "Got a lot on your plate? We can help", "Making big decisions with better numbers"],
+      "preview": "Clear numbers and a second opinion for the decisions that matter.",
+      "body": "Hi [First name],\n\nWhen you are running a business, there is rarely enough time to step back and look at the numbers, let alone work out what they mean for your next decision.\n\nThat is where our business advisory service comes in. We can:\n\n- Track how your business is performing and explain it in plain language\n- Build a budget and cash flow forecast you can actually use\n- Help you think through big decisions before you commit\n\nIf you would like to see whether it is a good fit, let's have a chat. There is no obligation.\n\n{booking_url}\n\nMany thanks,\n\n{signoff}"
+    },
+    {
+      "id": "virtual-cfo",
+      "group": "services",
+      "title": "Promote virtual CFO services",
+      "when": "For growing businesses without a full-time finance lead. Only send if you offer this service.",
+      "subjects": ["Do you have a full handle on your finances, [First name]?", "Senior finance support, without the full-time cost", "Ready to take your business to the next level?"],
+      "preview": "Learn more about our virtual CFO services.",
+      "body": "Hi [First name],\n\nAs a business grows, the financial decisions get bigger, but most businesses don't need or want a full-time finance executive.\n\nOur virtual CFO service gives you that senior support when you need it, including:\n\n- Strategic financial advice and planning\n- Clear, accurate reporting\n- Cash flow management\n- Better financial systems and processes\n\nWe will start by understanding your goals and priorities, then agree what support makes sense.\n\nIf you would like to find out more, reply to this email, call us on {phone} or choose a time here:\n\n{booking_url}\n\nHave a great day,\n\n{signoff}"
+    },
+    {
+      "id": "service",
+      "group": "services",
+      "title": "Promote one of your services",
+      "when": "Pick one service and one type of client. A specific problem gets far more replies than a list of everything you do.",
+      "subjects": ["{service}: could we take this off your plate?", "Is this taking up too much of your time, [First name]?"],
+      "preview": "How we can help, and what the next step looks like.",
+      "body": "Hi [First name],\n\nMany business owners tell us that [the problem this service solves] takes up more time and energy than it should.\n\nOur {service} service is designed to help. Here is how it works:\n\n- [What we do]\n- [What you get]\n- [How it makes life easier]\n\nYou can read more here: {service_link}\n\nIf you would like to talk it through, reply to this email or choose a time here:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+    },
+    {
+      "id": "event-clients",
+      "group": "events",
+      "title": "Invite clients to an event",
+      "when": "Send three to four weeks before the event. Lead with what they will learn, not the event itself.",
+      "subjects": ["You're invited: [event name]", "Join us on [event date], [First name]", "Learn how to [event outcome]"],
+      "preview": "Practical ideas you can use straight away, and it's free to attend.",
+      "body": "Hi [First name],\n\nWe would love you to join us for [event name], where we will be sharing practical ideas on [main topic].\n\nYou will come away knowing:\n\n- [What they will learn]\n- [What they will learn]\n- [What they will learn]\n\nHere are the details:\n\nDate and time: [date and time]\nWhere: [venue or online link]\nCost: [free, or the cost]\n\nTo save your place, [how to register]. If you know someone else who would benefit, they are welcome too.\n\nWe hope to see you there.\n\n{signoff}"
+    },
+    {
+      "id": "event-leads",
+      "group": "events",
+      "title": "Invite prospects to an event",
+      "when": "For people who have agreed to hear from you, such as your mailing list. Add a comment from a past attendee if they have agreed to it.",
+      "subjects": ["Struggling with [problem]? Join us on [event date]", "Free [webinar/seminar]: [event outcome]"],
+      "preview": "A free session with practical ideas you can use straight away.",
+      "body": "Hi [First name],\n\nIf [the problem your event solves] is taking up more of your time than it should, you are not alone. We hear it from business owners all the time.\n\nThat is why we are running [event name], a free [webinar/seminar] on how to [event outcome].\n\nDate and time: [date and time]\nWhere: [venue or online link]\n\nPlaces are limited to [number], so please [how to register] by [closing date].\n\nWe hope to see you there.\n\n{signoff}"
+    },
+    {
+      "id": "event-last-call",
+      "group": "events",
+      "title": "Last call for an event",
+      "when": "Send a few days before the event to people who haven't registered. Only mention limited places if that's true.",
+      "subjects": ["Last chance to join us on [event date]", "Still time to join us, [First name]"],
+      "preview": "A quick reminder before registrations close.",
+      "body": "Hi [First name],\n\nA quick reminder that [event name] is coming up on [date and time], and registrations close on [closing date].\n\nIf you want to learn how to [event outcome], we would love to see you there. It takes less than a minute to [how to register].\n\nAny questions, just reply to this email.\n\n{signoff}"
+    },
+    {
+      "id": "event-thanks",
+      "group": "events",
+      "title": "Follow up after an event",
+      "when": "Send within a day or two, while it's fresh. This is where events turn into conversations.",
+      "subjects": ["Thanks for coming, [First name]", "The notes from [event name]"],
+      "preview": "The notes we promised, and a next step if you'd like one.",
+      "body": "Hi [First name],\n\nThank you for joining us at [event name]. I hope you came away with some useful ideas.\n\nYou can find the [notes, slides or recording] here: [link]\n\nIf the session raised any questions about your own business, I would be happy to talk them through. You can choose a time here:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+    },
+    {
+      "id": "met-at-event",
+      "group": "new",
+      "title": "Follow up someone you met",
+      "when": "Send within a couple of days, and mention something they actually said. It's what stops this reading like a template.",
+      "subjects": ["Great meeting you at [event or place]", "Following up from [event or place], [First name]"],
+      "preview": "It was good to hear about your business.",
+      "body": "Hi [First name],\n\nIt was great to meet you at [event or place], and I enjoyed hearing about [something they said].\n\nBased on what you told me, I thought it might be useful to mention [how we could help with what they described].\n\nIf you would like to talk about it, I would be happy to have a chat with no obligation. You can reach me on {phone}, or choose a time here:\n\n{booking_url}\n\nI hope to speak with you soon.\n\n{signoff}"
+    },
+    {
+      "id": "met-offer",
+      "group": "new",
+      "title": "Offer something useful after meeting",
+      "when": "A lighter follow-up when a sales conversation would be too soon. Ask first, and only add them to your mailing list if they say yes.",
+      "subjects": ["Good to meet you, [First name]", "Something you might find useful"],
+      "preview": "No sales pitch, just something that might help.",
+      "body": "Hi [First name],\n\nIt was great to meet you at [event or place].\n\nI thought you might find our [newsletter or download] useful. It covers [what it covers], and our clients tell us it is worth a read.\n\nWould you like me to send it to you?\n\nAll the best,\n\n{signoff}"
+    },
+    {
+      "id": "idea",
+      "group": "new",
+      "title": "One-to-one: share a business idea",
+      "cold": true,
+      "when": "One-to-one only: send to one person you have researched, and never to a bought list. Spam rules differ by country, so check yours. Use a real result, and only name a client with their permission.",
+      "subjects": ["An idea for [their business]", "A thought on [what you could improve], [First name]"],
+      "preview": "It has worked for similar businesses, and takes 10 minutes to explain.",
+      "body": "Hi [First name],\n\nI have an idea that could help [their business] with [what you could improve].\n\nWe used the same approach with [a similar business, or a client who has agreed to be named], and [the real result, with the time it took].\n\nWould you be open to a 10-minute call to see whether it could work for you too? You can choose a time here:\n\n{booking_url}\n\nIf this isn't relevant, just let me know and I won't follow up.\n\nThanks,\n\n{signoff}"
+    },
+    {
+      "id": "common-problem",
+      "group": "new",
+      "title": "One-to-one: a problem in their industry",
+      "cold": true,
+      "when": "One-to-one only: send to one person you have researched, and never to a bought list. Spam rules differ by country, so check yours. The more specific the problem, the better.",
+      "subjects": ["Is [problem] a challenge at [their business]?", "A common problem in [industry]"],
+      "preview": "We see this a lot in your industry, and I have some ideas that might help.",
+      "body": "Hi [First name],\n\nWe work with a number of [industry] businesses, and one issue that keeps coming up is [a specific problem].\n\nRecently we helped [a type of business] to [the real result].\n\nIf this is a challenge for you too, I would be happy to share a few ideas on a quick call. You can choose a time here:\n\n{booking_url}\n\nIf it isn't relevant, just let me know and I won't follow up.\n\nAll the best,\n\n{signoff}"
+    },
+    {
+      "id": "industry",
+      "group": "new",
+      "title": "One-to-one: how we help businesses like yours",
+      "cold": true,
+      "when": "One-to-one only: send to one person you have researched, and never to a bought list. Spam rules differ by country, so check yours. Say how you came across them.",
+      "subjects": ["How we help [industry] businesses like [their business]", "Helping [their business] with [goal]"],
+      "preview": "What we do for businesses like yours, and whether a chat makes sense.",
+      "body": "Hi [First name],\n\nI came across [their business] through [how you found them], and I am getting in touch because we work with a lot of [industry] businesses.\n\nWe help them to [the main results you get], by:\n\n- [Benefit]\n- [Benefit]\n- [Benefit]\n\nWould a quick call make sense to see whether we could help you too? You can choose a time here:\n\n{booking_url}\n\nIf this isn't relevant, just let me know and I won't follow up.\n\nCheers,\n\n{signoff}"
+    }
+  ],
+  "promos": {
+    "download": {
+      "clients": {
+        "subjects": ["A free {kind} you might find useful: {title}", "Something useful for you, [First name]", "{title}: free for you to use"],
+        "preview": "{about}",
+        "body": "Hi [First name],\n\nI thought you might find our {title} useful.\n\n{about}\n\nIt is free to use, and you can get your copy here:\n\n{link}\n\nIf it raises any questions, or you would like a hand working through it, reply to this email or choose a time here:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+      },
+      "prospects": {
+        "subjects": ["Free {kind}: {title}", "Your free {title}", "A practical {kind} for your business"],
+        "preview": "{about}",
+        "body": "Hi [First name],\n\nRunning a business leaves little time for the things that could make the biggest difference, so we have put together something to help.\n\nOur free {title}:\n\n{about}\n\nYou can get your copy here:\n\n{link}\n\nIf you would like to talk about what it means for your business, we are happy to have a chat with no obligation:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+      }
+    },
+    "calculator": {
+      "clients": {
+        "subjects": ["Try our free {title}", "A quick way to check your numbers, [First name]", "{title}: see your numbers in a minute"],
+        "preview": "{about}",
+        "body": "Hi [First name],\n\nI thought you might find our free {title} useful.\n\n{about}\n\nIt only takes a minute, and you can try it here:\n\n{link}\n\nIf the result raises any questions, reply to this email or choose a time here and we can talk it through:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+      },
+      "prospects": {
+        "subjects": ["Free tool: {title}", "See your numbers in a minute", "A quick check for your business"],
+        "preview": "{about}",
+        "body": "Hi [First name],\n\nSometimes a quick calculation is all you need to make a better decision. That is why we have made our {title} free for any business owner to use.\n\n{about}\n\nYou can try it here:\n\n{link}\n\nA calculator gives you a starting point, not advice for your situation. If you would like to talk through what the result means for your business, we are happy to have a chat with no obligation:\n\n{booking_url}\n\nKind regards,\n\n{signoff}"
+      }
+    }
+  }
+}

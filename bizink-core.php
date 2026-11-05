@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.35.0
+ * Version:     0.36.0
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.35.0' );
+define( 'BZ_CORE_VERSION', '0.36.0' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -62,6 +62,7 @@ require_once __DIR__ . '/includes/theme-hero.php';
 require_once __DIR__ . '/includes/business-guides.php';
 require_once __DIR__ . '/includes/packages.php';
 require_once __DIR__ . '/includes/lead-magnets.php';
+require_once __DIR__ . '/includes/email-templates.php';
 require_once __DIR__ . '/includes/client-intake.php';
 require_once __DIR__ . '/includes/cookie-banner.php';
 require_once __DIR__ . '/includes/handover.php';
@@ -98,6 +99,7 @@ function bz_core_fields() {
 		'footer_blurb'    => array( 'Footer blurb', 'textarea', 'One or two sentences about the firm.' ),
 		'booking_url'     => array( 'Booking URL', 'url', 'External booking link. Leave empty to use the Book a Call page.' ),
 		'portal_url'      => array( 'Client portal URL', 'url', '' ),
+		'google_review_url' => array( 'Google review link', 'url', 'The firm\'s "Ask for reviews" link from its Google Business Profile. Fills in the review request on the Marketing page.' ),
 		'compliance_note' => array( 'Compliance note', 'textarea', 'Leave empty to use the regional default.' ),
 		'ga4_measurement_id' => array( 'GA4 measurement ID', 'text', 'G-XXXXXXXXXX. Adds the Google Analytics tag to every page (not for logged-in editors) and records form enquiries. The tag only starts once "Discourage search engines" is off (at launch), so it can be set during the build. Leave empty if the site already has a tag.' ),
 		'ga4_property_id'    => array( 'GA4 property ID', 'text', 'Numbers only, from Google Analytics → Admin → Property details. Used by the Marketing page for visitors and downloads.' ),
