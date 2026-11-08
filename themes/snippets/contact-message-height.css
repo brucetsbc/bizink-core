@@ -1,5 +1,6 @@
-/* Contact form (Gravity Form 1 on the master and its clones): a shorter message box than Gravity Forms' 288px. */
-#gform_1 .gfield textarea {
+/* Forms on the page (Gravity Form 1 on the master and its clones, and any form in a tile): a shorter message box than Gravity Forms' 288px. */
+#gform_1 .gfield textarea,
+.elementor .bz-card .gform_wrapper .gfield textarea.large {
   height: 140px;
   min-height: 140px;
 }

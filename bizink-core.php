@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.36.0
+ * Version:     0.36.1
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.36.0' );
+define( 'BZ_CORE_VERSION', '0.36.1' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -73,6 +73,7 @@ require_once __DIR__ . '/includes/mailpoet.php';
 require_once __DIR__ . '/includes/redirects.php';
 require_once __DIR__ . '/includes/agreements.php';
 require_once __DIR__ . '/includes/comments.php';
+require_once __DIR__ . '/includes/booking.php';
 
 /**
  * Client detail fields: key => [label, input type, help text].
@@ -97,7 +98,7 @@ function bz_core_fields() {
 		'specialities'    => array( 'Specialities', 'text', 'Comma separated, e.g. tax planning, business start-ups' ),
 		'offer_sentence'  => array( 'Offer sentence', 'textarea', 'e.g. We offer a free 30-minute consultation to talk through your plans.' ),
 		'footer_blurb'    => array( 'Footer blurb', 'textarea', 'One or two sentences about the firm.' ),
-		'booking_url'     => array( 'Booking URL', 'url', 'External booking link. Leave empty to use the Book a Call page.' ),
+		'booking_url'     => array( 'Booking URL', 'url', 'External booking link. Leave empty to use the Book a Call page. A Calendly link opens in a pop-up from any #book link.' ),
 		'portal_url'      => array( 'Client portal URL', 'url', '' ),
 		'google_review_url' => array( 'Google review link', 'url', 'The firm\'s "Ask for reviews" link from its Google Business Profile. Fills in the review request on the Marketing page.' ),
 		'compliance_note' => array( 'Compliance note', 'textarea', 'Leave empty to use the regional default.' ),
