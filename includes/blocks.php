@@ -184,7 +184,7 @@ function bz_core_blocks_finish( WP_REST_Request $r ) {
 		. '</div><!-- /wp:columns -->'
 		. '<!-- wp:separator {"align":"wide","backgroundColor":"base"} --><hr class="wp-block-separator alignwide has-text-color has-base-color has-alpha-channel-opacity has-base-background-color has-background"/><!-- /wp:separator -->'
 		. '<!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} --><div class="wp-block-group alignwide">'
-		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size">[bz field=copyright]<br>Built with Aukume by <a href="https://bizinkonline.com" target="_blank" rel="noopener">Bizink</a> [bz_cookie_settings]</p><!-- /wp:paragraph -->'
+		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size">[bz field=copyright]<br>Built with Elchemi by <a href="https://bizinkonline.com" target="_blank" rel="noopener">Bizink</a> [bz_cookie_settings]</p><!-- /wp:paragraph -->'
 		. '<!-- wp:navigation {"ref":' . (int) $leg . ',"overlayMenu":"never","fontSize":"small"} /-->'
 		. '</div><!-- /wp:group -->'
 		. '<!-- wp:paragraph {"fontSize":"small"} --><p class="has-small-font-size"><span>[bz field=compliance_note]</span></p><!-- /wp:paragraph -->'
