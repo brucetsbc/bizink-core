@@ -1,0 +1,2 @@
+/* Neutral dark grey footer (#333) instead of the brand colour: the master footer's outer section. Text stays white (12.6:1). */
+.elementor-location-footer > .e-con:first-child, .elementor-location-footer > .elementor-element:first-child { background-color: #333333 !important; }

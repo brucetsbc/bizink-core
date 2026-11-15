@@ -1,2 +1,4 @@
 /* Firms whose accent colour is dark (e.g. navy): light text on accent buttons (copy mode adds this automatically). */
 .elementor .bz-btn-accent, .elementor .bz-btn-accent:hover, .elementor .bz-btn-accent:focus-visible { color: var(--color-inverse, #fff) !important; }
+/* The theme's accent hover is a white button with brand-coloured text: with the light text above it went blank. Darken instead. */
+.elementor .bz-btn-accent:hover, .elementor .bz-btn-accent:focus-visible { background-color: var(--color-primary-dark) !important; border-color: var(--color-primary-dark) !important; }

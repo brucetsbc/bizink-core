@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bizink Core
  * Description: Shared features for Bizink accountant sites: client details ([bz] shortcode), Resources, Calculators, Team, Partners, region packs, key tax dates, glossary and Gravity Forms tags.
- * Version:     0.36.2
+ * Version:     0.37.0
  * Author:      Bizink
  * Text Domain: bizink-core
  * Update URI:  https://github.com/brucetsbc/bizink-core
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BZ_CORE_VERSION', '0.36.2' );
+define( 'BZ_CORE_VERSION', '0.37.0' );
 define( 'BZ_CORE_OPTION', 'bz_client_details' );
 
 /*
@@ -75,6 +75,7 @@ require_once __DIR__ . '/includes/agreements.php';
 require_once __DIR__ . '/includes/comments.php';
 require_once __DIR__ . '/includes/booking.php';
 require_once __DIR__ . '/includes/popup.php';
+require_once __DIR__ . '/includes/social-share.php';
 
 /**
  * Client detail fields: key => [label, input type, help text].

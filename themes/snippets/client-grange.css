@@ -1,0 +1,30 @@
+/* Grange Bookkeeping kit CSS. Header (change request #790, 2026-11-11): navy main bar (set on element 56f197aa), white menu text with
+   gold hover/current, white burger. Dropdowns keep a white panel with dark text. Master header element ids. */
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main > .elementor-nav-menu > li > a.elementor-item {
+  color: #fff;
+  fill: #fff;
+}
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main > .elementor-nav-menu > li > a.elementor-item:hover,
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main > .elementor-nav-menu > li > a.elementor-item:focus,
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main > .elementor-nav-menu > li > a.elementor-item.elementor-item-active {
+  color: #c5b457;
+  fill: #c5b457;
+}
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main .elementor-item:after,
+.elementor-location-header .elementor-element-516dbf7c .elementor-nav-menu--main .elementor-item:before {
+  background-color: #c5b457;
+}
+.elementor-location-header .elementor-element-516dbf7c .elementor-menu-toggle,
+.elementor-location-header .elementor-element-516dbf7c .elementor-menu-toggle:hover {
+  color: #fff;
+  fill: #fff;
+  background-color: transparent;
+}
+.elementor-location-header .elementor-element-516dbf7c .elementor-menu-toggle svg { fill: #fff; }
+
+/* Contact form (change request #793): shorter "How can we help?" box (Gravity Forms makes large textareas 288px). */
+.elementor .gform_wrapper.gravity-theme .gfield textarea.large,
+.elementor .gform_wrapper .gfield textarea.large {
+  height: 140px;
+  min-height: 0;
+}

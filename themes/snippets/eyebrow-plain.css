@@ -1,0 +1,5 @@
+/* Eyebrow labels as plain sentence-case headings: no accent dot, no capitals or letter spacing, heading colour
+   (white stays on dark panels). The labels' own text is already sentence case. BTP 2026-11-09. */
+.elementor .bz-eyebrow { text-transform: none !important; letter-spacing: normal !important; padding-inline-start: 0 !important;
+  background-image: none !important; font-family: var(--font-heading); }
+.elementor .bz-eyebrow:not(.bz-on-dark) { color: var(--color-heading) !important; }
