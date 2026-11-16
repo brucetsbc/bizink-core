@@ -205,7 +205,7 @@ function bz_core_hero_component( $variant, $slides = 0 ) {
 			$k = $p . '-dot' . $i;
 			$dots_xml .= '<e-div-block configuration-id="' . $k . '"></e-div-block>';
 			$config[ $k ] = array( 'tag' => 'button' );
-			$style[ $k ]  = 'width: 10px; height: 10px; padding: 0px; border-width: 0px; border-radius: 999px; background-color: rgba(255,255,255,0.4); cursor: pointer;' . ( 1 === $i ? ' background-color: var(--color-accent);' : '' );
+			$style[ $k ]  = 'width: 10px; height: 10px; min-width: 10px; padding: 0px; border-width: 0px; border-radius: 999px; background-color: rgba(255,255,255,0.4); cursor: pointer;' . ( 1 === $i ? ' background-color: var(--color-accent);' : '' );
 		}
 		$dots_xml = '<e-div-block configuration-id="' . $p . '-dots">' . $dots_xml . '</e-div-block>';
 	}
