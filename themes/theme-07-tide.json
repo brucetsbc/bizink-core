@@ -1,0 +1,33 @@
+{
+ "name": "Theme 07 — Tide",
+ "description": "Clean fintech calm: icy blue-grey surfaces, confident teal with deep navy, Fraunces italic accents over DM Sans, soft 16px cards and gently rounded 8px buttons.",
+ "tokens": {
+  "color-primary": "#00AECA",
+  "color-primary-dark": "#0C1C2E",
+  "color-secondary": "#0090AA",
+  "color-accent": "#BFEBF6",
+  "color-heading": "#0C1C2E",
+  "color-text": "#1A2B3C",
+  "color-text-muted": "#57697A",
+  "color-surface": "#FFFFFF",
+  "color-surface-alt": "#EEF5FA",
+  "color-border": "#D7E3EA",
+  "color-inverse": "#FFFFFF",
+  "font-heading": "Fraunces",
+  "font-body": "DM Sans",
+  "text-h1": "clamp(2.4rem, 1.6rem + 3vw, 4rem)",
+  "text-h2": "clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem)",
+  "text-h3": "clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem)",
+  "text-h4": "1.25rem",
+  "text-body": "1.0625rem",
+  "text-small": "0.875rem",
+  "space-xs": "8px",
+  "space-sm": "16px",
+  "space-md": "24px",
+  "space-lg": "48px",
+  "space-section": "clamp(56px, 2.5rem + 3.5vw, 96px)",
+  "container-max": "1200px",
+  "radius-card": "16px",
+  "radius-button": "8px"
+ }
+}

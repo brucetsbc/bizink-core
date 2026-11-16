@@ -22,6 +22,25 @@
 }
 .elementor-location-header .elementor-element-516dbf7c .elementor-menu-toggle svg { fill: #fff; }
 
+/* Menu dropdowns: square corners instead of Elementor's default rounded panel. */
+.elementor-nav-menu--dropdown.sub-menu {
+  border-radius: 0 !important;
+}
+
+/* H1 highlight spans: gold accent colour + italic (component heading overrides can carry a bare <span>, but not a style attribute). */
+.elementor .e-default-h1 span {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+/* Eyebrow pill: force it to hug its text instead of stretching across its flex column (blockification + stretch
+   otherwise wins over the bz-eyebrow global class's own width/align-self). */
+.elementor .bz-eyebrow {
+  width: max-content !important;
+  align-self: flex-start !important;
+  flex: 0 0 auto !important;
+}
+
 /* Contact form (change request #793): shorter "How can we help?" box (Gravity Forms makes large textareas 288px). */
 .elementor .gform_wrapper.gravity-theme .gfield textarea.large,
 .elementor .gform_wrapper .gfield textarea.large {

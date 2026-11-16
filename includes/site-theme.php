@@ -22,6 +22,7 @@ function bz_core_theme_snippets() {
 		'theme-04-lumen'  => 'theme-lumen',
 		'theme-05-signal' => 'theme-signal',
 		'theme-06-horizon' => 'theme-horizon',
+		'theme-07-tide' => 'theme-tide',
 	);
 }
 
