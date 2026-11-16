@@ -11,6 +11,8 @@
  * Undo puts the home page back exactly as it was (its Elementor data is kept in the theme history).
  * The look (shade, accent, slider timing) is in themes/snippets/signature-blocks.css and matches the block by
  * structure: a <section> whose first child is an <aside> holding the photos.
+ * Sliders (2+ photos) get a row of navigation dots after the text; assets/js/horizon-hero.js (enqueued below)
+ * takes over the slide timing on load and makes the dots clickable, same structural match as the CSS.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -143,6 +145,7 @@ function bz_core_hero_component( $variant, $slides = 0 ) {
 		$p . '-media' => 'position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 0px; z-index: 0;',
 		$p . '-shade' => 'position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; padding: 0px; z-index: 1; background-color: var(--color-primary-dark); opacity: 0.72;',
 		$p . '-in'    => 'position: relative; z-index: 2; width: 100%; max-width: var(--container-max); margin: 0px auto; padding: var(--space-section) var(--space-md);',
+		$p . '-dots'  => 'padding: 0px; display: flex; gap: 10px; margin-top: var(--space-md);',
 	);
 	$config   = array( $p => array( 'tag' => 'section' ), $p . '-media' => array( 'tag' => 'aside' ) );
 	$props    = array();
@@ -195,8 +198,19 @@ function bz_core_hero_component( $variant, $slides = 0 ) {
 			'group'    => 1 === $v['slides'] ? 'Image' : ( $v['stories'] ? 'Slide ' . $i : 'Slides' ),
 		);
 	}
+	$dots_xml = '';
+	if ( $v['slides'] > 1 ) {  // click-to-navigate dots (horizon-hero.js); slide 1's dot starts active for the no-JS fallback
+		$config[ $p . '-dots' ] = array( 'tag' => 'nav' );
+		for ( $i = 1; $i <= $v['slides']; $i++ ) {
+			$k = $p . '-dot' . $i;
+			$dots_xml .= '<e-div-block configuration-id="' . $k . '"></e-div-block>';
+			$config[ $k ] = array( 'tag' => 'button' );
+			$style[ $k ]  = 'width: 10px; height: 10px; padding: 0px; border-width: 0px; border-radius: 999px; background-color: rgba(255,255,255,0.4); cursor: pointer;' . ( 1 === $i ? ' background-color: var(--color-accent);' : '' );
+		}
+		$dots_xml = '<e-div-block configuration-id="' . $p . '-dots">' . $dots_xml . '</e-div-block>';
+	}
 	$xml  = '<e-div-block configuration-id="' . $p . '"><e-div-block configuration-id="' . $p . '-media">' . $slide_xml . '</e-div-block>'
-		. '<e-div-block configuration-id="' . $p . '-shade"></e-div-block><e-div-block configuration-id="' . $p . '-in">' . $text_xml . '</e-div-block></e-div-block>';
+		. '<e-div-block configuration-id="' . $p . '-shade"></e-div-block><e-div-block configuration-id="' . $p . '-in">' . $text_xml . $dots_xml . '</e-div-block></e-div-block>';
 	$made = bz_core_hero_ability(
 		'elementor/manage-component',
 		array( 'action' => 'create', 'title' => $title, 'xml_structure' => $xml, 'element_config' => $config, 'style' => $style, 'overridable_props' => $props )
@@ -304,3 +318,17 @@ function bz_core_hero_restore( $page, $data ) {
 		}
 	}
 }
+
+/*
+ * Click-to-navigate dots for the HORIZON-HERO-02/03 sliders. Cheap to enqueue on every page: the script bails
+ * immediately where the structure it looks for isn't there. The keyframe fade in signature-blocks.css is the
+ * no-JS (and no-dots) fallback, so nothing breaks if this fails to load.
+ */
+add_action(
+	'wp_footer',
+	function () {
+		wp_register_script( 'bz-horizon-hero', false, array(), BZ_CORE_VERSION, true );
+		wp_enqueue_script( 'bz-horizon-hero' );
+		wp_add_inline_script( 'bz-horizon-hero', (string) file_get_contents( __DIR__ . '/../assets/js/horizon-hero.js' ) );
+	}
+);

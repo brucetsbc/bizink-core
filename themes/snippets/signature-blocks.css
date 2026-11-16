@@ -53,9 +53,15 @@ section:has(> aside:first-child > img:nth-child(6):last-child) div:has(> article
 @keyframes bz-hz-text-4 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 5% { opacity: 1; visibility: visible; transform: none; } 25% { opacity: 1; visibility: visible; } 30% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
 @keyframes bz-hz-text-5 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 4% { opacity: 1; visibility: visible; transform: none; } 20% { opacity: 1; visibility: visible; } 24% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
 @keyframes bz-hz-text-6 { 0% { opacity: 0; visibility: hidden; transform: translateY(14px); } 3.33% { opacity: 1; visibility: visible; transform: none; } 16.67% { opacity: 1; visibility: visible; } 20% { opacity: 0; visibility: hidden; } 100% { opacity: 0; visibility: hidden; } }
+/* HORIZON-HERO-02/03 navigation dots (a <nav> of <button>s after the text; slide 1's starts lit in the editor).
+   horizon-hero.js takes over the slide timing on load and makes them clickable; without it they just sit there. */
+section:has(> aside:first-child > img + img) > div:last-child > nav button:hover { background-color: rgba(255,255,255,0.7) !important; }
+section:has(> aside:first-child > img + img) > div:last-child > nav button.is-active { background-color: var(--color-accent) !important; }
+/* Without horizon-hero.js (html:not(.bz-js)): the keyframe fade above is the whole show, so respect reduced motion
+   here instead. With it, the script itself skips the auto-advance timer and leaves the dots live. */
 @media (prefers-reduced-motion: reduce) {
-  section > aside:first-child > img { animation: none !important; }
-  section:has(> aside:first-child > img) div:has(> article + article) > article { animation: none !important; }
-  section:has(> aside:first-child > img) div:has(> article + article) > article:first-child { opacity: 1 !important; visibility: visible !important; }
-  section:has(> aside:first-child > img) div:has(> article + article) > article:not(:first-child) { display: none !important; }
+  html:not(.bz-js) section > aside:first-child > img { animation: none !important; }
+  html:not(.bz-js) section:has(> aside:first-child > img) div:has(> article + article) > article { animation: none !important; }
+  html:not(.bz-js) section:has(> aside:first-child > img) div:has(> article + article) > article:first-child { opacity: 1 !important; visibility: visible !important; }
+  html:not(.bz-js) section:has(> aside:first-child > img) div:has(> article + article) > article:not(:first-child) { display: none !important; }
 }
