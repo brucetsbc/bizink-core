@@ -25,6 +25,27 @@
 /* Menu dropdowns: square corners instead of Elementor's default rounded panel. */
 .elementor-nav-menu--dropdown.sub-menu {
   border-radius: 0 !important;
+  min-width: 420px !important;
+  width: 420px !important;
+}
+
+/* Sub-menu item descriptions: Elementor's nav-menu widget never renders a menu item's own
+   "description" field, so the short blurb for each item is stored in its link title attribute
+   (attr_title) instead and surfaced here via attr(title), which does render. */
+.elementor-nav-menu--dropdown.sub-menu .elementor-sub-item {
+  display: block;
+  white-space: normal;
+  line-height: 1.3;
+  padding-block: 10px;
+}
+.elementor-nav-menu--dropdown.sub-menu .elementor-sub-item[title]::after {
+  content: attr(title);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+  white-space: normal;
 }
 
 /* H1 highlight spans: gold accent colour + italic (component heading overrides can carry a bare <span>, but not a style attribute). */
@@ -39,6 +60,12 @@
   width: max-content !important;
   align-self: flex-start !important;
   flex: 0 0 auto !important;
+}
+
+/* A blanked-out intro (eyebrow/heading/lead all emptied via override, e.g. Our Team page's team-grid section)
+   still reserves its flex gap even at 0 height; collapse the whole block instead of just its text children. */
+.elementor .bz-intro:has(> .bz-eyebrow:empty) {
+  display: none;
 }
 
 /* Contact form (change request #793): shorter "How can we help?" box (Gravity Forms makes large textareas 288px). */

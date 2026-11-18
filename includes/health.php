@@ -428,30 +428,30 @@ function bz_core_uptime_run() {
 		if ( ! empty( $row['paused'] ) ) {
 			continue;
 		}
-		$url         = ! empty( $row['report']['home'] ) ? $row['report']['home'] : 'https://' . $h . '/';
-		$reqs[ $h ]  = array( 'url' => add_query_arg( 'bz_uptime', time(), $url ), 'type' => 'GET', 'headers' => array( 'User-Agent' => 'Bizink uptime check' ) );
+		$url        = ! empty( $row['report']['home'] ) ? $row['report']['home'] : 'https://' . $h . '/';
+		$reqs[ $h ] = array( 'url' => $url, 'type' => 'GET', 'headers' => array( 'User-Agent' => 'Bizink uptime check' ) );
+		// Plain URL, no cache-buster: lets the site's own cache/CDN answer, like a real visitor would, instead of
+		// forcing a full uncached render on every one of ~200 sites every 5 minutes (that was occasionally timing
+		// out under load and causing false "down" alerts; bizink-core 0.39.2).
 	}
-	$res = class_exists( '\WpOrg\Requests\Requests' )
-		? \WpOrg\Requests\Requests::request_multiple( $reqs, array( 'timeout' => 20, 'connect_timeout' => 10, 'follow_redirects' => true, 'redirects' => 3 ) )
-		: Requests::request_multiple( $reqs, array( 'timeout' => 20, 'connect_timeout' => 10 ) ); // older WordPress
+	$opts = array( 'timeout' => 30, 'connect_timeout' => 12, 'follow_redirects' => true, 'redirects' => 3 );
+	$res  = bz_core_uptime_requests( $reqs, $opts );
+	// One immediate retry for anything that failed, before counting it: a single slow response or network blip
+	// shouldn't read the same as real downtime.
+	$retry = array();
 	foreach ( $res as $h => $r ) {
-		$row  = bz_core_health_get( $h );
-		$up   = $row['uptime'] ?? array( 'status' => 'unknown', 'fails' => 0, 'checks' => array() );
-		$ok   = false;
-		$why  = '';
-		if ( $r instanceof \Exception ) {
-			$why = $r->getMessage();
-		} else {
-			$code = (int) $r->status_code;
-			$firm = ! empty( $row['report']['firm'] ) ? html_entity_decode( $row['report']['firm'], ENT_QUOTES ) : '';
-			if ( $code >= 400 ) {
-				$why = 'HTTP ' . $code;
-			} elseif ( $firm && false === stripos( html_entity_decode( (string) $r->body, ENT_QUOTES ), $firm ) && false === stripos( (string) $r->body, esc_html( $firm ) ) ) {
-				$why = 'Page loaded but the firm name is missing (error page?)';
-			} else {
-				$ok = true;
-			}
+		list( $ok ) = bz_core_uptime_check( $h, $r );
+		if ( ! $ok ) {
+			$retry[ $h ] = $reqs[ $h ];
 		}
+	}
+	if ( $retry ) {
+		$res = array_merge( $res, bz_core_uptime_requests( $retry, $opts ) );
+	}
+	foreach ( $res as $h => $r ) {
+		$row = bz_core_health_get( $h );
+		$up  = $row['uptime'] ?? array( 'status' => 'unknown', 'fails' => 0, 'checks' => array() );
+		list( $ok, $why ) = bz_core_uptime_check( $h, $r );
 		$up['checks'][] = array( time(), $ok ? 1 : 0 );
 		$up['checks']   = array_values( array_filter( $up['checks'], function ( $c ) { return $c[0] > time() - DAY_IN_SECONDS; } ) );
 		$up['last']     = time();
@@ -490,6 +490,31 @@ function bz_core_uptime_run() {
 			bz_core_health_put( $h, $row );
 		}
 	}
+}
+
+/* request_multiple, or an empty array when there's nothing to send (it doesn't like being called with no requests). */
+function bz_core_uptime_requests( $reqs, $opts ) {
+	if ( ! $reqs ) {
+		return array();
+	}
+	return class_exists( '\WpOrg\Requests\Requests' ) ? \WpOrg\Requests\Requests::request_multiple( $reqs, $opts ) : Requests::request_multiple( $reqs, $opts ); // older WordPress
+}
+
+/* Is a request_multiple result up? [ok, why] — why is '' when ok. */
+function bz_core_uptime_check( $host, $r ) {
+	if ( $r instanceof \Exception ) {
+		return array( false, $r->getMessage() );
+	}
+	$code = (int) $r->status_code;
+	if ( $code >= 400 ) {
+		return array( false, 'HTTP ' . $code );
+	}
+	$row  = bz_core_health_get( $host );
+	$firm = ! empty( $row['report']['firm'] ) ? html_entity_decode( $row['report']['firm'], ENT_QUOTES ) : '';
+	if ( $firm && false === stripos( html_entity_decode( (string) $r->body, ENT_QUOTES ), $firm ) && false === stripos( (string) $r->body, esc_html( $firm ) ) ) {
+		return array( false, 'Page loaded but the firm name is missing (error page?)' );
+	}
+	return array( true, '' );
 }
 
 function bz_core_ssl_days( $host ) {
