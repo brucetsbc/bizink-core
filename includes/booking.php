@@ -52,7 +52,7 @@ add_action(
 .bz-book[open]{display:flex;flex-direction:column}
 .bz-book::backdrop{background:rgba(10,15,25,.6)}
 .bz-book__head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;border-bottom:1px solid var(--color-border,#e5e5e5)}
-.bz-book__title{margin:0;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.25;color:var(--color-heading,inherit)}
+.bz-book__title{margin:0;font-size:var(--text-h3,clamp(1.25rem,2.4vw,1.6rem));line-height:1.25;color:var(--color-heading,inherit)}
 .bz-book__close{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:var(--color-surface-alt,#f3f3f3);color:var(--color-heading,#222);font-size:26px;line-height:1;cursor:pointer}
 .bz-book__close:hover{filter:brightness(.95)}
 .bz-book__body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}

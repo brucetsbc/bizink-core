@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Marketing assistant mock</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: #1d2733; }
+  .frame { width: 900px; border: 1px solid #d7dbe6; border-radius: 12px; overflow: hidden; background: #fff; }
+  .frame-bar { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: #f4f5f8; border-bottom: 1px solid #e3e6ee; font-size: 13px; color: #55606e; }
+  .frame-bar .dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #d7dbe6; margin-right: 5px; }
+  .frame-bar .title { font-weight: 600; color: #333B61; }
+  .frame-body { padding: 22px 26px 26px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+  .stat { background: #f4f5f8; border-radius: 10px; padding: 14px 16px; }
+  .stat .l { font-size: 12px; color: #55606e; margin-bottom: 4px; }
+  .stat .v { font-size: 26px; font-weight: 700; color: #14202e; }
+  .stat .d { font-size: 12px; color: #55606e; margin-top: 2px; }
+  .stat .d.up { color: #1b7a3a; }
+  .plan-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+  .plan-h b { font-size: 17px; color: #14202e; }
+  .plan-h span { font-size: 13px; color: #55606e; }
+  .row { display: grid; grid-template-columns: 86px 1fr 128px; gap: 14px; align-items: center; border: 1px solid #e3e6ee; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+  .row .when { font-size: 12px; color: #FCB813; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+  .row .t { font-weight: 600; font-size: 15px; color: #14202e; }
+  .row .s { font-size: 12.5px; color: #55606e; margin-top: 2px; }
+  .btn { border: 1px solid #333B61; border-radius: 7px; padding: 7px 12px; font-size: 12.5px; text-align: center; background: #fff; color: #333B61; font-weight: 600; white-space: nowrap; }
+  .btn.primary { background: #333B61; border-color: #333B61; color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="frame" id="shot">
+  <div class="frame-bar">
+    <span class="dots"><span></span><span></span><span></span></span>
+    <span class="title">Your firm &middot; Marketing assistant</span>
+  </div>
+  <div class="frame-body">
+    <div class="stats">
+      <div class="stat"><div class="l">Website visitors</div><div class="v">1,284</div><div class="d up">+18% vs last month</div></div>
+      <div class="stat"><div class="l">Enquiries</div><div class="v">23</div><div class="d up">+5 from forms</div></div>
+      <div class="stat"><div class="l">Downloads</div><div class="v">41</div><div class="d">Top: Business plan</div></div>
+      <div class="stat"><div class="l">Search clicks</div><div class="v">312</div><div class="d">&ldquo;accountant near me&rdquo;</div></div>
+    </div>
+    <div class="plan-h"><b>Your 90-day marketing plan</b><span>built from your services, downloads and key tax dates</span></div>
+    <div class="row">
+      <div class="when">This week</div>
+      <div><div class="t">Remind clients the quarterly BAS is due</div><div class="s">Email to your client list, linking to Key tax dates</div></div>
+      <div class="btn primary">Create email</div>
+    </div>
+    <div class="row">
+      <div class="when">Next week</div>
+      <div><div class="t">Promote the Property tax checklist</div><div class="s">Social tile for investors, ages 35&ndash;65</div></div>
+      <div class="btn">Make a post</div>
+    </div>
+    <div class="row">
+      <div class="when">Early next month</div>
+      <div><div class="t">Blog: 5 questions before buying a business</div><div class="s">Links to your Business guides and calculators</div></div>
+      <div class="btn">Draft post</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
